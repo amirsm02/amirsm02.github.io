@@ -60,6 +60,7 @@
           list-style-type: none;
           margin: 0;
           background-color: black;
+          text-align: left;
       }
 
       /* Style for each link in the list */
@@ -70,6 +71,7 @@
           cursor: pointer;
           color: white;
           font-size: 16px;
+          text-align: left;
       }
 
       .scrollbox li a:hover {
@@ -120,19 +122,22 @@
           </script>
 
           <script>
-            function filterLinks() {
-            var searchInput = document.getElementById("search").value.toLowerCase();  // Get search input
-            var links = document.querySelectorAll("#link-list li");  // Get all list items
+          function filterLinks() {
+              var searchInput = document.getElementById("search").value.toLowerCase();  // Get search input
+              var links = document.querySelectorAll("#link-list li");  // Get all list items
 
-            links.forEach(function(link) {
-                var linkText = link.querySelector("a").textContent || link.querySelector("a").innerText;  // Get text inside <a> tag
-                if (linkText.toLowerCase().includes(searchInput)) {
-                    link.style.display = "block";  // Show the link if it matches
-                } else {
-                    link.style.display = "none";   // Hide the link if it doesn't match
-                }
-            });
-            }
+              links.forEach(function(link) {
+                  // Directly query the <a> tag inside the list item
+                  var linkText = link.querySelector("a").textContent || link.querySelector("a").innerText;  // Get text inside <a> tag
+                  
+                  // Compare the linkText with the search input
+                  if (linkText.toLowerCase().includes(searchInput)) {
+                      link.style.display = "block";  // Show the link if it matches
+                  } else {
+                      link.style.display = "none";   // Hide the link if it doesn't match
+                  }
+              });
+          }
           </script>
 
         </div>
