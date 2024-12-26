@@ -50,15 +50,15 @@ p {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    font-size: 16px;
   }
   
   /* Links inside the dropdown */
   .dropdown-content a {
     color: black;
-    padding: 5px 10px;
+    /* padding: 5px 10px; */
     text-decoration: none;
     display: block;
+    font-size: 16px;
   }
   
   /* Change color of dropdown links on hover */
