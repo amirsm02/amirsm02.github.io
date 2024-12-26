@@ -33,31 +33,23 @@
 
     <hr>
         <div class="container-fluid pl-3">
-          <div class="dropdown">
+
+          <div class="dropdown" style="float: right; margin: 20px;">
             <button class="dropbtn">Object</button>
             <div class="dropdown-content">
-              <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Image 1</a></p>
-              <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Image 2</a></p>
+              <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Ring Nebula (M57)</a></p>
+              <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Whirlpool Galaxy (M51)</a></p>
             </div>
           </div>
 
           <img id="image" src="/astro/ring nebula.png" alt="Image" width="60%" style="float: left; margin: 0px;">
 
-          <!-- Links to change image -->
-          <!-- <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Image 1</a></p>
-          <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Image 2</a></p> -->
-
-          <!-- JavaScript file (can be inline) -->
           <script>
               // Function to change the image source
               function changeImage(imageSource) {
                   document.getElementById('image').src = imageSource;
               }
           </script>
-
-          <!-- <div>
-            <img src="/astro/ring nebula.png" width="60%" style="float: left; margin: 0px;">
-          </div> -->
 
         </div>
     </div>
