@@ -36,7 +36,7 @@
       .scrollbox-container {
           width: 300px;
           height: 400px;
-          border: 1px solid #ccc;
+          border: 1px solid rgb(85, 85, 85);
           border-radius: 5px;
           overflow: hidden;
       }
@@ -64,8 +64,8 @@
       }
 
       /* Style for each link in the list */
-      .scrollbox li a {
-          padding: 10px;
+      .scrollbox li {
+          padding: 0px;
           background-color: black;
           border-bottom: 1px solid black;
           cursor: pointer;
@@ -74,7 +74,7 @@
           text-align: left;
       }
 
-      .scrollbox li a:hover {
+      .scrollbox li:hover {
           background-color: black;
       }
     </style>
@@ -94,7 +94,7 @@
             <ul id="link-list" class="scrollbox">
                 <li><p><a href="#" onclick="changeImage('/astro/Jupiter.png')">Jupiter</a></p></li>
 
-                <!-- <li><p><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')">M13 - Hercules Globular Cluster</a></p></li> -->
+                <li><p><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')">M13 - Hercules Globular Cluster</a></p></li>
 
                 <li><p><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></p></li>
 
