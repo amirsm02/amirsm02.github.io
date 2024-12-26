@@ -72,6 +72,7 @@
       .scrollbox li a {
           display: flex;
           padding: 0;
+          align-items: center;
           background-color: rgb(5, 5, 5);
           border-bottom: 1px solid rgb(5, 5, 5);;
           cursor: pointer;
@@ -91,7 +92,9 @@
           height: 16px; /* Set the height of the square */
           background-color: rgb(50, 0, 159); /* Set the color of the square */
           margin-right: 10px; /* Space between the square and the text */
+          margin-top: 0;
           margin-bottom: 0;
+          padding-top: 0;
           padding-bottom: 0;
           border-radius: 2px; /* Optional: for rounded corners */
       }
@@ -112,7 +115,7 @@
             <ul id="link-list" class="scrollbox">
                 <li><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')">M13 - Hercules Globular Cluster</a></li>
 
-                <li><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></li>
+                <!-- <li><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></li> -->
 
                 <li><a href="#" onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')">M31 - Andromeda Galaxy</a></li>
                 <li><a href="#" onclick="changeImage('/astro/M51 - Whirlpool Galaxy.png')">M51 - Whirlpool Galaxy</a></li>
