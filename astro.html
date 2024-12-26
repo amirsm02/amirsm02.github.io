@@ -34,10 +34,10 @@
 
       /* Style for the container holding the search bar and list */
       .scrollbox-container {
-          width: 300px;
+          width: 320px;
           height: 350px;
           border: 1px solid rgb(5, 5, 5);
-          border-radius: 2px;
+          border-radius: 3px;
           overflow: hidden;
       }
 
@@ -121,6 +121,20 @@
           padding-bottom: 0;
           border-radius: 2px; /* Optional: for rounded corners */
       }
+
+      .text-box {
+          width: 100%;
+          height: 100px; /* Height of the text box */
+          margin-top: 10px;
+          padding: 10px;
+          font-size: 16px;
+          color: #333;
+          background-color: #f9f9f9;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          resize: none; /* Prevent resizing */
+          box-sizing: border-box;
+      }
     </style>
   </head>
   <body data-spy="scroll" data-target="#site-navbar">
@@ -136,11 +150,10 @@
     
             <!-- Scrollable list of links -->
             <ul id="link-list" class="scrollbox">
-              <li><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="star"></span>M13 - Hercules Globular Clusterrrrrrrrrrrrrrrrrrrr</a></li>
-                <li><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="star"></span>M13 - Hercules Globular Cluster</a></li>
+                <li><a href="#" data-content="helooo" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="star"></span>M13 - Hercules Globular Cluster</a></li>
 
                 <li><a href="#" onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')"><span class="galaxy"></span>M31 - Andromeda Galaxy</a></li>
-                <li><a href="#" onclick="changeImage('/astro/M51 - Whirlpool Galaxy.png')"><span class="galaxy"></span>M51 - Whirlpool Galaxy</a></li>
+                <!-- <li><a href="#" onclick="changeImage('/astro/M51 - Whirlpool Galaxy.png')"><span class="galaxy"></span>M51 - Whirlpool Galaxy</a></li> -->
 
                 <li><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')"><span class="nebula"></span>M45 - Pleiades</a></li>
                 <li><a href="#" onclick="changeImage('/astro/B33 - Horsehead Nebula.png')"><span class="nebula"></span>B33 - Horsehead Nebula</a></li>
@@ -181,6 +194,25 @@
                   }
               });
           }
+          </script>
+
+          <script>
+              // Get all list items
+              const listItems = document.querySelectorAll('.scrollbox li a');
+              
+              // Get the text box
+              const textBox = document.getElementById('text-box');
+              
+              // Add click event listeners to each list item
+              listItems.forEach(item => {
+                  item.addEventListener('click', function() {
+                      // Get the content associated with this list item
+                      const content = item.getAttribute('data-content');
+                      
+                      // Update the text box with the content
+                      textBox.value = content;
+                  });
+              });
           </script>
 
         </div>
