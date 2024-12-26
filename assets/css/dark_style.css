@@ -7,8 +7,8 @@
 
 /* Set a dark background and light text */
 body {
-    background-color: #a6a6a6; /* Dark background color */
-    color: #ffffff; /* Light text color */
+    background-color: #000000; /* Dark background color */
+    color: white; /* Light text color */
     font-family: 'Courier New', monospace; /* Set a readable font */
     margin: 20px; /* Optional: adds some space around content */
 }
