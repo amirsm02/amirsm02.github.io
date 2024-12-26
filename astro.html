@@ -48,6 +48,7 @@
           font-size: 16px;
           border: none;
           box-sizing: border-box;
+          background-color: black;
       }
 
       /* Style for the scrollable list */
@@ -57,18 +58,19 @@
           padding: 0;
           list-style-type: none;
           margin: 0;
+          background-color: black;
       }
 
       /* Style for each link in the list */
-      .scrollbox li {
+      .scrollbox li a {
           padding: 10px;
-          background-color: #f9f9f9;
-          border-bottom: 1px solid #ddd;
+          background-color: black;
+          border-bottom: 1px solid black;
           cursor: pointer;
       }
 
-      .scrollbox li:hover {
-          background-color: #e0e0e0;
+      .scrollbox li a:hover {
+          background-color: black;
       }
     </style>
   </head>
@@ -79,28 +81,24 @@
     <hr>
         <div class="container-fluid pl-3">
 
-          <!-- <div class="dropdown" style="float: right; margin: 20px;">
-            <button class="dropbtn">Object</button>
-            <div class="dropdown-content">
-              <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Ring Nebula (M57)</a></p>
-              <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Whirlpool Galaxy (M51)</a></p>
-            </div>
-          </div> -->
-
           <div class="scrollbox-container">
             <!-- Search bar -->
-            <input type="text" id="search" class="search-bar" placeholder="Search links..." onkeyup="filterLinks()">
+            <input type="text" id="search" class="search-bar" placeholder="Search celestial objects..." onkeyup="filterLinks()">
     
             <!-- Scrollable list of links -->
             <ul id="link-list" class="scrollbox">
                 <p><a href="#" onclick="changeImage('/astro/Jupiter.png')">Jupiter</a></p>
+
                 <p><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')">M13 - Hercules Globular Cluster</a></p>
+
                 <p><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></p>
+
                 <p><a href="#" onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')">M31 - Andromeda Galaxy</a></p>
                 <p><a href="#" onclick="changeImage('/astro/M51 - Whirlpool Galaxy.png')">M51 - Whirlpool Galaxy</a></p>
-                <p><a href="#" onclick="changeImage('/astro/M42 - Orion Nebula.png')">M42 - Orion Nebula</a></p>
+
                 <p><a href="#" onclick="changeImage('/astro/B33 - Horsehead Nebula.png')">B33 - Horsehead Nebula</a></p>
                 <p><a href="#" onclick="changeImage('/astro/Caldwell 49 - Rosette Nebula.png')">Caldwell 49 - Rosette Nebula</a></p>
+                <p><a href="#" onclick="changeImage('/astro/M42 - Orion Nebula.png')">M42 - Orion Nebula</a></p>
                 <p><a href="#" onclick="changeImage('/astro/M57 - Ring Nebula.png')">M57 - Ring Nebula</a></p>
                 <p><a href="#" onclick="changeImage('/astro/NGC6888 - Crescent Nebula.png')">NGC6888 - Crescent Nebula</a></p>
                 <p><a href="#" onclick="changeImage('/astro/NGC1499 - California Nebula.png')">NGC1499 - California Nebula</a></p>
@@ -109,7 +107,7 @@
             </ul>
           </div>
 
-          <img id="image" src="/astro/ring nebula.png" alt="Image" width="60%" style="float: left; margin: 0px;">
+          <img id="image" src="/astro/M45 - Pleiades.png" alt="Image" width="60%" style="float: left; margin: 0px;">
 
           <script>
               // Function to change the image source
