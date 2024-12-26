@@ -34,19 +34,18 @@
     <hr>
         <div class="container-fluid pl-3">
           <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
+            <button class="dropbtn">Object</button>
             <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+              <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Image 1</a></p>
+              <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Image 2</a></p>
             </div>
           </div>
 
-          <img id="image" src="/astro/ring nebula.png" alt="Image" width="300">
+          <img id="image" src="/astro/ring nebula.png" alt="Image" width="60%" style="float: left; margin: 0px;">
 
           <!-- Links to change image -->
-          <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Image 1</a></p>
-          <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Image 2</a></p>
+          <!-- <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Image 1</a></p>
+          <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Image 2</a></p> -->
 
           <!-- JavaScript file (can be inline) -->
           <script>
