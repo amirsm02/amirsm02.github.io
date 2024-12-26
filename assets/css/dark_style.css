@@ -1,0 +1,28 @@
+/* Basic CSS Reset (optional, but helps standardize the look) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set a dark background and light text */
+body {
+    background-color: #121212; /* Dark background color */
+    color: #ffffff; /* Light text color */
+    font-family: Arial, sans-serif; /* Set a readable font */
+    margin: 20px; /* Optional: adds some space around content */
+}
+
+/* Style headings */
+h1 {
+    color: #f1f1f1; /* Lighter color for headings */
+    text-align: center; /* Center the title */
+}
+
+/* Style paragraphs */
+p {
+    color: #d1d1d1; /* Light gray for paragraph text */
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-align: center; /* Center the paragraph */
+}
