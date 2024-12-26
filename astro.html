@@ -31,27 +31,6 @@
   <body data-spy="scroll" data-target="#site-navbar">
     <div class="float-center container-fluid" style="max-width: 1000px;">
 
-    <!-- navigation dashboard -->
-    <div class="container-fluid pt-3 d-sm-flex justify-content-between dashboard">
-        <h3>Amir Shapour Mohammadi</h3>
-        <p>
-        <a style="color: white;" href="https://amirshapourmohammadi.com/">Home</a>
-        &nbsp;
-        <a style="color: white;" href="https://amirshapourmohammadi.com/projects.html">Projects</a>
-        &nbsp;
-        <a style="color: white;" href="https://amirshapourmohammadi.com/coursework.html">Coursework</a>
-        &nbsp;
-        </p>
-        <p>
-        <a target="blank" style="color: white;" href="https://www.linkedin.com/in/asmohammadi/"><i class="fa-brands fa-linkedin fa-2x"></i></a>
-        &nbsp;
-        <a target="blank" style="color: white;" href="https://github.com/amirsm02"><i class="fa-brands fa-github fa-2x"></i></a>
-        &nbsp;
-        <a target="blank" style="color: white;" href="https://scholar.google.com/citations?user=gLXummMAAAAJ&hl=en&authuser=2""><i class="ai ai-google-scholar-square ai-2x"></i></a>
-        &nbsp;
-        </p>
-    </div>
-
     <hr>
         <div class="container-fluid pl-3">
           <div class="dropdown">
@@ -63,9 +42,23 @@
             </div>
           </div>
 
-          <div>
-            <img src="/astro/ring nebula.png" width="60%" style="float: none; margin: 20px;">
-          </div>
+          <img id="image" src="/astro/ring nebula.png" alt="Image" width="300">
+
+          <!-- Links to change image -->
+          <p><a href="#" onclick="changeImage('/astro/ring nebula.png')">Image 1</a></p>
+          <p><a href="#" onclick="changeImage('/astro/M51 (Whirlpool Galaxy).png')">Image 2</a></p>
+
+          <!-- JavaScript file (can be inline) -->
+          <script>
+              // Function to change the image source
+              function changeImage(imageSource) {
+                  document.getElementById('image').src = imageSource;
+              }
+          </script>
+
+          <!-- <div>
+            <img src="/astro/ring nebula.png" width="60%" style="float: left; margin: 0px;">
+          </div> -->
 
         </div>
     </div>
