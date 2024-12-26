@@ -35,7 +35,7 @@
       /* Style for the container holding the search bar and list */
       .scrollbox-container {
           width: 300px;
-          height: 400px;
+          height: 350px;
           border: 1px solid rgb(5, 5, 5);
           border-radius: 2px;
           overflow: hidden;
@@ -86,12 +86,12 @@
       }
 
       /* Style for the colored square */
-      .scrollbox li a .colored-square {
-          width: 20px; /* Set the width of the square */
-          height: 20px; /* Set the height of the square */
-          background-color: blue; /* Set the color of the square */
+      .scrollbox li a .nebula {
+          width: 16px; /* Set the width of the square */
+          height: 16px; /* Set the height of the square */
+          background-color: rgb(50, 0, 159); /* Set the color of the square */
           margin-right: 10px; /* Space between the square and the text */
-          border-radius: 3px; /* Optional: for rounded corners */
+          border-radius: 2px; /* Optional: for rounded corners */
       }
     </style>
   </head>
@@ -108,8 +108,8 @@
     
             <!-- Scrollable list of links -->
             <ul id="link-list" class="scrollbox">
-                <li><a href="#"><span class="colored-square"></span> Item 1</a></li>
-                <li><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')">M13 - Hercules Globular Cluster</a></li>
+                <!-- <li><a href="#"><span class="colored-square"></span> Item 1</a></li> -->
+                <li><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="nebula"></span>M13 - Hercules Globular Cluster</a></li>
 
                 <li><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></li>
 
