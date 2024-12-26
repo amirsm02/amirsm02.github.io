@@ -36,8 +36,7 @@
       .scrollbox-container {
           width: 300px;
           height: 400px;
-          border: 0px solid rgb(5, 5, 5);;
-          border-radius: 5px;
+          border: none;
           overflow: hidden;
       }
 
@@ -54,7 +53,7 @@
 
       /* Style for the scrollable list */
       .scrollbox {
-          max-height: 100%;
+          height: calc(100% - 40px);
           overflow-y: auto;
           padding-left: 20px ;
           list-style-type: none;
@@ -99,8 +98,6 @@
     
             <!-- Scrollable list of links -->
             <ul id="link-list" class="scrollbox">
-                <li><p><a href="#" onclick="changeImage('/astro/Jupiter.png')">Jupiter</a></p></li>
-
                 <li><p><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')">M13 - Hercules Globular Cluster</a></p></li>
 
                 <li><p><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></p></li>
@@ -114,6 +111,7 @@
                 <li><p><a href="#" onclick="changeImage('/astro/M57 - Ring Nebula.png')">M57 - Ring Nebula</a></p></li>
                 <li><p><a href="#" onclick="changeImage('/astro/NGC6888 - Crescent Nebula.png')">NGC6888 - Crescent Nebula</a></p></li>
                 <li><p><a href="#" onclick="changeImage('/astro/NGC1499 - California Nebula.png')">NGC1499 - California Nebula</a></p></li>
+                <li><p><a href="#" onclick="changeImage('/astro/NGC6995 - Eastern Veil Nebula.png')">NGC6995 - Eastern Veil Nebula</a></p></li>
                 <li><p><a href="#" onclick="changeImage('/astro/NGC6960 - Western Veil Nebula.png')">NGC6960 - Western Veil Nebula</a></p></li>
                 <li><p><a href="#" onclick="changeImage('/astro/NGC7000 - North American Nebula.png')">NGC7000 - North American Nebula</a></p></li>
             </ul>
