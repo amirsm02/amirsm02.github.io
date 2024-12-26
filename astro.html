@@ -87,6 +87,12 @@
       .scrollbox li a:hover {
           background-color: rgb(5, 5, 5);;
       }
+      
+      .scrollbox li a.selected {
+          background-color: rgb(255, 0, 0); /* Highlight background color */
+          color: white; /* Change text color */
+          border: 1px solid rgb(200, 200, 200); /* Optional: Add a border */
+      }
 
       .scrollbox li a .star {
           width: 16px; /* Set the width of the square */
@@ -180,7 +186,7 @@
                 <li><a href="#"
                 data-content=
                 "Date: 07/29/2024
-                ISO: 101
+                Gain: 101
                 Offset: 50
                 Subs: 34x60
                 Scope: 72mm Skywatcher Refractor"
@@ -220,7 +226,7 @@
                 <li><a href="#"
                 data-content=
                 "Date: 08/14/2024
-                ISO: 101
+                Gain: 101
                 Offset: 50
                 Subs: 
                 Scope: 150mm Newtonian"
@@ -236,7 +242,7 @@
                 <li><a href="#"
                 data-content=
                 "Date: 08/14/2024
-                ISO: 101
+                Gain: 101
                 Offset: 50
                 Subs: 1x300
                 Scope: 150mm 
@@ -247,7 +253,7 @@
                 <li><a href="#"
                 data-content=
                 "Date: 07/29/2024
-                ISO: 101
+                Gain: 101
                 Offset: 50
                 Subs: 34x60
                 Scope: 72mm Skywatcher Refractor"
@@ -278,6 +284,7 @@
                   document.getElementById('image').src = imageSource;
               }
           </script>
+          
 
           <script>
           function filterLinks() {
@@ -304,6 +311,17 @@
               
               // Get the text box
               const textBox = document.getElementById('text-box');
+
+              // Add event listeners to each list item
+              listItems.forEach(item => {
+                  item.addEventListener('click', function() {
+                      // Remove 'selected' class from all list items
+                      listItems.forEach(link => link.classList.remove('selected'));
+
+                      // Add 'selected' class to the clicked item
+                      item.classList.add('selected');
+                  });
+              });
               
               // Add click event listeners to each list item
               listItems.forEach(item => {
@@ -315,6 +333,12 @@
                       textBox.value = content;
                   });
               });
+          </script>
+
+          <script>
+              // const listItems = document.querySelectorAll('.scrollbox li a');
+
+              
           </script>
 
         </div>
