@@ -36,7 +36,8 @@
       .scrollbox-container {
           width: 300px;
           height: 400px;
-          border: none;
+          border: 1px solid rgb(5, 5, 5);
+          border-radius: 2px;
           overflow: hidden;
       }
 
@@ -83,6 +84,15 @@
       .scrollbox li a:hover {
           background-color: rgb(5, 5, 5);;
       }
+
+      /* Style for the colored square */
+      .scrollbox li a .colored-square {
+          width: 20px; /* Set the width of the square */
+          height: 20px; /* Set the height of the square */
+          background-color: blue; /* Set the color of the square */
+          margin-right: 10px; /* Space between the square and the text */
+          border-radius: 3px; /* Optional: for rounded corners */
+      }
     </style>
   </head>
   <body data-spy="scroll" data-target="#site-navbar">
@@ -98,9 +108,10 @@
     
             <!-- Scrollable list of links -->
             <ul id="link-list" class="scrollbox">
+                <li><a href="#"><span class="colored-square"></span> Item 1</a></li>
                 <li><p><a href="#" onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')">M13 - Hercules Globular Cluster</a></p></li>
 
-                <li><p><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></p></li>
+                <li><a href="#" onclick="changeImage('/astro/M45 - Pleiades.png')">M45 - Pleiades</a></li>
 
                 <li><p><a href="#" onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')">M31 - Andromeda Galaxy</a></p></li>
                 <li><p><a href="#" onclick="changeImage('/astro/M51 - Whirlpool Galaxy.png')">M51 - Whirlpool Galaxy</a></p></li>
