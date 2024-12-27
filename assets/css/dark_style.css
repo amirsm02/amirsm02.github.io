@@ -13,15 +13,6 @@ body {
     margin: 20px; /* Optional: adds some space around content */
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
-    font-weight: 900;
-    line-height: 1.5;
-    letter-spacing: 0.075em;
-    text-transform: uppercase;
-    margin: 0 0 1rem 0;
-}
-
 /* Style headings */
 h1 {
     color: #f1f1f1; /* Lighter color for headings */
@@ -33,6 +24,7 @@ h1 {
     /* letter-spacing: 0.075em; */
 
     margin: 0 0 0 100px;
+    font-weight: normal;
 
     font-size: 24px;
 
