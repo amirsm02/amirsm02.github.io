@@ -36,7 +36,7 @@ h1 {
 p {
     color: #d1d1d1; /* Light gray for paragraph text */
     font-family: "Source Sans Pro", sans-serif;
-    font-size: 18px;
-    /* padding-right: 300px; */
+    font-size: 17px;
+    padding-right: 100px;
     text-align: left; /* Center the paragraph */
 }

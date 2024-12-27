@@ -117,7 +117,7 @@
 
       /* Add hover text using the ::after pseudo-element */
       .scrollbox li a .star:hover::after {
-        content: "Star system"; /* Text to show on hover */
+        content: "Star"; /* Text to show on hover */
         color: white; /* Text color */
         background-color: rgb(10, 10, 10);
         font-size: 16px; /* Font size for the hover text */
@@ -142,7 +142,7 @@
           opacity: 0;
       }
 
-
+      /* Style for the square (galaxy) */
       .scrollbox li a .galaxy {
           width: 16px; /* Set the width of the square */
           height: 16px; /* Set the height of the square */
@@ -154,8 +154,44 @@
           padding-bottom: 0;
           margin-left: 15px;
           border-radius: 2px; /* Optional: for rounded corners */
+          position: relative; /* This is needed for the pseudo-element positioning */
+          transition: background-color 0.3s ease; /* Smooth transition for the background color */
+          overflow: visible;
+      }
+
+      /* Darken the square on hover */
+      .scrollbox li a .galaxy:hover {
+          background-color: rgb(62, 0, 6); /* Darker color */
+      }
+
+      /* Add hover text using the ::after pseudo-element */
+      .scrollbox li a .galaxy:hover::after {
+        content: "Galaxy"; /* Text to show on hover */
+        color: white; /* Text color */
+        background-color: rgb(10, 10, 10);
+        font-size: 16px; /* Font size for the hover text */
+        font-family: "Source Sans Pro", sans-serif;
+        opacity: 1; /* Make sure the text is visible */
+        transition: opacity 0.3s ease; /* Smooth transition for text */
+
+        white-space: nowrap; /* Prevent the text from wrapping */
+        position: absolute; /* Position it relative to the parent */
+        left: -140px; /* Align the left edge of the hover text with the left of the parent */
+        top: 50%; /* Vertically center the hover text */
+        transform: translateY(-50%); /* Adjust for vertical centering */
+
+        padding: 0 10px; /* Add some space around the text */
+        border: 2px solid rgb(10, 10, 10); /* Border around the text */
+        border-radius: 3px; /* Optional: adds rounded corners to the border */
+      }
+
+      /* Hide the hover text initially (before hovering) */
+      .scrollbox li a .galaxy::after {
+          content: "";
+          opacity: 0;
       }
       
+      /* Style for the square (star) */
       .scrollbox li a .nebula {
           width: 16px; /* Set the width of the square */
           height: 16px; /* Set the height of the square */
@@ -167,6 +203,41 @@
           padding-bottom: 0;
           margin-left: 15px;
           border-radius: 2px; /* Optional: for rounded corners */
+          position: relative; /* This is needed for the pseudo-element positioning */
+          transition: background-color 0.3s ease; /* Smooth transition for the background color */
+          overflow: visible;
+      }
+
+      /* Darken the square on hover */
+      .scrollbox li a .nebula:hover {
+          background-color: rgb(36, 0, 112); /* Darker color */
+      }
+
+      /* Add hover text using the ::after pseudo-element */
+      .scrollbox li a .nebula:hover::after {
+        content: "Nebula"; /* Text to show on hover */
+        color: white; /* Text color */
+        background-color: rgb(10, 10, 10);
+        font-size: 16px; /* Font size for the hover text */
+        font-family: "Source Sans Pro", sans-serif;
+        opacity: 1; /* Make sure the text is visible */
+        transition: opacity 0.3s ease; /* Smooth transition for text */
+
+        white-space: nowrap; /* Prevent the text from wrapping */
+        position: absolute; /* Position it relative to the parent */
+        left: -140px; /* Align the left edge of the hover text with the left of the parent */
+        top: 50%; /* Vertically center the hover text */
+        transform: translateY(-50%); /* Adjust for vertical centering */
+
+        padding: 0 10px; /* Add some space around the text */
+        border: 2px solid rgb(10, 10, 10); /* Border around the text */
+        border-radius: 3px; /* Optional: adds rounded corners to the border */
+      }
+
+      /* Hide the hover text initially (before hovering) */
+      .scrollbox li a .nebula::after {
+          content: "";
+          opacity: 0;
       }
 
       .text-box {
@@ -358,7 +429,7 @@
           Gain: 101
           Offset: 50
           Subs: 19x60
-          Scope: 72mm Skywatcher Refractor
+          Scope: 72mm Refractor
           Filter: None"
           ></textarea>
 
