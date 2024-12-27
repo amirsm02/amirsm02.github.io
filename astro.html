@@ -103,7 +103,7 @@
           padding-bottom: 0;
           margin-left: 15px;
           border-radius: 2px; /* Optional: for rounded corners */
-          position: relative; /* Needed for the positioning of the pseudo-element */
+          position: relative; /* This is needed for the pseudo-element positioning */
           transition: background-color 0.3s ease; /* Smooth transition for the background color */
       }
 
@@ -112,21 +112,19 @@
           background-color: rgb(80, 75, 0); /* Darker color */
       }
 
-      /* Add hover text with black background to the left */
+      /* Add hover text using the ::after pseudo-element */
       .scrollbox li a .star:hover::after {
-          content: "Star"; /* Text to show on hover */
-          position: absolute; /* Position the text relative to the square */
-          top: 50%; /* Vertically center the text relative to the square */
-          left: -60px; /* Position the text to the left of the square */
-          transform: translateY(-50%); /* Vertically center the text */
-          background-color: black; /* Set a black background */
+          content: "Star system"; /* Text to show on hover */
+          position: absolute; /* Position the text inside the square */
+          top: 50%; /* Center vertically */
+          left: 50%; /* Center horizontally */
+          transform: translate(-50%, -50%); /* Adjust to truly center the text */
           color: white; /* Text color */
+          background-color: rgb(10, 10, 10);
           font-size: 12px; /* Font size for the hover text */
           font-family: "Source Sans Pro", sans-serif;
-          padding: 5px 10px; /* Add padding to the text */
-          border-radius: 5px; /* Optional: round the corners of the text box */
-          opacity: 1; /* Make the text visible */
-          transition: opacity 0.3s ease; /* Smooth transition for text visibility */
+          opacity: 1; /* Make sure the text is visible */
+          transition: opacity 0.3s ease; /* Smooth transition for text */
       }
 
       /* Hide the hover text initially (before hovering) */
