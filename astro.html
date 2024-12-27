@@ -46,7 +46,7 @@
           width: 100%;
           padding: 10px;
           font-size: 16px;
-          font-family: 'Menlo', monospace;
+          font-family: "Source Sans Pro", sans-serif;
           border: none;
           box-sizing: border-box;
           background-color: rgb(15, 15, 15);
@@ -78,7 +78,6 @@
           cursor: pointer;
           color: rgb(187, 187, 187);
           font-size: 16px;
-          /* font-family: 'Menlo', monospace; */
           font-family: "Source Sans Pro", sans-serif;
           text-align: left;
           margin: 0px;
@@ -92,6 +91,7 @@
           background-color: rgb(0, 27, 71); /* Highlight background color */
       }
 
+      /* Style for the square (star) */
       .scrollbox li a .star {
           width: 16px; /* Set the width of the square */
           height: 16px; /* Set the height of the square */
@@ -103,6 +103,33 @@
           padding-bottom: 0;
           margin-left: 15px;
           border-radius: 2px; /* Optional: for rounded corners */
+          position: relative; /* This is needed for the pseudo-element positioning */
+          transition: background-color 0.3s ease; /* Smooth transition for the background color */
+      }
+
+      /* Darken the square on hover */
+      .scrollbox li a .star:hover {
+          background-color: rgb(80, 75, 0); /* Darker color */
+      }
+
+      /* Add hover text using the ::after pseudo-element */
+      .scrollbox li a .star:hover::after {
+          content: "Star system"; /* Text to show on hover */
+          position: absolute; /* Position the text inside the square */
+          top: 50%; /* Center vertically */
+          left: 50%; /* Center horizontally */
+          transform: translate(-50%, -50%); /* Adjust to truly center the text */
+          color: white; /* Text color */
+          font-size: 12px; /* Font size for the hover text */
+          font-family: "Source Sans Pro", sans-serif;
+          opacity: 1; /* Make sure the text is visible */
+          transition: opacity 0.3s ease; /* Smooth transition for text */
+      }
+
+      /* Hide the hover text initially (before hovering) */
+      .scrollbox li a .star::after {
+          content: "";
+          opacity: 0;
       }
 
       .scrollbox li a .galaxy {
@@ -138,7 +165,7 @@
           margin-top: 10px;
           padding: 10px;
           font-size: 14px;
-          font-family: 'Menlo', monospace;
+          font-family: "Source Sans Pro", sans-serif;
           color: rgb(187, 187, 187);
           background-color: rgb(15, 15, 15);
           border: 1px solid rgb(15, 15, 15);
