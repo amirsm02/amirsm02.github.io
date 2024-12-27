@@ -19,11 +19,9 @@ h1 {
     /* text-align: center; Center the title */
 
     font-family: "Source Sans Pro", sans-serif;
-    /* font-weight: 900; */
-    /* line-height: 1.5; */
-    /* letter-spacing: 0.075em; */
 
     margin: 0 0 0 100px;
+    padding: 0;
     font-weight: normal;
 
     font-size: 24px;
@@ -37,7 +35,8 @@ h1 {
 /* Style paragraphs */
 p {
     color: #d1d1d1; /* Light gray for paragraph text */
+    font-family: "Source Sans Pro", sans-serif;
     font-size: 1.2em;
     line-height: 1.6;
-    text-align: center; /* Center the paragraph */
+    text-align: left; /* Center the paragraph */
 }
