@@ -115,16 +115,19 @@
       /* Add hover text using the ::after pseudo-element */
       .scrollbox li a .star:hover::after {
           content: "Star system"; /* Text to show on hover */
-          /* position: absolute; Position the text inside the square */
-          /* top: 50%; Center vertically */
-          left: 40px; /* Center horizontally */
-          /* transform: translate(-50%, -50%); Adjust to truly center the text */
           color: white; /* Text color */
           background-color: rgb(10, 10, 10);
           font-size: 16px; /* Font size for the hover text */
           font-family: "Source Sans Pro", sans-serif;
           opacity: 1; /* Make sure the text is visible */
           transition: opacity 0.3s ease; /* Smooth transition for text */
+
+          white-space: nowrap; /* Prevent the text from wrapping */
+          position: absolute; /* Position it relative to the parent */
+          left: 0; /* Align the text to the left of the parent object */
+          top: 50%; /* Optionally, you can adjust this to align vertically */
+          transform: translateY(-50%); /* Center the text vertically if needed */
+          padding: 5px; /* Add some space around the text if necessary */
       }
 
       /* Hide the hover text initially (before hovering) */
