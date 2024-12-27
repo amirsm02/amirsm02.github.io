@@ -13,10 +13,33 @@ body {
     margin: 20px; /* Optional: adds some space around content */
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-weight: 900;
+    line-height: 1.5;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+}
+
 /* Style headings */
 h1 {
     color: #f1f1f1; /* Lighter color for headings */
-    text-align: center; /* Center the title */
+    /* text-align: center; Center the title */
+
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-weight: 900;
+    line-height: 1.5;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+
+    font-size: 1.25rem;
+    /* margin: 0 0 1.5rem 0; */
+
+    border-bottom: 0;
+    color: inherit;
+    text-decoration: none;
 }
 
 /* Style paragraphs */
