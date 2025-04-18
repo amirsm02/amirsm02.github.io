@@ -28,9 +28,6 @@
 
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <style>
-    /* .spacer {
-        height: 0px;
-    } */
 
     /* Style for the container holding the search bar and list */
     .scrollbox-container {
@@ -51,6 +48,12 @@
         box-sizing: border-box;
         background-color: rgb(15, 15, 15);
         color: rgb(187, 187, 187);
+    }
+
+    .search-bar:focus {
+    outline: none;
+    box-shadow: none;
+    border: none; /* Optional: only if you're not adding a custom border */
     }
 
     /* Style for the scrollable list
@@ -253,7 +256,6 @@
         white-space: pre-line;
         width: 320px;
         height: 150px; /* Height of the text box */
-        margin-top: 10px;
         padding: 10px;
         font-size: 14px;
         font-family: "Source Sans Pro", sans-serif;
@@ -263,7 +265,24 @@
         border-radius: 3px;
         resize: none; /* Prevent resizing */
         box-sizing: border-box;
-      }
+    }
+
+    .image-wrapper {
+    float: left;
+    width: 60%;
+    height: 400px; /* adjust as needed */
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    }
+
+    .image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    }
     </style>
   </head>
   <body data-spy="scroll" data-target="#site-navbar">
@@ -620,79 +639,79 @@
             </ul>
          </div>
         
-          <img id="image" src="/astro/M13 - Hercules Globular Cluster.png" alt="Image" width="60%" style="float: left; margin: 0px;">
-          <textarea id="text-box" class="text-box"  style="float: right; margin: 20px;"
-          placeholder=
-          "Date: 07/29/2024
-          Gain: 101
-          Offset: 50
-          Subs: 19x60
-          Scope: 72mm Refractor
-          Filter: None"
-          ></textarea>
+        <div class="image-wrapper">
+        <img id="image" src="/astro/M13 - Hercules Globular Cluster.png" alt="Image" width="60%">
+        </div>
 
-          <script>
-              // Function to change the image source
-              function changeImage(imageSource) {
-                  document.getElementById('image').src = imageSource;
-              }
-          </script>
+        <textarea class="text-box" style="float: right; margin: 20px;" placeholder="Date: 07/29/2024
+        Gain: 101
+        Offset: 50
+        Subs: 19x60
+        Scope: 72mm Refractor
+        Filter: None"></textarea>
+
+        <script>
+            // Function to change the image source
+            function changeImage(imageSource) {
+                document.getElementById('image').src = imageSource;
+            }
+        </script>
           
 
-          <script>
-          function filterLinks() {
-              var searchInput = document.getElementById("search").value.toLowerCase();  // Get search input
-              var links = document.querySelectorAll("#link-list li");  // Get all list items
+        <script>
+        function filterLinks() {
+            var searchInput = document.getElementById("search").value.toLowerCase();  // Get search input
+            var links = document.querySelectorAll("#link-list li");  // Get all list items
 
-              links.forEach(function(link) {
-                  // Directly query the <a> tag inside the list item
-                  var linkText = link.querySelector("a").textContent || link.querySelector("a").innerText;  // Get text inside <a> tag
-                  
-                  // Compare the linkText with the search input
-                  if (linkText.toLowerCase().includes(searchInput)) {
-                      link.style.display = "block";  // Show the link if it matches
-                  } else {
-                      link.style.display = "none";   // Hide the link if it doesn't match
-                  }
-              });
-          }
-          </script>
+            links.forEach(function(link) {
+                // Directly query the <a> tag inside the list item
+                var linkText = link.querySelector("a").textContent || link.querySelector("a").innerText;  // Get text inside <a> tag
+                
+                // Compare the linkText with the search input
+                if (linkText.toLowerCase().includes(searchInput)) {
+                    link.style.display = "block";  // Show the link if it matches
+                } else {
+                    link.style.display = "none";   // Hide the link if it doesn't match
+                }
+            });
+        }
+        </script>
 
-          <script>
-              // Get all list items
-              const listItems = document.querySelectorAll('.scrollbox li a');
-              
-              // Get the text box
-              const textBox = document.getElementById('text-box');
+        <script>
+            // Get all list items
+            const listItems = document.querySelectorAll('.scrollbox li a');
+            
+            // Get the text box
+            const textBox = document.getElementById('text-box');
 
-              // Add event listeners to each list item
-              listItems.forEach(item => {
-                  item.addEventListener('click', function() {
-                      // Remove 'selected' class from all list items
-                      listItems.forEach(link => link.classList.remove('selected'));
+            // Add event listeners to each list item
+            listItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove 'selected' class from all list items
+                    listItems.forEach(link => link.classList.remove('selected'));
 
-                      // Add 'selected' class to the clicked item
-                      item.classList.add('selected');
-                  });
-              });
-              
-              // Add click event listeners to each list item
-              listItems.forEach(item => {
-                  item.addEventListener('click', function() {
-                      // Get the content associated with this list item
-                      const content = item.getAttribute('data-content');
-                      
-                      // Update the text box with the content
-                      textBox.value = content;
-                  });
-              });
-          </script>
+                    // Add 'selected' class to the clicked item
+                    item.classList.add('selected');
+                });
+            });
+            
+            // Add click event listeners to each list item
+            listItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Get the content associated with this list item
+                    const content = item.getAttribute('data-content');
+                    
+                    // Update the text box with the content
+                    textBox.value = content;
+                });
+            });
+        </script>
 
-          <script>
-              // const listItems = document.querySelectorAll('.scrollbox li a');
+        <script>
+            // const listItems = document.querySelectorAll('.scrollbox li a');
 
-              
-          </script>
+            
+        </script>
 
         </div>
     </div>
