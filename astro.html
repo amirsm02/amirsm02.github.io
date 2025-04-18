@@ -28,232 +28,241 @@
 
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <style>
-      /* .spacer {
-          height: 0px;
-      } */
+    /* .spacer {
+        height: 0px;
+    } */
 
-      /* Style for the container holding the search bar and list */
-      .scrollbox-container {
-          width: 320px;
-          height: 350px;
-          border: 1px solid rgb(15, 15, 15);
-          border-radius: 3px;
-          overflow: hidden;
-      }
+    /* Style for the container holding the search bar and list */
+    .scrollbox-container {
+        width: 320px;
+        height: 350px;
+        border: 1px solid rgb(15, 15, 15);
+        border-radius: 3px;
+        overflow: hidden;
+    }
 
-      /* Style for the search bar at the top */
-      .search-bar {
-          width: 100%;
-          padding: 10px;
-          font-size: 16px;
-          font-family: "Source Sans Pro", sans-serif;
-          border: none;
-          box-sizing: border-box;
-          background-color: rgb(15, 15, 15);
-          color: rgb(187, 187, 187);
-      }
-
-      /* Style for the scrollable list */
-      .scrollbox {
-          height: calc(100% - 40px);
-          overflow-y: auto;
-          list-style-type: none;
-          margin: 0;
-          background-color: rgb(15, 15, 15);
-          text-align: left;
-          overflow: scroll;
-      }
-
-      .scrollbox li {
-          margin: 0;
-          padding: 0;
-      }
-
-      /* Style for each link in the list */
-      .scrollbox li a {
-          display: flex;
-          padding: 0;
-          align-items: center;
-          background-color: rgb(15, 15, 15);
-          border-bottom: 1px solid rgb(15, 15, 15);
-          cursor: pointer;
-          color: rgb(187, 187, 187);
-          font-size: 16px;
-          font-family: "Source Sans Pro", sans-serif;
-          text-align: left;
-          margin: 0px;
-          overflow: hidden;
-      }
-
-      .scrollbox li a:hover {
-          background-color: rgb(0, 27, 71);
-      }
-      
-      .scrollbox li a.selected {
-          background-color: rgb(0, 27, 71); /* Highlight background color */
-      }
-
-      /* Style for the square (star) */
-      .scrollbox li a .star {
-          width: 16px; /* Set the width of the square */
-          height: 16px; /* Set the height of the square */
-          background-color: rgb(107, 102, 0); /* Set the color of the square */
-          margin-right: 10px; /* Space between the square and the text */
-          margin-top: 0;
-          margin-bottom: 0;
-          padding-top: 0;
-          padding-bottom: 0;
-          margin-left: 15px;
-          border-radius: 2px; /* Optional: for rounded corners */
-          position: relative; /* This is needed for the pseudo-element positioning */
-          transition: background-color 0.3s ease; /* Smooth transition for the background color */
-          overflow: visible;
-      }
-
-      /* Darken the square on hover */
-      .scrollbox li a .star:hover {
-          background-color: rgb(80, 75, 0); /* Darker color */
-      }
-
-      /* Add hover text using the ::after pseudo-element */
-      .scrollbox li a .star:hover::after {
-        content: "Star"; /* Text to show on hover */
-        color: white; /* Text color */
-        background-color: rgb(10, 10, 10);
-        font-size: 16px; /* Font size for the hover text */
+    /* Style for the search bar at the top */
+    .search-bar {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
         font-family: "Source Sans Pro", sans-serif;
-        opacity: 1; /* Make sure the text is visible */
-        transition: opacity 0.3s ease; /* Smooth transition for text */
+        border: none;
+        box-sizing: border-box;
+        background-color: rgb(15, 15, 15);
+        color: rgb(187, 187, 187);
+    }
 
-        white-space: nowrap; /* Prevent the text from wrapping */
-        position: absolute; /* Position it relative to the parent */
-        left: -100px; /* Align the left edge of the hover text with the left of the parent */
-        top: 50%; /* Vertically center the hover text */
-        transform: translateY(-50%); /* Adjust for vertical centering */
+    /* Style for the scrollable list
+    .scrollbox {
+        height: calc(100% - 40px);
+        overflow-y: auto;
+        list-style-type: none;
+        margin: 0;
+        background-color: rgb(15, 15, 15);
+        text-align: left;
+        overflow: scroll;
+    } */
 
-        padding: 0 10px; /* Add some space around the text */
-        border: 2px solid rgb(10, 10, 10); /* Border around the text */
-        border-radius: 3px; /* Optional: adds rounded corners to the border */
-      }
+    .scrollbox {
+    height: calc(100% - 40px);
+    overflow-y: auto;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;  /* remove default padding */
+    background-color: rgb(15, 15, 15);
+    text-align: left;
 
-      /* Hide the hover text initially (before hovering) */
-      .scrollbox li a .star::after {
-          content: "";
-          opacity: 0;
-      }
+    /* Custom scrollbar for WebKit (Chrome, Safari) */
+    scrollbar-width: thin;
+    scrollbar-color: black black;  /* For Firefox */
+    }
 
-      /* Style for the square (galaxy) */
-      .scrollbox li a .galaxy {
-          width: 16px; /* Set the width of the square */
-          height: 16px; /* Set the height of the square */
-          background-color: rgb(96, 0, 10); /* Set the color of the square */
-          margin-right: 10px; /* Space between the square and the text */
-          margin-top: 0;
-          margin-bottom: 0;
-          padding-top: 0;
-          padding-bottom: 0;
-          margin-left: 15px;
-          border-radius: 2px; /* Optional: for rounded corners */
-          position: relative; /* This is needed for the pseudo-element positioning */
-          transition: background-color 0.3s ease; /* Smooth transition for the background color */
-          overflow: visible;
-      }
-
-      /* Darken the square on hover */
-      .scrollbox li a .galaxy:hover {
-          background-color: rgb(62, 0, 6); /* Darker color */
-      }
-
-      /* Add hover text using the ::after pseudo-element */
-      .scrollbox li a .galaxy:hover::after {
-        content: "Galaxy"; /* Text to show on hover */
-        color: white; /* Text color */
-        background-color: rgb(10, 10, 10);
-        font-size: 16px; /* Font size for the hover text */
+    /* Style for each link in the list */
+    .scrollbox li a {
+        display: flex;
+        padding: 0;
+        align-items: center;
+        background-color: rgb(15, 15, 15);
+        border-bottom: 1px solid rgb(15, 15, 15);
+        cursor: pointer;
+        color: rgb(187, 187, 187);
+        font-size: 16px;
         font-family: "Source Sans Pro", sans-serif;
-        opacity: 1; /* Make sure the text is visible */
-        transition: opacity 0.3s ease; /* Smooth transition for text */
+        text-align: left;
+        margin: 0px;
+        overflow: hidden;
+    }
 
-        white-space: nowrap; /* Prevent the text from wrapping */
-        position: absolute; /* Position it relative to the parent */
-        left: -100px; /* Align the left edge of the hover text with the left of the parent */
-        top: 50%; /* Vertically center the hover text */
-        transform: translateY(-50%); /* Adjust for vertical centering */
+    .scrollbox li a:hover {
+        background-color: rgb(0, 27, 71);
+    }
+    
+    .scrollbox li a.selected {
+        background-color: rgb(0, 27, 71); /* Highlight background color */
+    }
 
-        padding: 0 10px; /* Add some space around the text */
-        border: 2px solid rgb(10, 10, 10); /* Border around the text */
-        border-radius: 3px; /* Optional: adds rounded corners to the border */
-      }
+    /* Style for the square (star) */
+    .scrollbox li a .star {
+        width: 16px; /* Set the width of the square */
+        height: 16px; /* Set the height of the square */
+        background-color: rgb(107, 102, 0); /* Set the color of the square */
+        margin-right: 10px; /* Space between the square and the text */
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-left: 15px;
+        border-radius: 2px; /* Optional: for rounded corners */
+        position: relative; /* This is needed for the pseudo-element positioning */
+        transition: background-color 0.3s ease; /* Smooth transition for the background color */
+        overflow: visible;
+    }
 
-      /* Hide the hover text initially (before hovering) */
-      .scrollbox li a .galaxy::after {
-          content: "";
-          opacity: 0;
-      }
-      
-      /* Style for the square (star) */
-      .scrollbox li a .nebula {
-          width: 16px; /* Set the width of the square */
-          height: 16px; /* Set the height of the square */
-          background-color: rgb(50, 0, 159); /* Set the color of the square */
-          margin-right: 10px; /* Space between the square and the text */
-          margin-top: 0;
-          margin-bottom: 0;
-          padding-top: 0;
-          padding-bottom: 0;
-          margin-left: 15px;
-          border-radius: 2px; /* Optional: for rounded corners */
-          position: relative; /* This is needed for the pseudo-element positioning */
-          transition: background-color 0.3s ease; /* Smooth transition for the background color */
-          overflow: visible;
-      }
+    /* Darken the square on hover */
+    .scrollbox li a .star:hover {
+        background-color: rgb(80, 75, 0); /* Darker color */
+    }
 
-      /* Darken the square on hover */
-      .scrollbox li a .nebula:hover {
-          background-color: rgb(36, 0, 112); /* Darker color */
-      }
+    /* Add hover text using the ::after pseudo-element */
+    .scrollbox li a .star:hover::after {
+    content: "Star"; /* Text to show on hover */
+    color: white; /* Text color */
+    background-color: rgb(10, 10, 10);
+    font-size: 16px; /* Font size for the hover text */
+    font-family: "Source Sans Pro", sans-serif;
+    opacity: 1; /* Make sure the text is visible */
+    transition: opacity 0.3s ease; /* Smooth transition for text */
 
-      /* Add hover text using the ::after pseudo-element */
-      .scrollbox li a .nebula:hover::after {
-        content: "Nebula"; /* Text to show on hover */
-        color: white; /* Text color */
-        background-color: rgb(10, 10, 10);
-        font-size: 16px; /* Font size for the hover text */
+    white-space: nowrap; /* Prevent the text from wrapping */
+    position: absolute; /* Position it relative to the parent */
+    left: -100px; /* Align the left edge of the hover text with the left of the parent */
+    top: 50%; /* Vertically center the hover text */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+
+    padding: 0 10px; /* Add some space around the text */
+    border: 2px solid rgb(10, 10, 10); /* Border around the text */
+    border-radius: 3px; /* Optional: adds rounded corners to the border */
+    }
+
+    /* Hide the hover text initially (before hovering) */
+    .scrollbox li a .star::after {
+        content: "";
+        opacity: 0;
+    }
+
+    /* Style for the square (galaxy) */
+    .scrollbox li a .galaxy {
+        width: 16px; /* Set the width of the square */
+        height: 16px; /* Set the height of the square */
+        background-color: rgb(96, 0, 10); /* Set the color of the square */
+        margin-right: 10px; /* Space between the square and the text */
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-left: 15px;
+        border-radius: 2px; /* Optional: for rounded corners */
+        position: relative; /* This is needed for the pseudo-element positioning */
+        transition: background-color 0.3s ease; /* Smooth transition for the background color */
+        overflow: visible;
+    }
+
+    /* Darken the square on hover */
+    .scrollbox li a .galaxy:hover {
+        background-color: rgb(62, 0, 6); /* Darker color */
+    }
+
+    /* Add hover text using the ::after pseudo-element */
+    .scrollbox li a .galaxy:hover::after {
+    content: "Galaxy"; /* Text to show on hover */
+    color: white; /* Text color */
+    background-color: rgb(10, 10, 10);
+    font-size: 16px; /* Font size for the hover text */
+    font-family: "Source Sans Pro", sans-serif;
+    opacity: 1; /* Make sure the text is visible */
+    transition: opacity 0.3s ease; /* Smooth transition for text */
+
+    white-space: nowrap; /* Prevent the text from wrapping */
+    position: absolute; /* Position it relative to the parent */
+    left: -100px; /* Align the left edge of the hover text with the left of the parent */
+    top: 50%; /* Vertically center the hover text */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+
+    padding: 0 10px; /* Add some space around the text */
+    border: 2px solid rgb(10, 10, 10); /* Border around the text */
+    border-radius: 3px; /* Optional: adds rounded corners to the border */
+    }
+
+    /* Hide the hover text initially (before hovering) */
+    .scrollbox li a .galaxy::after {
+        content: "";
+        opacity: 0;
+    }
+    
+    /* Style for the square (star) */
+    .scrollbox li a .nebula {
+        width: 16px; /* Set the width of the square */
+        height: 16px; /* Set the height of the square */
+        background-color: rgb(50, 0, 159); /* Set the color of the square */
+        margin-right: 10px; /* Space between the square and the text */
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-left: 15px;
+        border-radius: 2px; /* Optional: for rounded corners */
+        position: relative; /* This is needed for the pseudo-element positioning */
+        transition: background-color 0.3s ease; /* Smooth transition for the background color */
+        overflow: visible;
+    }
+
+    /* Darken the square on hover */
+    .scrollbox li a .nebula:hover {
+        background-color: rgb(36, 0, 112); /* Darker color */
+    }
+
+    /* Add hover text using the ::after pseudo-element */
+    .scrollbox li a .nebula:hover::after {
+    content: "Nebula"; /* Text to show on hover */
+    color: white; /* Text color */
+    background-color: rgb(10, 10, 10);
+    font-size: 16px; /* Font size for the hover text */
+    font-family: "Source Sans Pro", sans-serif;
+    opacity: 1; /* Make sure the text is visible */
+    transition: opacity 0.3s ease; /* Smooth transition for text */
+
+    white-space: nowrap; /* Prevent the text from wrapping */
+    position: absolute; /* Position it relative to the parent */
+    left: -100px; /* Align the left edge of the hover text with the left of the parent */
+    top: 50%; /* Vertically center the hover text */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+
+    padding: 0 10px; /* Add some space around the text */
+    border: 2px solid rgb(10, 10, 10); /* Border around the text */
+    border-radius: 3px; /* Optional: adds rounded corners to the border */
+    }
+
+    /* Hide the hover text initially (before hovering) */
+    .scrollbox li a .nebula::after {
+        content: "";
+        opacity: 0;
+    }
+
+    .text-box {
+        white-space: pre-line;
+        width: 320px;
+        height: 150px; /* Height of the text box */
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 14px;
         font-family: "Source Sans Pro", sans-serif;
-        opacity: 1; /* Make sure the text is visible */
-        transition: opacity 0.3s ease; /* Smooth transition for text */
-
-        white-space: nowrap; /* Prevent the text from wrapping */
-        position: absolute; /* Position it relative to the parent */
-        left: -100px; /* Align the left edge of the hover text with the left of the parent */
-        top: 50%; /* Vertically center the hover text */
-        transform: translateY(-50%); /* Adjust for vertical centering */
-
-        padding: 0 10px; /* Add some space around the text */
-        border: 2px solid rgb(10, 10, 10); /* Border around the text */
-        border-radius: 3px; /* Optional: adds rounded corners to the border */
-      }
-
-      /* Hide the hover text initially (before hovering) */
-      .scrollbox li a .nebula::after {
-          content: "";
-          opacity: 0;
-      }
-
-      .text-box {
-          white-space: pre-line;
-          width: 320px;
-          height: 150px; /* Height of the text box */
-          margin-top: 10px;
-          padding: 10px;
-          font-size: 14px;
-          font-family: "Source Sans Pro", sans-serif;
-          color: rgb(187, 187, 187);
-          background-color: rgb(15, 15, 15);
-          border: 1px solid rgb(15, 15, 15);
-          border-radius: 3px;
-          resize: none; /* Prevent resizing */
-          box-sizing: border-box;
+        color: rgb(187, 187, 187);
+        background-color: rgb(15, 15, 15);
+        border: 1px solid rgb(15, 15, 15);
+        border-radius: 3px;
+        resize: none; /* Prevent resizing */
+        box-sizing: border-box;
       }
     </style>
   </head>
