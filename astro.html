@@ -267,22 +267,22 @@
         box-sizing: border-box;
     }
 
-    .image-wrapper {
+    /* .image-wrapper {
     float: left;
     width: 60%;
-    height: 400px; /* adjust as needed */
+    height: 400px;
     background-color: #111;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0px;
-    }
+    } */
 
-    .image-wrapper img {
+    /* .image-wrapper img {
     max-width: 100%;
     max-height: 100%;
     display: block;
-    }
+    } */
     </style>
   </head>
   <body data-spy="scroll" data-target="#site-navbar">
@@ -327,6 +327,17 @@
                 Filter: SVBony UV/IR Cut"
                 onclick="changeImage('/astro/Jupiter + Callisto, Ganymede, Io, Europa.jpg')"><span class="star"></span>Jupiter + Callisto, Ganymede, Io, Europa</a></li>
 
+                <!-- Sun -->
+                <li><a href="#"
+                data-content=
+                "Date: 04/18/2025
+                Gain: 101
+                Offset: 50
+                Subs: 2.5s (500 frames)
+                Scope: 150mm Newtonian
+                Filter: SVBony UV/IR Cut, Solar Filter"
+                onclick="changeImage('/astro/Sun.jpg')"><span class="star"></span>Sun</a></li>
+
                 <!-- M13 - Hercules Globular Cluster -->
                 <li><a href="#"
                 data-content=
@@ -362,15 +373,15 @@
                 onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')"><span class="galaxy"></span>M31 - Andromeda Galaxy</a></li> -->
                 
                 <!-- M51 - Whirlpool Galaxy -->
-                <!-- <li><a href="#"
+                <li><a href="#"
                 data-content=
-                "Date: 07/29/2024
+                "Date: 04/18/2025
                 Gain: 101
                 Offset: 50
-                Subs: 34x60
-                Scope: 72mm Refractor
-                Filter: None"
-                onclick="changeImage('/astro/M51 - Whirlpool Galaxy.png')"><span class="galaxy"></span>M51 - Whirlpool Galaxy</a></li> -->
+                Subs: 47x180
+                Scope: 150mm Newtonian
+                Filter: SVBony UV/IR Cut"
+                onclick="changeImage('/astro/M51 - Whirlpool Galaxy.png')"><span class="galaxy"></span>M51 - Whirlpool Galaxy</a></li>
                 
                 <!-- NGC891 - Silver Silver Galaxy -->
                 <li><a href="#"
@@ -639,9 +650,9 @@
             </ul>
          </div>
         
-        <div class="image-wrapper">
+        <!-- <div class="image-wrapper"> -->
         <img id="image" src="/astro/M13 - Hercules Globular Cluster.png" alt="Image" width="60%">
-        </div>
+        <!-- </div> -->
 
         <textarea class="text-box" style="float: right; margin: 20px;" placeholder="Date: 07/29/2024
         Gain: 101
