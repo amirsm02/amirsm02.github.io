@@ -56,17 +56,6 @@
     border: none; /* Optional: only if you're not adding a custom border */
     }
 
-    /* Style for the scrollable list
-    .scrollbox {
-        height: calc(100% - 40px);
-        overflow-y: auto;
-        list-style-type: none;
-        margin: 0;
-        background-color: rgb(15, 15, 15);
-        text-align: left;
-        overflow: scroll;
-    } */
-
     .scrollbox {
     height: calc(100% - 40px);
     overflow-y: auto;
@@ -105,152 +94,76 @@
         background-color: rgb(0, 27, 71); /* Highlight background color */
     }
 
-    /* Style for the square (star) */
-    .scrollbox li a .star {
-        width: 16px; /* Set the width of the square */
-        height: 16px; /* Set the height of the square */
-        background-color: rgb(107, 102, 0); /* Set the color of the square */
-        margin-right: 10px; /* Space between the square and the text */
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-left: 15px;
-        border-radius: 2px; /* Optional: for rounded corners */
-        position: relative; /* This is needed for the pseudo-element positioning */
-        transition: background-color 0.3s ease; /* Smooth transition for the background color */
-        overflow: visible;
+    /****/
+
+    /* Base style for all astronomical icons */
+    .astro-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    margin-left: 15px;
+    border-radius: 2px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    display: inline-block;
     }
 
-    /* Darken the square on hover */
-    .scrollbox li a .star:hover {
-        background-color: rgb(80, 75, 0); /* Darker color */
+    /* Specific colors based on data-type */
+    .astro-icon[data-type="galaxy"] {
+    background-color: rgb(170, 0, 0);
     }
 
-    /* Add hover text using the ::after pseudo-element */
-    .scrollbox li a .star:hover::after {
-    content: "Star"; /* Text to show on hover */
-    color: white; /* Text color */
+    .astro-icon[data-type="galaxy cluster"] {
+    background-color: rgb(96, 0, 10);
+    }
+
+    .astro-icon[data-type="nebula"] {
+    background-color: rgb(0, 60, 96);
+    }
+
+    .astro-icon[data-type="star"] {
+    background-color: rgb(255, 215, 0);
+    }
+
+    .astro-icon[data-type="globular cluster"] {
+    background-color: rgb(161, 137, 0);
+    }
+
+    .astro-icon[data-type="planets and moon"] {
+    background-color: rgb(123, 123, 123);
+    }
+
+    /* Hover effect for all icons */
+    .astro-icon:hover {
+    filter: brightness(85%);
+    }
+
+    /* Tooltip on hover */
+    .astro-icon:hover::after {
+    content: attr(data-type);
+    color: white;
     background-color: rgb(10, 10, 10);
-    font-size: 16px; /* Font size for the hover text */
+    font-size: 16px;
     font-family: "Source Sans Pro", sans-serif;
-    opacity: 1; /* Make sure the text is visible */
-    transition: opacity 0.3s ease; /* Smooth transition for text */
-
-    white-space: nowrap; /* Prevent the text from wrapping */
-    position: absolute; /* Position it relative to the parent */
-    left: -100px; /* Align the left edge of the hover text with the left of the parent */
-    top: 50%; /* Vertically center the hover text */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-
-    padding: 0 10px; /* Add some space around the text */
-    border: 2px solid rgb(10, 10, 10); /* Border around the text */
-    border-radius: 3px; /* Optional: adds rounded corners to the border */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+    position: absolute;
+    left: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 10px;
+    border: 2px solid rgb(10, 10, 10);
+    border-radius: 3px;
     }
 
-    /* Hide the hover text initially (before hovering) */
-    .scrollbox li a .star::after {
-        content: "";
-        opacity: 0;
+    /* Hide tooltip by default */
+    .astro-icon::after {
+    content: "";
+    opacity: 0;
     }
 
-    /* Style for the square (galaxy) */
-    .scrollbox li a .galaxy {
-        width: 16px; /* Set the width of the square */
-        height: 16px; /* Set the height of the square */
-        background-color: rgb(96, 0, 10); /* Set the color of the square */
-        margin-right: 10px; /* Space between the square and the text */
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-left: 15px;
-        border-radius: 2px; /* Optional: for rounded corners */
-        position: relative; /* This is needed for the pseudo-element positioning */
-        transition: background-color 0.3s ease; /* Smooth transition for the background color */
-        overflow: visible;
-    }
-
-    /* Darken the square on hover */
-    .scrollbox li a .galaxy:hover {
-        background-color: rgb(62, 0, 6); /* Darker color */
-    }
-
-    /* Add hover text using the ::after pseudo-element */
-    .scrollbox li a .galaxy:hover::after {
-    content: "Galaxy"; /* Text to show on hover */
-    color: white; /* Text color */
-    background-color: rgb(10, 10, 10);
-    font-size: 16px; /* Font size for the hover text */
-    font-family: "Source Sans Pro", sans-serif;
-    opacity: 1; /* Make sure the text is visible */
-    transition: opacity 0.3s ease; /* Smooth transition for text */
-
-    white-space: nowrap; /* Prevent the text from wrapping */
-    position: absolute; /* Position it relative to the parent */
-    left: -100px; /* Align the left edge of the hover text with the left of the parent */
-    top: 50%; /* Vertically center the hover text */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-
-    padding: 0 10px; /* Add some space around the text */
-    border: 2px solid rgb(10, 10, 10); /* Border around the text */
-    border-radius: 3px; /* Optional: adds rounded corners to the border */
-    }
-
-    /* Hide the hover text initially (before hovering) */
-    .scrollbox li a .galaxy::after {
-        content: "";
-        opacity: 0;
-    }
-    
-    /* Style for the square (star) */
-    .scrollbox li a .nebula {
-        width: 16px; /* Set the width of the square */
-        height: 16px; /* Set the height of the square */
-        background-color: rgb(50, 0, 159); /* Set the color of the square */
-        margin-right: 10px; /* Space between the square and the text */
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-left: 15px;
-        border-radius: 2px; /* Optional: for rounded corners */
-        position: relative; /* This is needed for the pseudo-element positioning */
-        transition: background-color 0.3s ease; /* Smooth transition for the background color */
-        overflow: visible;
-    }
-
-    /* Darken the square on hover */
-    .scrollbox li a .nebula:hover {
-        background-color: rgb(36, 0, 112); /* Darker color */
-    }
-
-    /* Add hover text using the ::after pseudo-element */
-    .scrollbox li a .nebula:hover::after {
-    content: "Nebula"; /* Text to show on hover */
-    color: white; /* Text color */
-    background-color: rgb(10, 10, 10);
-    font-size: 16px; /* Font size for the hover text */
-    font-family: "Source Sans Pro", sans-serif;
-    opacity: 1; /* Make sure the text is visible */
-    transition: opacity 0.3s ease; /* Smooth transition for text */
-
-    white-space: nowrap; /* Prevent the text from wrapping */
-    position: absolute; /* Position it relative to the parent */
-    left: -100px; /* Align the left edge of the hover text with the left of the parent */
-    top: 50%; /* Vertically center the hover text */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-
-    padding: 0 10px; /* Add some space around the text */
-    border: 2px solid rgb(10, 10, 10); /* Border around the text */
-    border-radius: 3px; /* Optional: adds rounded corners to the border */
-    }
-
-    /* Hide the hover text initially (before hovering) */
-    .scrollbox li a .nebula::after {
-        content: "";
-        opacity: 0;
-    }
+    /****/
 
     .text-box {
         white-space: pre-line;
@@ -267,22 +180,6 @@
         box-sizing: border-box;
     }
 
-    /* .image-wrapper {
-    float: left;
-    width: 60%;
-    height: 400px;
-    background-color: #111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0px;
-    } */
-
-    /* .image-wrapper img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    } */
     </style>
   </head>
   <body data-spy="scroll" data-target="#site-navbar">
@@ -314,7 +211,7 @@
                 Subs: 60s (253 frames)
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut"
-                onclick="changeImage('/astro/Moon - First Quarter.jpg')"><span class="star"></span>Moon - First Quarter</a></li>
+                onclick="changeImage('/astro/Moon - First Quarter.jpg')"><span class="astro-icon" data-type="planets and moon"></span>Moon - First Quarter</a></li>
     
                 <!-- Jupiter + Callisto, Ganymede, Io, Europa -->
                 <li><a href="#"
@@ -325,7 +222,7 @@
                 Subs: 30s (178 frames)
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut"
-                onclick="changeImage('/astro/Jupiter + Callisto, Ganymede, Io, Europa.jpg')"><span class="star"></span>Jupiter + Callisto, Ganymede, Io, Europa</a></li>
+                onclick="changeImage('/astro/Jupiter + Callisto, Ganymede, Io, Europa.jpg')"><span class="astro-icon" data-type="planets and moon"></span>Jupiter + Callisto, Ganymede, Io, Europa</a></li>
 
                 <!-- Sun -->
                 <li><a href="#"
@@ -336,7 +233,7 @@
                 Subs: 2.5s (500 frames)
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut, Solar Filter"
-                onclick="changeImage('/astro/Sun.jpg')"><span class="star"></span>Sun</a></li>
+                onclick="changeImage('/astro/Sun.jpg')"><span class="astro-icon" data-type="star"></span>Sun</a></li>
 
                 <!-- M13 - Hercules Globular Cluster -->
                 <li><a href="#"
@@ -347,7 +244,7 @@
                 Subs: 19x60
                 Scope: 72mm Refractor
                 Filter: None"
-                onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="star"></span>M13 - Hercules Globular Cluster</a></li>
+                onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="astro-icon" data-type="globular cluster"></span>M13 - Hercules Globular Cluster</a></li>
 
                 <!-- Alnitak -->
                 <!-- <li><a href="#"
@@ -358,9 +255,8 @@
                 Subs: 8x300
                 Scope: 150mm Newtonian
                 Filter: None"
-                onclick="changeImage('/astro/Alnitak.png')"><span class="star"></span>Alnitak</a></li> -->
+                onclick="changeImage('/astro/Alnitak.png')"><span class="astro-icon" data-type="star"></span>Alnitak</a></li> -->
     
-
                 <!-- M31 - Andromeda Galaxy -->
                 <!-- <li><a href="#"
                 data-content=
@@ -370,7 +266,7 @@
                 Subs: 100x60
                 Scope: 72mm Refractor
                 Filter: None"
-                onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')"><span class="galaxy"></span>M31 - Andromeda Galaxy</a></li> -->
+                onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')"><span class="astro-icon" data-type="galaxy"></span>M31 - Andromeda Galaxy</a></li> -->
                 
                 <!-- M51 - Whirlpool Galaxy -->
                 <li><a href="#"
@@ -381,21 +277,20 @@
                 Subs: 47x180
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut"
-                onclick="changeImage('/astro/M51 - Whirlpool Galaxy.jpg')"><span class="galaxy"></span>M51 - Whirlpool Galaxy</a></li>
-                
+                onclick="changeImage('/astro/M51 - Whirlpool Galaxy.jpg')"><span class="astro-icon" data-type="galaxy"></span>M51 - Whirlpool Galaxy</a></li>
+
                 <!-- NGC891 - Silver Silver Galaxy -->
-                <li><a href="#"
-                data-content=
+                <li><a href="#" data-content=
                 "Date: 12/27/2024
                 Gain: 101
                 Offset: 50
                 Subs: 30x300
                 Scope: 150mm Newtonian
                 Filter: None"
-                onclick="changeImage('/astro/NGC891 - Silver Silver Galaxy.jpg')"><span class="galaxy"></span>NGC891 - Silver Silver Galaxy</a></li>
+                onclick="changeImage('/astro/NGC891 - Silver Silver Galaxy.jpg')"><span class="astro-icon" data-type="galaxy"></span>NGC891 - Silver Silver Galaxy</a></li>
 
                 <!-- M33 - Triangulum Galaxy -->
-                <li><a href="#"
+                <!-- <li><a href="#"
                 data-content=
                 "Date: 12/28/2024
                 Gain: 101
@@ -403,7 +298,7 @@
                 Subs: 34x240
                 Scope: 150mm Newtonian
                 Filter: None"
-                onclick="changeImage('/astro/M33 - Triangulum Galaxy.jpg')"><span class="galaxy"></span>M33 - Triangulum Galaxy</a></li>
+                onclick="changeImage('/astro/M33 - Triangulum Galaxy.jpg')"><span class="astro-icon" data-type="galaxy"></span>M33 - Triangulum Galaxy</a></li> -->
 
                 <!-- M81 and M82 - Bodes Galaxy and Cigar Galaxy -->
                 <li><a href="#"
@@ -414,7 +309,7 @@
                 Subs: 23x240
                 Scope: 150mm Newtonian
                 Filter: None"
-                onclick="changeImage('/astro/M81 and M82 - Bodes Galaxy and Cigar Galaxy.jpg')"><span class="galaxy"></span>M81 and M82 - Bodes Galaxy and Cigar Galaxy</a></li>
+                onclick="changeImage('/astro/M81 and M82 - Bodes Galaxy and Cigar Galaxy.jpg')"><span class="astro-icon" data-type="galaxy"></span>M81 and M82 - Bodes Galaxy and Cigar Galaxy</a></li>
 
                 <!-- Leo Triplet -->
                 <li><a href="#"
@@ -425,19 +320,8 @@
                 Subs: 21x180
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR cut"
-                onclick="changeImage('/astro/Leo Triplet.jpg')"><span class="galaxy"></span>Leo Triplet</a></li>
+                onclick="changeImage('/astro/Leo Triplet.jpg')"><span class="astro-icon" data-type="galaxy"></span>Leo Triplet</a></li>
 
-                <!-- Markarian's Chain -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/21/2025
-                Gain: 101
-                Offset: 50
-                Subs: 10x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR cut"
-                onclick="changeImage('/astro/Markarian\'s Chain.jpg')"><span class="galaxy"></span>Markarian's Chain</a></li>
-    
                 <!-- M63 - Sunflower Galaxy -->
                 <li><a href="#"
                 data-content=
@@ -447,7 +331,7 @@
                 Subs: 50x180
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut"
-                onclick="changeImage('/astro/M63 - Sunflower Galaxy.jpg')"><span class="galaxy"></span>M63 - Sunflower Galaxy</a></li>
+                onclick="changeImage('/astro/M63 - Sunflower Galaxy.jpg')"><span class="astro-icon" data-type="galaxy"></span>M63 - Sunflower Galaxy</a></li>
         
                 <!-- M101 - Pinwheel Galaxy -->
                 <li><a href="#"
@@ -458,7 +342,7 @@
                 Subs: 38x180
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut"
-                onclick="changeImage('/astro/M101 - Pinwheel Galaxy.jpg')"><span class="galaxy"></span>M101 - Pinwheel Galaxy</a></li>
+                onclick="changeImage('/astro/M101 - Pinwheel Galaxy.jpg')"><span class="astro-icon" data-type="galaxy"></span>M101 - Pinwheel Galaxy</a></li>
 
                 <!-- NGC2903 -->
                 <li><a href="#"
@@ -469,7 +353,7 @@
                 Subs: 30x180
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut"
-                onclick="changeImage('/astro/NGC2903.jpg')"><span class="galaxy"></span>NGC2903</a></li>    
+                onclick="changeImage('/astro/NGC2903.jpg')"><span class="astro-icon" data-type="galaxy"></span>NGC2903</a></li>    
 
                 <!-- NGC4038 - Antennae Galaxies -->
                 <li><a href="#"
@@ -480,8 +364,19 @@
                 Subs: 60x180
                 Scope: 150mm Newtonian
                 Filter: SVBony UV/IR Cut"
-                onclick="changeImage('/astro/NGC4038 - Antennae Galaxies.jpg')"><span class="galaxy"></span>NGC4038 - Antennae Galaxies</a></li>    
+                onclick="changeImage('/astro/NGC4038 - Antennae Galaxies.jpg')"><span class="astro-icon" data-type="galaxy"></span>NGC4038 - Antennae Galaxies</a></li>    
 
+                <!-- Markarian's Chain -->
+                <li><a href="#"
+                data-content=
+                "Date: 03/21/2025
+                Gain: 101
+                Offset: 50
+                Subs: 10x180
+                Scope: 150mm Newtonian
+                Filter: SVBony UV/IR cut"
+                onclick="changeImage('/astro/Markarian\'s Chain.jpg')"><span class="astro-icon" data-type="galaxy cluster"></span>Markarian's Chain</a></li>
+                
                 <!-- Perseus Galaxy Cluster -->
                 <li><a href="#"
                 data-content=
@@ -491,7 +386,7 @@
                 Subs: 32x200 + 45x120
                 Scope: 150mm Newtonian
                 Filter: None"
-                onclick="changeImage('/astro/Perseus Galaxy Cluster.jpg')"><span class="galaxy"></span>Perseus Galaxy Cluster</a></li>
+                onclick="changeImage('/astro/Perseus Galaxy Cluster.jpg')"><span class="astro-icon" data-type="galaxy cluster"></span>Perseus Galaxy Cluster</a></li>
     
                 <!-- M45 - Pleiades -->
                 <!-- <li><a href="#"
@@ -502,7 +397,7 @@
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
                 Filter: None"
-                onclick="changeImage('/astro/M45 - Pleiades.png')"><span class="nebula"></span>M45 - Pleiades</a></li> -->
+                onclick="changeImage('/astro/M45 - Pleiades.png')"><span class="astro-icon" data-type="star"></span>M45 - Pleiades</a></li> -->
                 
                 <!-- IC405 - Flaming Star Nebula -->
                 <li><a href="#"
@@ -513,7 +408,7 @@
                 Subs: 79x240
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/IC405 - Flaming Star Nebula.jpg')"><span class="nebula"></span>IC405 - Flaming Star Nebula</a></li>
+                onclick="changeImage('/astro/IC405 - Flaming Star Nebula.jpg')"><span class="astro-icon" data-type="nebula"></span>IC405 - Flaming Star Nebula</a></li>
         
                 <!-- IC1795 - Fish Head Nebula -->
                 <li><a href="#"
@@ -524,7 +419,7 @@
                 Subs: 39x240
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/IC1795 - Fish Head Nebula.jpg')"><span class="nebula"></span>IC1795 - Fish Head Nebula</a></li>
+                onclick="changeImage('/astro/IC1795 - Fish Head Nebula.jpg')"><span class="astro-icon" data-type="nebula"></span>IC1795 - Fish Head Nebula</a></li>
             
                 <!-- IC434 - Horsehead Nebula -->
                 <!-- <li><a href="#"
@@ -535,7 +430,7 @@
                 Subs: 26x300
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/IC434 - Horsehead Nebula.jpg')"><span class="nebula"></span>IC434 - Horsehead Nebula</a></li> -->
+                onclick="changeImage('/astro/IC434 - Horsehead Nebula.jpg')"><span class="astro-icon" data-type="nebula"></span>IC434 - Horsehead Nebula</a></li> -->
 
                 <!-- Caldwell 49 - Rosette Nebula -->
                 <!-- <li><a href="#"
@@ -546,7 +441,7 @@
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/Caldwell 49 - Rosette Nebula.png')"><span class="nebula"></span>Caldwell 49 - Rosette Nebula</a></li> -->
+                onclick="changeImage('/astro/Caldwell 49 - Rosette Nebula.png')"><span class="astro-icon" data-type="nebula"></span>Caldwell 49 - Rosette Nebula</a></li> -->
                 
                 <!-- M42 - Orion Nebula -->
                 <!-- <li><a href="#"
@@ -557,7 +452,7 @@
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/M42 - Orion Nebula.png')"><span class="nebula"></span>M42 - Orion Nebula</a></li> -->
+                onclick="changeImage('/astro/M42 - Orion Nebula.png')"><span class="astro-icon" data-type="nebula"></span>M42 - Orion Nebula</a></li> -->
                 
                 <!-- M57 - Ring Nebula -->
                 <!-- <li><a href="#"
@@ -568,7 +463,7 @@
                 Subs: 6x(?) (unfinished)
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate(?)"
-                onclick="changeImage('/astro/M57 - Ring Nebula.png')"><span class="nebula"></span>M57 - Ring Nebula</a></li> -->
+                onclick="changeImage('/astro/M57 - Ring Nebula.png')"><span class="astro-icon" data-type="nebula"></span>M57 - Ring Nebula</a></li> -->
                 
                 <!-- NGC281 - Pacman Nebula -->
                 <li><a href="#"
@@ -579,9 +474,8 @@
                 Subs: 43x240
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/NGC281 - Pacman Nebula.jpg')"><span class="nebula"></span>NGC281 - Pacman Nebula</a></li>
+                onclick="changeImage('/astro/NGC281 - Pacman Nebula.jpg')"><span class="astro-icon" data-type="nebula"></span>NGC281 - Pacman Nebula</a></li>
         
-
                 <!-- NGC6888 - Crescent Nebula -->
                 <li><a href="#"
                 data-content=
@@ -591,7 +485,7 @@
                 Subs: 38x480
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/NGC6888 - Crescent Nebula.jpg')"><span class="nebula"></span>NGC6888 - Crescent Nebula</a></li>
+                onclick="changeImage('/astro/NGC6888 - Crescent Nebula.jpg')"><span class="astro-icon" data-type="nebula"></span>NGC6888 - Crescent Nebula</a></li>
                 
                 <!-- NGC1499 - California Nebula -->
                 <!-- <li><a href="#"
@@ -602,7 +496,7 @@
                 Subs: 1x100 (unfinished)
                 Scope: 72mm Refractor
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/NGC1499 - California Nebula.png')"><span class="nebula"></span>NGC1499 - California Nebula</a></li> -->
+                onclick="changeImage('/astro/NGC1499 - California Nebula.png')"><span class="astro-icon" data-type="nebula"></span>NGC1499 - California Nebula</a></li> -->
                 
                 <!-- NGC2174 - Monkey Head Nebula -->
                 <!-- <li><a href="#"
@@ -613,7 +507,7 @@
                 Subs: 62x240
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/NGC2174 - Monkey Head Nebula.jpg')"><span class="nebula"></span>NGC2174 - Monkey Head Nebula</a></li> -->
+                onclick="changeImage('/astro/NGC2174 - Monkey Head Nebula.jpg')"><span class="astro-icon" data-type="nebula"></span>NGC2174 - Monkey Head Nebula</a></li> -->
                     
                 <!-- NGC6995 - Eastern Veil Nebula -->
                 <!-- <li><a href="#"
@@ -624,7 +518,7 @@
                 Subs: 1x300 (unfinished)
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/NGC6995 - Eastern Veil Nebula.png')"><span class="nebula"></span>NGC6995 - Eastern Veil Nebula</a></li> -->
+                onclick="changeImage('/astro/NGC6995 - Eastern Veil Nebula.png')"><span class="astro-icon" data-type="nebula"></span>NGC6995 - Eastern Veil Nebula</a></li> -->
                 
                 <!-- NGC6960 - Western Veil Nebula -->
                 <!-- <li><a href="#"
@@ -635,7 +529,7 @@
                 Subs: 34x60
                 Scope: 72mm Refractor
                 Filter: None"
-                onclick="changeImage('/astro/NGC6960 - Western Veil Nebula.png')"><span class="nebula"></span>NGC6960 - Western Veil Nebula</a></li> -->
+                onclick="changeImage('/astro/NGC6960 - Western Veil Nebula.png')"><span class="astro-icon" data-type="nebula"></span>NGC6960 - Western Veil Nebula</a></li> -->
                 
                 <!-- NGC7000 - North American Nebula -->
                 <!-- <li><a href="#"
@@ -646,7 +540,7 @@
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
                 Filter: L-Ultimate"
-                onclick="changeImage('/astro/NGC7000 - North American Nebula.png')"><span class="nebula"></span>NGC7000 - North American Nebula</a></li> -->
+                onclick="changeImage('/astro/NGC7000 - North American Nebula.png')"><span class="astro-icon" data-type="nebula"></span>NGC7000 - North American Nebula</a></li> -->
             </ul>
          </div>
         
