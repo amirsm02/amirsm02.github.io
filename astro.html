@@ -166,18 +166,24 @@
     /****/
 
     .text-box {
-        white-space: pre-line;
-        width: 320px;
-        height: 150px; /* Height of the text box */
-        padding: 10px;
-        font-size: 14px;
-        font-family: "Source Sans Pro", sans-serif;
-        color: rgb(187, 187, 187);
-        background-color: rgb(15, 15, 15);
-        border: 1px solid rgb(15, 15, 15);
-        border-radius: 3px;
-        resize: none; /* Prevent resizing */
-        box-sizing: border-box;
+    clear: both;
+    /* existing styles */
+    white-space: pre-line;
+    width: 320px;
+    height: 150px;
+    padding: 10px;
+    font-size: 14px;
+    font-family: "Source Sans Pro", sans-serif;
+    color: rgb(187, 187, 187);
+    background-color: rgb(15, 15, 15);
+    border: 1px solid rgb(15, 15, 15);
+    border-radius: 3px;
+    resize: none;
+    box-sizing: border-box;
+    }
+
+    .text-box:focus {
+    outline: none;
     }
 
     </style>
@@ -548,7 +554,7 @@
         <img id="image" src="/astro/M13 - Hercules Globular Cluster.png" alt="Image" width="60%">
         <!-- </div> -->
 
-        <textarea class="text-box" style="float: right; margin: 20px;" placeholder="Date: 07/29/2024
+        <textarea class="text-box" id="text-box" readonly style="float: right; margin: 20px; margin-top: 10px;" placeholder="Date: 07/29/2024
         Gain: 101
         Offset: 50
         Subs: 19x60
