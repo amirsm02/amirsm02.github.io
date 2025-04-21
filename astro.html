@@ -149,7 +149,7 @@
     clear: both;
     white-space: pre-line;
     width: 320px;
-    height: 150px;
+    height: 170px;
     padding: 10px;
     font-size: 14px;
     font-family: "Source Sans Pro", sans-serif;
@@ -165,6 +165,50 @@
     outline: none;
     }
 
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0;
+    }
+
+    .dropbtn {
+    background-color: rgb(25, 25, 25);
+    color: rgb(187, 187, 187);
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: "Source Sans Pro", sans-serif;
+    border: 1px solid rgb(50, 50, 50);
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(20, 20, 20);
+    /* min-width: 160px; */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.5);
+    z-index: 1;
+    border: 1px solid rgb(50, 50, 50);
+    border-radius: 4px;
+    }
+
+    .dropdown-content a {
+    color: rgb(187, 187, 187);
+    padding: 2px 5px;
+    text-decoration: none;
+    display: block;
+    font-family: "Source Sans Pro", sans-serif;
+    }
+
+    .dropdown-content a:hover {
+    background-color: rgb(60, 60, 60);
+    }
+
+    .dropdown:hover .dropdown-content {
+    display: block;
+    }
+
     </style>
   </head>
   <body data-spy="scroll" data-target="#site-navbar">
@@ -175,11 +219,25 @@
       <a style="color: rgb(187, 187, 187);" href="https://amirshapourmohammadi.com/">Home</a>
       </p>
     </div>
-    <!-- <div class="spacer"></div> Spacer div -->
+    
     <div class="float-center container-fluid" style="max-width: 1000px;">
 
     <hr>
         <div class="container-fluid pl-3">
+<!-- 
+        <div class="dropdown" style="display: block; text-align: right; margin: 0px 20px 10px 0px;">
+            <button class="dropbtn" style="
+            font-size: 14px;
+            padding: 4px 10px;
+            background-color: rgb(25, 25, 25);
+            color: rgb(187, 187, 187);
+            cursor: pointer;
+          ">Filter</button>
+        <div class="dropdown-content" id="typeDropdown" style="text-align: left;">
+            <a href="#" data-type="all">Show All</a>
+        </div>
+        </div> -->
+        
 
           <div class="scrollbox-container" style="float: right; margin: 20px; margin-top: 0px;">
             <!-- Search bar -->
@@ -195,7 +253,8 @@
                 Offset: 50
                 Subs: 60s (253 frames)
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut"
+                Filter: SVBony UV/IR Cut
+                Distance: 1.3 ls"
                 onclick="changeImage('/astro/Moon - First Quarter.jpg')"><span class="astro-icon" data-type="Solar System"></span>Moon - First Quarter</a></li>
     
                 <!-- Jupiter + Callisto, Ganymede, Io, Europa -->
@@ -206,7 +265,8 @@
                 Offset: 50
                 Subs: 30s (178 frames)
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut"
+                Filter: SVBony UV/IR Cut
+                Distance: 44.3 lm"
                 onclick="changeImage('/astro/Jupiter + Callisto, Ganymede, Io, Europa.jpg')"><span class="astro-icon" data-type="Solar System"></span>Jupiter + Callisto, Ganymede, Io, Europa</a></li>
 
                 <!-- Sun -->
@@ -217,7 +277,8 @@
                 Offset: 50
                 Subs: 2.5s (500 frames)
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut, Solar Filter"
+                Filter: SVBony UV/IR Cut, Solar Filter
+                Distance: 8.3 lm"
                 onclick="changeImage('/astro/Sun.jpg')"><span class="astro-icon" data-type="Solar System"></span>Sun</a></li>
 
                 <!-- M13 - Hercules Globular Cluster -->
@@ -229,7 +290,8 @@
                 Offset: 50
                 Subs: 19x60
                 Scope: 72mm Refractor
-                Filter: None"
+                Filter: None
+                Distance 22,200 ly"
                 onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="astro-icon" data-type="Globular Cluster"></span>M13 - Hercules Globular Cluster</a></li>
 
                 <!-- Alnitak -->
@@ -240,7 +302,8 @@
                 Offset: 50
                 Subs: 8x300
                 Scope: 150mm Newtonian
-                Filter: None"
+                Filter: None
+                Distance: 1,262 ly"
                 onclick="changeImage('/astro/Alnitak.png')"><span class="astro-icon" data-type="Star"></span>Alnitak</a></li> -->
     
                 <!-- M31 - Andromeda Galaxy -->
@@ -251,7 +314,8 @@
                 Offset: 50
                 Subs: 100x60
                 Scope: 72mm Refractor
-                Filter: None"
+                Filter: None
+                Distance: 2.5 Mly"
                 onclick="changeImage('/astro/M31 - Andromeda Galaxy.png')"><span class="astro-icon" data-type="Galaxy"></span>M31 - Andromeda Galaxy</a></li> -->
                 
                 <!-- M51 - Whirlpool Galaxy -->
@@ -262,7 +326,8 @@
                 Offset: 50
                 Subs: 47x180
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut"
+                Filter: SVBony UV/IR Cut
+                Distance: 31 Mly"
                 onclick="changeImage('/astro/M51 - Whirlpool Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M51 - Whirlpool Galaxy</a></li>
 
                 <!-- NGC891 - Silver Silver Galaxy -->
@@ -272,7 +337,8 @@
                 Offset: 50
                 Subs: 30x300
                 Scope: 150mm Newtonian
-                Filter: None"
+                Filter: None
+                Distance: 27.4 Mly"
                 onclick="changeImage('/astro/NGC891 - Silver Silver Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>NGC891 - Silver Silver Galaxy</a></li>
 
                 <!-- M33 - Triangulum Galaxy -->
@@ -283,7 +349,8 @@
                 Offset: 50
                 Subs: 34x240
                 Scope: 150mm Newtonian
-                Filter: None"
+                Filter: None
+                Distance: 2.7 Mly"
                 onclick="changeImage('/astro/M33 - Triangulum Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M33 - Triangulum Galaxy</a></li> -->
 
                 <!-- M81 and M82 - Bodes Galaxy and Cigar Galaxy -->
@@ -294,7 +361,8 @@
                 Offset: 50
                 Subs: 23x240
                 Scope: 150mm Newtonian
-                Filter: None"
+                Filter: None
+                Distance: 11 Mly"
                 onclick="changeImage('/astro/M81 and M82 - Bodes Galaxy and Cigar Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M81 and M82 - Bodes Galaxy and Cigar Galaxy</a></li>
 
                 <!-- Leo Triplet -->
@@ -305,7 +373,8 @@
                 Offset: 50
                 Subs: 21x180
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR cut"
+                Filter: SVBony UV/IR cut
+                Distance: 35 Mly"
                 onclick="changeImage('/astro/Leo Triplet.jpg')"><span class="astro-icon" data-type="Galaxy"></span>Leo Triplet</a></li>
 
                 <!-- M63 - Sunflower Galaxy -->
@@ -316,7 +385,8 @@
                 Offset: 50
                 Subs: 50x180
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut"
+                Filter: SVBony UV/IR Cut
+                Distance: 27 Mly"
                 onclick="changeImage('/astro/M63 - Sunflower Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M63 - Sunflower Galaxy</a></li>
         
                 <!-- M101 - Pinwheel Galaxy -->
@@ -327,7 +397,8 @@
                 Offset: 50
                 Subs: 38x180
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut"
+                Filter: SVBony UV/IR Cut
+                Distance: 25 Mly"
                 onclick="changeImage('/astro/M101 - Pinwheel Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M101 - Pinwheel Galaxy</a></li>
 
                 <!-- NGC2903 -->
@@ -338,7 +409,8 @@
                 Offset: 50
                 Subs: 30x180
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut"
+                Filter: SVBony UV/IR Cut
+                Distance: 30.7 Mly"
                 onclick="changeImage('/astro/NGC2903.jpg')"><span class="astro-icon" data-type="Galaxy"></span>NGC2903</a></li>    
 
                 <!-- NGC4038 - Antennae Galaxies -->
@@ -349,7 +421,8 @@
                 Offset: 50
                 Subs: 60x180
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut"
+                Filter: SVBony UV/IR Cut
+                Distance: 45 Mly"
                 onclick="changeImage('/astro/NGC4038 - Antennae Galaxies.jpg')"><span class="astro-icon" data-type="Galaxy"></span>NGC4038 - Antennae Galaxies</a></li>    
 
                 <!-- Markarian's Chain -->
@@ -360,7 +433,8 @@
                 Offset: 50
                 Subs: 10x180
                 Scope: 150mm Newtonian
-                Filter: SVBony UV/IR cut"
+                Filter: SVBony UV/IR cut
+                Distance: 51.9 Mly (M86)"
                 onclick="changeImage('/astro/Markarian\'s Chain.jpg')"><span class="astro-icon" data-type="Galaxy Cluster"></span>Markarian's Chain</a></li>
                 
                 <!-- Perseus Galaxy Cluster -->
@@ -371,7 +445,8 @@
                 Offset: 50
                 Subs: 32x200 + 45x120
                 Scope: 150mm Newtonian
-                Filter: None"
+                Filter: None
+                Distance: 237 Mly (Perseus A)"
                 onclick="changeImage('/astro/Perseus Galaxy Cluster.jpg')"><span class="astro-icon" data-type="Galaxy Cluster"></span>Perseus Galaxy Cluster</a></li>
     
                 <!-- M45 - Pleiades -->
@@ -382,7 +457,8 @@
                 Offset: 50
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
-                Filter: None"
+                Filter: None
+                Distance: 444.2 Mly"
                 onclick="changeImage('/astro/M45 - Pleiades.png')"><span class="astro-icon" data-type="Star"></span>M45 - Pleiades</a></li> -->
                 
                 <!-- IC405 - Flaming Star Nebula -->
@@ -393,7 +469,8 @@
                 Offset: 50
                 Subs: 79x240
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 1,500 ly"
                 onclick="changeImage('/astro/IC405 - Flaming Star Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>IC405 - Flaming Star Nebula</a></li>
         
                 <!-- IC1795 - Fish Head Nebula -->
@@ -404,7 +481,8 @@
                 Offset: 50
                 Subs: 39x240
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 6,000 ly"
                 onclick="changeImage('/astro/IC1795 - Fish Head Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>IC1795 - Fish Head Nebula</a></li>
             
                 <!-- IC434 - Horsehead Nebula -->
@@ -415,7 +493,8 @@
                 Offset: 50
                 Subs: 26x300
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 1,500 ly"
                 onclick="changeImage('/astro/IC434 - Horsehead Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>IC434 - Horsehead Nebula</a></li> -->
 
                 <!-- Caldwell 49 - Rosette Nebula -->
@@ -426,7 +505,8 @@
                 Offset: 50
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 5,219 ly"
                 onclick="changeImage('/astro/Caldwell 49 - Rosette Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>Caldwell 49 - Rosette Nebula</a></li> -->
                 
                 <!-- M42 - Orion Nebula -->
@@ -437,7 +517,8 @@
                 Offset: 50
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 1,344 ly"
                 onclick="changeImage('/astro/M42 - Orion Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>M42 - Orion Nebula</a></li> -->
                 
                 <!-- M57 - Ring Nebula -->
@@ -448,7 +529,8 @@
                 Offset: 50
                 Subs: 6x(?) (unfinished)
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate(?)"
+                Filter: L-Ultimate(?)
+                Distance: 2,283 ly"
                 onclick="changeImage('/astro/M57 - Ring Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>M57 - Ring Nebula</a></li> -->
                 
                 <!-- NGC281 - Pacman Nebula -->
@@ -459,7 +541,8 @@
                 Offset: 50
                 Subs: 43x240
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 9,459 ly"
                 onclick="changeImage('/astro/NGC281 - Pacman Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC281 - Pacman Nebula</a></li>
         
                 <!-- NGC6888 - Crescent Nebula -->
@@ -470,7 +553,8 @@
                 Offset: 50
                 Subs: 38x480
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 5,000 ly"
                 onclick="changeImage('/astro/NGC6888 - Crescent Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC6888 - Crescent Nebula</a></li>
                 
                 <!-- NGC1499 - California Nebula -->
@@ -481,7 +565,8 @@
                 Offset: 50
                 Subs: 1x100 (unfinished)
                 Scope: 72mm Refractor
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 1,499 ly"
                 onclick="changeImage('/astro/NGC1499 - California Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>NGC1499 - California Nebula</a></li> -->
                 
                 <!-- NGC2174 - Monkey Head Nebula -->
@@ -492,7 +577,8 @@
                 Offset: 50
                 Subs: 62x240
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 6,523 ly"
                 onclick="changeImage('/astro/NGC2174 - Monkey Head Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC2174 - Monkey Head Nebula</a></li> -->
                     
                 <!-- NGC6995 - Eastern Veil Nebula -->
@@ -503,7 +589,8 @@
                 Offset: 50
                 Subs: 1x300 (unfinished)
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 2,400 ly"
                 onclick="changeImage('/astro/NGC6995 - Eastern Veil Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>NGC6995 - Eastern Veil Nebula</a></li> -->
                 
                 <!-- NGC6960 - Western Veil Nebula -->
@@ -514,7 +601,8 @@
                 Offset: 50
                 Subs: 34x60
                 Scope: 72mm Refractor
-                Filter: None"
+                Filter: None
+                Distance: 2,100 ly"
                 onclick="changeImage('/astro/NGC6960 - Western Veil Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>NGC6960 - Western Veil Nebula</a></li> -->
                 
                 <!-- NGC7000 - North American Nebula -->
@@ -525,7 +613,8 @@
                 Offset: 50
                 Subs: 1x100 (unfinished)
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate"
+                Filter: L-Ultimate
+                Distance: 2,200 ly"
                 onclick="changeImage('/astro/NGC7000 - North American Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>NGC7000 - North American Nebula</a></li> -->
             </ul>
          </div>
@@ -619,6 +708,46 @@
                 document.body.removeChild(icon._tooltip);
                 icon._tooltip = null;
             }
+            });
+        });
+        </script>
+
+        <script>
+            // Automatically populate dropdown with unique types
+            document.addEventListener("DOMContentLoaded", () => {
+                const icons = document.querySelectorAll('.astro-icon');
+                const dropdown = document.getElementById('typeDropdown');
+            
+                const types = new Set();
+                icons.forEach(icon => {
+                    types.add(icon.getAttribute('data-type'));
+                });
+    
+            types.forEach(type => {
+                const option = document.createElement('a');
+                option.href = "#";
+                option.textContent = type;
+                option.dataset.type = type;
+                dropdown.appendChild(option);
+            });
+        
+            // Event delegation for filtering
+            dropdown.addEventListener('click', e => {
+                if (e.target.tagName === 'A') {
+                    const selectedType = e.target.dataset.type;
+                    const listItems = document.querySelectorAll('.scrollbox li');
+        
+                    listItems.forEach(li => {
+                        const type = li.querySelector('.astro-icon').getAttribute('data-type');
+                        if (selectedType === 'all' || type === selectedType) {
+                            li.style.display = '';
+                        } else {
+                            li.style.display = 'none';
+                        }
+                    });
+        
+                    e.preventDefault(); // Prevent default anchor behavior
+                }
             });
         });
         </script>
