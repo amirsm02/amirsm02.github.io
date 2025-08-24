@@ -110,8 +110,12 @@
     background-color: rgb(96, 0, 10);
     }
 
-    .astro-icon[data-type="Nebula"] {
+    .astro-icon[data-type="Emission Nebula"] {
     background-color: rgb(0, 60, 96);
+    }
+
+    .astro-icon[data-type="Reflection Nebula"] {
+    background-color: rgb(90, 90, 90);
     }
 
     .astro-icon[data-type="Star"] {
@@ -224,20 +228,6 @@
 
     <hr>
         <div class="container-fluid pl-3">
-<!-- 
-        <div class="dropdown" style="display: block; text-align: right; margin: 0px 20px 10px 0px;">
-            <button class="dropbtn" style="
-            font-size: 14px;
-            padding: 4px 10px;
-            background-color: rgb(25, 25, 25);
-            color: rgb(187, 187, 187);
-            cursor: pointer;
-          ">Filter</button>
-        <div class="dropdown-content" id="typeDropdown" style="text-align: left;">
-            <a href="#" data-type="all">Show All</a>
-        </div>
-        </div> -->
-        
 
           <div class="scrollbox-container" style="float: right; margin: 20px; margin-top: 0px;">
             <!-- Search bar -->
@@ -295,18 +285,6 @@
                 Constellation: Hercules"
                 onclick="changeImage('/astro/M13 - Hercules Globular Cluster.png')"><span class="astro-icon" data-type="Globular Cluster"></span>M13 - Hercules Globular Cluster</a></li>
 
-                <!-- Alnitak -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/27/2024
-                Gain: 101
-                Offset: 50
-                Subs: 8x300
-                Scope: 150mm Newtonian
-                Filter: None
-                Distance: 1,262 ly"
-                onclick="changeImage('/astro/Alnitak.png')"><span class="astro-icon" data-type="Star"></span>Alnitak</a></li> -->
-    
                 <!-- M31 - Andromeda Galaxy -->
                 <li><a href="#"
                 data-content=
@@ -344,19 +322,6 @@
                 Distance: 27.4 Mly
                 Constellation: Andromeda"
                 onclick="changeImage('/astro/NGC891 - Silver Silver Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>NGC891 - Silver Silver Galaxy</a></li>
-
-                <!-- M33 - Triangulum Galaxy -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/28/2024
-                Gain: 101
-                Offset: 50
-                Subs: 34x240
-                Scope: 150mm Newtonian
-                Filter: None
-                Distance: 2.7 Mly
-                Constellation: Triangulum"
-                onclick="changeImage('/astro/M33 - Triangulum Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M33 - Triangulum Galaxy</a></li> -->
 
                 <!-- M81 and M82 - Bodes Galaxy and Cigar Galaxy -->
                 <li><a href="#"
@@ -461,19 +426,7 @@
                 Distance: 237 Mly (Perseus A)
                 Constellation: Perseus"
                 onclick="changeImage('/astro/Perseus Galaxy Cluster.jpg')"><span class="astro-icon" data-type="Galaxy Cluster"></span>Perseus Galaxy Cluster</a></li>
-    
-                <!-- M45 - Pleiades -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/24/2024
-                Gain: 101
-                Offset: 50
-                Subs: 1x100 (unfinished)
-                Scope: 150mm Newtonian
-                Filter: None
-                Distance: 444.2 Mly"
-                onclick="changeImage('/astro/M45 - Pleiades.png')"><span class="astro-icon" data-type="Star"></span>M45 - Pleiades</a></li> -->
-                
+  
                 <!-- IC405 - Flaming Star Nebula -->
                 <li><a href="#"
                 data-content=
@@ -485,7 +438,7 @@
                 Filter: L-Ultimate
                 Distance: 1,500 ly
                 Constellation: Auriga"
-                onclick="changeImage('/astro/IC405 - Flaming Star Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>IC405 - Flaming Star Nebula</a></li>
+                onclick="changeImage('/astro/IC405 - Flaming Star Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>IC405 - Flaming Star Nebula</a></li>
         
                 <!-- IC1795 - Fish Head Nebula -->
                 <li><a href="#"
@@ -498,56 +451,8 @@
                 Filter: L-Ultimate
                 Distance: 6,000 ly
                 Constellation: Cassiopeia"
-                onclick="changeImage('/astro/IC1795 - Fish Head Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>IC1795 - Fish Head Nebula</a></li>
-            
-                <!-- IC434 - Horsehead Nebula -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/27/2024
-                Gain: 101
-                Offset: 50
-                Subs: 26x300
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 1,500 ly"
-                onclick="changeImage('/astro/IC434 - Horsehead Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>IC434 - Horsehead Nebula</a></li> -->
-
-                <!-- Caldwell 49 - Rosette Nebula -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/22/2024
-                Gain: 101
-                Offset: 50
-                Subs: 1x100 (unfinished)
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 5,219 ly"
-                onclick="changeImage('/astro/Caldwell 49 - Rosette Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>Caldwell 49 - Rosette Nebula</a></li> -->
-                
-                <!-- M42 - Orion Nebula -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/22/2024
-                Gain: 101
-                Offset: 50
-                Subs: 1x100 (unfinished)
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 1,344 ly"
-                onclick="changeImage('/astro/M42 - Orion Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>M42 - Orion Nebula</a></li> -->
-                
-                <!-- M57 - Ring Nebula -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 08/14/2024
-                Gain: 101
-                Offset: 50
-                Subs: 6x(?) (unfinished)
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate(?)
-                Distance: 2,283 ly"
-                onclick="changeImage('/astro/M57 - Ring Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>M57 - Ring Nebula</a></li> -->
-                
+                onclick="changeImage('/astro/IC1795 - Fish Head Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>IC1795 - Fish Head Nebula</a></li>
+  
                 <!-- NGC281 - Pacman Nebula -->
                 <li><a href="#"
                 data-content=
@@ -559,7 +464,7 @@
                 Filter: L-Ultimate
                 Distance: 9,459 ly
                 Constellation: Cassiopeia"
-                onclick="changeImage('/astro/NGC281 - Pacman Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC281 - Pacman Nebula</a></li>
+                onclick="changeImage('/astro/NGC281 - Pacman Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC281 - Pacman Nebula</a></li>
         
                 <!-- NGC6888 - Crescent Nebula -->
                 <li><a href="#"
@@ -572,7 +477,7 @@
                 Filter: L-Ultimate
                 Distance: 5,000 ly
                 Constellation: Cygnus"
-                onclick="changeImage('/astro/NGC6888 - Crescent Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC6888 - Crescent Nebula</a></li>
+                onclick="changeImage('/astro/NGC6888 - Crescent Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC6888 - Crescent Nebula</a></li>
                 
                 <!-- NGC6992 - Eastern Veil Nebula -->
                 <li><a href="#"
@@ -585,7 +490,7 @@
                 Filter: L-Ultimate
                 Distance: 2,400 ly
                 Constellatoin: Cygnus"
-                onclick="changeImage('/astro/NGC6992 - Eastern Veil Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC6992 - Eastern Veil Nebula</a></li>
+                onclick="changeImage('/astro/NGC6992 - Eastern Veil Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC6992 - Eastern Veil Nebula</a></li>
 
                 <!-- NGC6960 - Western Veil Nebula -->
                 <li><a href="#"
@@ -598,7 +503,7 @@
                 Filter: L-Ultimate
                 Distance: 2,400 ly
                 Constellation: Cygnus"
-                onclick="changeImage('/astro/NGC6960 - Western Veil Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC6960 - Western Veil Nebula</a></li>
+                onclick="changeImage('/astro/NGC6960 - Western Veil Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC6960 - Western Veil Nebula</a></li>
 
                 <!-- NGC7380 - Wizard Nebula -->
                 <li><a href="#"
@@ -611,43 +516,20 @@
                 Filter: L-Ultimate
                 Distance: 7,000 ly
                 Constellation: Cepheus"
-                onclick="changeImage('/astro/NGC7380 - Wizard Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC7380 - Wizard Nebula</a></li>
+                onclick="changeImage('/astro/NGC7380 - Wizard Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC7380 - Wizard Nebula</a></li>
 
-                <!-- NGC1499 - California Nebula -->
-                <!-- <li><a href="#"
+                <!-- NGC7023 - Iris Nebula -->
+                <li><a href="#"
                 data-content=
-                "Date: 12/22/2024
+                "Date: 08/20/2025
                 Gain: 101
                 Offset: 50
-                Subs: 1x100 (unfinished)
-                Scope: 72mm Refractor
-                Filter: L-Ultimate
-                Distance: 1,499 ly"
-                onclick="changeImage('/astro/NGC1499 - California Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>NGC1499 - California Nebula</a></li> -->
-                
-                <!-- NGC2174 - Monkey Head Nebula -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/27/2024
-                Gain: 101
-                Offset: 50
-                Subs: 62x240
+                Subs: 126x60
                 Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 6,523 ly"
-                onclick="changeImage('/astro/NGC2174 - Monkey Head Nebula.jpg')"><span class="astro-icon" data-type="Nebula"></span>NGC2174 - Monkey Head Nebula</a></li> -->
-
-                <!-- NGC7000 - North American Nebula -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 12/22/2024
-                Gain: 101
-                Offset: 50
-                Subs: 1x100 (unfinished)
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 2,200 ly"
-                onclick="changeImage('/astro/NGC7000 - North American Nebula.png')"><span class="astro-icon" data-type="Nebula"></span>NGC7000 - North American Nebula</a></li> -->
+                Filter: SVBony UV/IR cut
+                Distance: 1,300 ly
+                Constellation: Cepheus"
+                onclick="changeImage('/astro/NGC7023 - Iris Nebula.jpg')"><span class="astro-icon" data-type="Reflection Nebula"></span>NGC7023 - Iris Nebula</a></li>
             </ul>
          </div>
         
