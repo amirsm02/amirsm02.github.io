@@ -922,11 +922,18 @@ Lens: 14mm Rokinon`,
       gallery.querySelectorAll(".gallery-card").forEach(resizeGridItem);
     }
 
+    function getThumbnailPath(fullResolutionPath) {
+      return fullResolutionPath
+        .replace(/^\.\/astro\//, "./astro_thumbnails/")
+        .replace(/^\/astro\//, "/astro_thumbnails/")
+        .replace(/^astro\//, "astro_thumbnails/");
+    }
+
     function renderGallery() {
       const items = visibleItems();
       gallery.replaceChildren();
 
-      items.forEach(item => {
+      items.forEach((item, index) => {
         const card = document.createElement("article");
         card.className = "gallery-card";
         card.tabIndex = 0;
@@ -934,10 +941,19 @@ Lens: 14mm Rokinon`,
         card.setAttribute("aria-label", `Open ${item.title}`);
 
         const image = document.createElement("img");
-        image.src = item.src;
+        image.src = item.thumb ?? getThumbnailPath(item.src);
         image.alt = item.title;
-        image.loading = "lazy";
+        image.loading = index < 8 ? "eager" : "lazy";
+        image.fetchPriority = index < 4 ? "high" : "auto";
         image.decoding = "async";
+
+        // Fall back to the full-resolution image if a thumbnail is missing.
+        image.addEventListener("error", () => {
+          if (image.src !== new URL(item.src, document.baseURI).href) {
+            image.src = item.src;
+          }
+        }, { once: true });
+
         image.addEventListener("load", () => resizeGridItem(card));
 
         const overlay = document.createElement("div");
