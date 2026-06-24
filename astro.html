@@ -1,812 +1,1029 @@
-
 <!doctype html>
-<html>
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YJ4KCW74E"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Astrophotography image gallery">
+  <title>Gallery | Amir Shapour Mohammadi</title>
 
-      gtag('config', 'G-9YJ4KCW74E');
-    </script>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-    <link rel="stylesheet" href="style.css">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Amir Shapour Mohammadi</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-
-      <link rel="stylesheet" href="assets/css/dark_style.css"/>
-
-    <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <style>
-
-    /* Style for the container holding the search bar and list */
-    .scrollbox-container {
-        width: 320px;
-        height: 350px;
-        border: 1px solid rgb(15, 15, 15);
-        border-radius: 3px;
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0d0d;
+      --panel: #151515;
+      --text: #f2f2f2;
+      --muted: #a8a8a8;
+      --line: #4a4a4a;
+      --accent: #0f4567;
+      --gap: 12px;
     }
 
-    /* Style for the search bar at the top */
-    .search-bar {
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, input { font: inherit; }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 18px clamp(12px, 2vw, 28px);
+      border-bottom: 1px solid #242424;
+    }
+
+    .site-header h1 {
+      margin: 0;
+      font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+      letter-spacing: .01em;
+    }
+
+    .home-link {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .home-link:hover { text-decoration: underline; }
+
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 15px clamp(10px, 1.5vw, 22px);
+      background: rgba(13, 13, 13, .96);
+      border-bottom: 1px solid #252525;
+      backdrop-filter: blur(8px);
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-button,
+    .sort-button {
+      min-height: 31px;
+      padding: 5px 9px;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid #ddd;
+      border-radius: 0;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter-button:hover,
+    .sort-button:hover,
+    .filter-button.active,
+    .sort-button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .utility-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 13px;
+    }
+
+    .search {
+      width: min(420px, 100%);
+      padding: 9px 11px;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid #444;
+      outline: none;
+    }
+
+    .search:focus { border-color: #ddd; }
+
+    .sort-controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-flow: row;
+      grid-auto-rows: 8px;
+      gap: var(--gap);
+      padding: var(--gap);
+      align-items: start;
+    }
+
+    .gallery-card {
+      position: relative;
+      display: block;
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #111;
+      cursor: pointer;
+      break-inside: avoid;
+    }
+
+    .gallery-card[hidden] { display: none; }
+
+    .gallery-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 180px;
+      object-fit: cover;
+      transition: transform .35s ease, filter .35s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.018);
+      filter: brightness(.92);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: auto 0 0;
+      min-height: 70px;
+      padding: 20px 16px;
+      background: rgba(0, 80, 106, 0.78);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .25s ease, transform .25s ease, background-color .25s ease;
+      pointer-events: none;
+      backdrop-filter: blur(2px);
+    }
+
+    .gallery-card:hover .card-overlay,
+    .gallery-card:focus-visible .card-overlay {
+      opacity: 1;
+      transform: translateY(0);
+      background: rgba(0, 103, 135, 0.82);
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .card-category {
+      margin-top: 4px;
+      color: #d2d2d2;
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 60px 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(0, 0, 0, .94);
+    }
+
+    .lightbox.open { display: grid; }
+
+    .lightbox-dialog {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 340px);
+      width: min(1400px, 100%);
+      max-height: 92vh;
+      background: #111;
+      border: 1px solid #333;
+      overflow: hidden;
+    }
+
+    .lightbox-image-wrap {
+      display: grid;
+      place-items: center;
+      min-height: 55vh;
+      background: #050505;
+    }
+
+    .lightbox-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: 92vh;
+      object-fit: contain;
+    }
+
+    .lightbox-copy {
+      padding: 26px 24px;
+      overflow-y: auto;
+    }
+
+    .lightbox-copy h2 {
+      margin: 0 38px 8px 0;
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .lightbox-copy .category {
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .lightbox-copy pre {
+      margin: 0;
+      color: #d3d3d3;
+      font: .92rem/1.65 Arial, Helvetica, sans-serif;
+      white-space: pre-wrap;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      z-index: 2;
+      width: 38px;
+      height: 38px;
+      color: white;
+      background: rgba(0,0,0,.62);
+      border: 1px solid #666;
+      cursor: pointer;
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 1200px) {
+      .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 800px) {
+      .utility-row {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .sort-controls { justify-content: flex-end; }
+
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      .lightbox {
+        padding: 8px;
+        overflow-y: auto;
+      }
+
+      .lightbox-dialog {
+        display: block;
+        max-height: none;
+      }
+
+      .lightbox-image-wrap { min-height: 0; }
+
+      .lightbox-image {
         width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        font-family: "Source Sans Pro", sans-serif;
-        border: none;
-        box-sizing: border-box;
-        background-color: rgb(15, 15, 15);
-        color: rgb(187, 187, 187);
+        height: auto;
+        max-height: 70vh;
+      }
     }
 
-    .search-bar:focus {
-    outline: none;
-    box-shadow: none;
-    border: none; /* Optional: only if you're not adding a custom border */
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        padding: 8px;
+      }
+
+      .filter-button, .sort-button {
+        font-size: .72rem;
+      }
     }
 
-    .scrollbox {
-    height: calc(100% - 40px);
-    overflow-y: auto;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;  /* remove default padding */
-    background-color: rgb(15, 15, 15);
-    text-align: left;
-    /* Custom scrollbar for WebKit (Chrome, Safari) */
-    scrollbar-width: thin;
-    scrollbar-color: black black;  /* For Firefox */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
     }
+  </style>
+</head>
 
-    /* Style for each link in the list */
-    .scrollbox li a {
-        display: flex;
-        padding: 0;
-        align-items: center;
-        background-color: rgb(15, 15, 15);
-        border-bottom: 1px solid rgb(15, 15, 15);
-        cursor: pointer;
-        color: rgb(187, 187, 187);
-        font-size: 16px;
-        font-family: "Source Sans Pro", sans-serif;
-        text-align: left;
-        margin: 0px;
-    }
+<body>
+  <header class="site-header">
+    <h1>Amir Shapour Mohammadi</h1>
+    <a class="home-link" href="https://amirshapourmohammadi.com/">Home</a>
+  </header>
 
-    .scrollbox li a:hover {
-        background-color: rgb(0, 27, 71);
-    }
-    
-    .scrollbox li a.selected {
-        background-color: rgb(0, 27, 71);
-    }
+  <section class="controls" aria-label="Gallery controls">
+    <div id="filters" class="filter-row"></div>
 
-    .astro-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 10px;
-    margin-left: 15px;
-    border-radius: 2px;
-    position: relative;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    }
+    <div class="utility-row">
+      <input
+        id="search"
+        class="search"
+        type="search"
+        placeholder="Search images..."
+        autocomplete="off"
+        aria-label="Search images"
+      >
 
-    .astro-icon[data-type="Galaxy"] {
-    background-color: rgb(170, 0, 0);
-    }
-
-    .astro-icon[data-type="Galaxy Cluster"] {
-    background-color: rgb(96, 0, 10);
-    }
-
-    .astro-icon[data-type="Emission Nebula"] {
-    background-color: rgb(0, 60, 96);
-    }
-
-    .astro-icon[data-type="Reflection Nebula"] {
-    background-color: rgb(90, 90, 90);
-    }
-
-    .astro-icon[data-type="Wide-field"] {
-    background-color: rgb(255, 215, 0);
-    }
-
-    .astro-icon[data-type="Globular Cluster"] {
-    background-color: rgb(161, 137, 0);
-    }
-
-    .astro-icon[data-type="Solar System"] {
-    background-color: rgb(123, 123, 123);
-    }
-
-    .astro-icon:hover {
-    filter: brightness(85%);
-    }
-
-    .external-tooltip {
-    position: absolute;
-    background-color: rgb(10, 10, 10);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 14px;
-    font-family: "Source Sans Pro", sans-serif;
-    white-space: nowrap;
-    z-index: 1000;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    }
-
-    .text-box {
-    clear: both;
-    white-space: pre-line;
-    width: 320px;
-    height: 170px;
-    padding: 10px;
-    font-size: 14px;
-    font-family: "Source Sans Pro", sans-serif;
-    color: rgb(187, 187, 187);
-    background-color: rgb(15, 15, 15);
-    border: 1px solid rgb(15, 15, 15);
-    border-radius: 3px;
-    resize: none;
-    box-sizing: border-box;
-    }
-
-    .text-box:focus {
-    outline: none;
-    }
-
-    .dropdown {
-    position: relative;
-    display: inline-block;
-    margin: 10px 0;
-    }
-
-    .dropbtn {
-    background-color: rgb(25, 25, 25);
-    color: rgb(187, 187, 187);
-    padding: 10px 14px;
-    font-size: 14px;
-    font-family: "Source Sans Pro", sans-serif;
-    border: 1px solid rgb(50, 50, 50);
-    border-radius: 4px;
-    cursor: pointer;
-    }
-
-    .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: rgb(20, 20, 20);
-    /* min-width: 160px; */
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.5);
-    z-index: 1;
-    border: 1px solid rgb(50, 50, 50);
-    border-radius: 4px;
-    }
-
-    .dropdown-content a {
-    color: rgb(187, 187, 187);
-    padding: 2px 5px;
-    text-decoration: none;
-    display: block;
-    font-family: "Source Sans Pro", sans-serif;
-    }
-
-    .dropdown-content a:hover {
-    background-color: rgb(60, 60, 60);
-    }
-
-    .dropdown:hover .dropdown-content {
-    display: block;
-    }
-
-    </style>
-  </head>
-  <body data-spy="scroll" data-target="#site-navbar">
-
-    <div class="container-fluid pt-3 d-sm-flex justify-content-between dashboard">
-      <h1>Amir Shapour Mohammadi</h1>
-      <p>
-      <a style="color: rgb(187, 187, 187);" href="https://amirshapourmohammadi.com/">Home</a>
-      </p>
-    </div>
-    
-    <div class="float-center container-fluid" style="max-width: 1000px;">
-
-    <hr>
-        <div class="container-fluid pl-3">
-
-          <div class="scrollbox-container" style="float: right; margin: 20px; margin-top: 0px;">
-            <!-- Search bar -->
-            <input type="text" id="search" class="search-bar" placeholder="Search celestial object..." onkeyup="filterLinks()">
-    
-            <!-- Scrollable list of links -->
-            <ul id="link-list" class="scrollbox">
-
-                <!-- ---
-                Solar System
-                ---- -->
-
-                <!-- Moon - First Quarter -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/21/2025
-                Gain: 101
-                Offset: 50
-                Subs: 60s (253 frames)
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 1.3 ls"
-                onclick="changeImage('/astro/Moon - First Quarter.jpg')"><span class="astro-icon" data-type="Solar System"></span>Moon - First Quarter</a></li>
-    
-                <!-- Jupiter + Callisto, Ganymede, Io, Europa
-                <li><a href="#"
-                data-content=
-                "Date: 03/22/2025
-                Gain: 101
-                Offset: 50
-                Subs: 178 frames
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 44.3 lm"
-                onclick="changeImage('/astro/Jupiter + Callisto, Ganymede, Io, Europa.jpg')"><span class="astro-icon" data-type="Solar System"></span>Jupiter + Callisto, Ganymede, Io, Europa</a></li> -->
-
-                <!-- Jupiter -->
-                <li><a href="#"
-                data-content=
-                "Date: 11/10/2025
-                Gain: 101
-                Offset: 50
-                Subs: 1000 frames
-                Scope: Celestron C8
-                Filter: None
-                FOV modifier: None
-                Distance: 39 lm"
-                onclick="changeImage('/astro/Jupiter.jpg')"><span class="astro-icon" data-type="Solar System"></span>Jupiter</a></li>
-
-                <!-- Sun -->
-                <li><a href="#"
-                data-content=
-                "Date: 04/18/2025
-                Gain: 101
-                Offset: 50
-                Subs: 2.5s (500 frames)
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut, Solar Filter
-                Distance: 8.3 lm"
-                onclick="changeImage('/astro/Sun.jpg')"><span class="astro-icon" data-type="Solar System"></span>Sun</a></li>
-
-                <!-- ---
-                Globular Cluster
-                ---- -->
-
-                <!-- M13 - Hercules Globular Cluster -->
-                <li><a href="#"
-                class="selected"
-                data-content=
-                "Date: 05/29/2026
-                Gain: 101
-                Offset: 50
-                Subs: 141x60
-                Scope: Celestron C8
-                Filter: None
-                Distance 22,200 ly
-                Constellation: Hercules
-                Moon illumination: 99%"
-                onclick="changeImage('/astro/M13 - Hercules Globular Cluster.jpg')"><span class="astro-icon" data-type="Globular Cluster"></span>M13 - Hercules Globular Cluster</a></li>
-
-                <!-- ---
-                Galaxy
-                ---- -->
-
-                <!-- M31 - Andromeda Galaxy -->
-                <!-- <li><a href="#"
-                data-content=
-                "Date: 08/19/2025
-                Gain: 101
-                Offset: 50
-                Subs: (107,62)x60 (M2)
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 2.5 Mly
-                Constellation: Andromeda"
-                onclick="changeImage('/astro/M31 - Andromeda Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M31 - Andromeda Galaxy</a></li> -->
-
-                <li><a href="#"
-                data-content=
-                "Date: 11/11/2025
-                Gain: 101
-                Offset: 50
-                Subs: 210x60
-                Scope: ASKAR FRA300 Pro
-                Filter: None
-                Distance: 2.5 Mly
-                Constellation: Andromeda"
-                onclick="changeImage('/astro/M31 - Andromeda Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M31 - Andromeda Galaxy</a></li>
-                
-                <!-- M51 - Whirlpool Galaxy -->
-                <li><a href="#"
-                data-content=
-                "Date: 04/18/2025
-                Gain: 101
-                Offset: 50
-                Subs: 47x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 31 Mly
-                Constellation: Canes Venatici"
-                onclick="changeImage('/astro/M51 - Whirlpool Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M51 - Whirlpool Galaxy</a></li>
-
-                <!-- NGC891 - Silver Silver Galaxy -->
-                <li><a href="#" data-content=
-                "Date: 12/27/2024
-                Gain: 101
-                Offset: 50
-                Subs: 30x300
-                Scope: 150mm Newtonian
-                Filter: None
-                Distance: 27.4 Mly
-                Constellation: Andromeda"
-                onclick="changeImage('/astro/NGC891 - Silver Silver Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>NGC891 - Silver Silver Galaxy</a></li>
-
-                <!-- M81 and M82 - Bodes Galaxy and Cigar Galaxy -->
-                <li><a href="#"
-                data-content=
-                "Date: 01/05/2024
-                Gain: 101
-                Offset: 50
-                Subs: 23x240
-                Scope: 150mm Newtonian
-                Filter: None
-                Distance: 11 Mly
-                Constellation: Ursa Major"
-                onclick="changeImage('/astro/M81 and M82 - Bodes Galaxy and Cigar Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M81 and M82 - Bodes Galaxy and Cigar Galaxy</a></li>
-
-                <!-- Leo Triplet -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/22/2025
-                Gain: 101
-                Offset: 50
-                Subs: 21x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR cut
-                Distance: 35 Mly
-                Constellation: Leo"
-                onclick="changeImage('/astro/Leo Triplet.jpg')"><span class="astro-icon" data-type="Galaxy"></span>Leo Triplet</a></li>
-
-                <!-- M63 - Sunflower Galaxy -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/22/2025
-                Gain: 101
-                Offset: 50
-                Subs: 50x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 27 Mly
-                Constellation: Canes Venatici"
-                onclick="changeImage('/astro/M63 - Sunflower Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M63 - Sunflower Galaxy</a></li>
-        
-                <!-- M101 - Pinwheel Galaxy -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/21/2025
-                Gain: 101
-                Offset: 50
-                Subs: 38x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 25 Mly
-                Constellation: Ursa Major"
-                onclick="changeImage('/astro/M101 - Pinwheel Galaxy.jpg')"><span class="astro-icon" data-type="Galaxy"></span>M101 - Pinwheel Galaxy</a></li>
-
-                <!-- NGC2903 -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/23/2025
-                Gain: 101
-                Offset: 50
-                Subs: 30x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 30.7 Mly
-                Constellation: Leo"
-                onclick="changeImage('/astro/NGC2903.jpg')"><span class="astro-icon" data-type="Galaxy"></span>NGC2903</a></li>    
-
-                <!-- NGC4038 - Antennae Galaxies -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/23/2025
-                Gain: 101
-                Offset: 50
-                Subs: 60x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR Cut
-                Distance: 45 Mly
-                Constellation: Corvus"
-                onclick="changeImage('/astro/NGC4038 - Antennae Galaxies.jpg')"><span class="astro-icon" data-type="Galaxy"></span>NGC4038 - Antennae Galaxies</a></li>    
-
-                <!-- ---
-                Galaxy Cluster
-                ---- -->
-
-                <!-- Markarian's Chain -->
-                <li><a href="#"
-                data-content=
-                "Date: 03/21/2025
-                Gain: 101
-                Offset: 50
-                Subs: 10x180
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR cut
-                Distance: 51.9 Mly (M86)
-                Constellation: Virgo"
-                onclick="changeImage('/astro/Markarian\'s Chain.jpg')"><span class="astro-icon" data-type="Galaxy Cluster"></span>Markarian's Chain</a></li>
-                
-                <!-- Perseus Galaxy Cluster -->
-                <li><a href="#"
-                data-content=
-                "Date: 01/05/2024
-                Gain: 101
-                Offset: 50
-                Subs: 32x200 + 45x120
-                Scope: 150mm Newtonian
-                Filter: None
-                Distance: 237 Mly (Perseus A)
-                Constellation: Perseus"
-                onclick="changeImage('/astro/Perseus Galaxy Cluster.jpg')"><span class="astro-icon" data-type="Galaxy Cluster"></span>Perseus Galaxy Cluster</a></li>
-  
-                <!-- ---
-                Emission Nebula
-                ---- -->
-
-                <!-- IC405 - Flaming Star Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 01/04/2024
-                Gain: 101
-                Offset: 50
-                Subs: 79x240
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 1,500 ly
-                Constellation: Auriga"
-                onclick="changeImage('/astro/IC405 - Flaming Star Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>IC405 - Flaming Star Nebula</a></li>
-        
-                <!-- IC1795 - Fish Head Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 01/07/2024
-                Gain: 101
-                Offset: 50
-                Subs: 39x240
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 6,000 ly
-                Constellation: Cassiopeia"
-                onclick="changeImage('/astro/IC1795 - Fish Head Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>IC1795 - Fish Head Nebula</a></li>
-  
-                <!-- NGC281 - Pacman Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 12/27/2024
-                Gain: 101
-                Offset: 50
-                Subs: 43x240
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 9,459 ly
-                Constellation: Cassiopeia"
-                onclick="changeImage('/astro/NGC281 - Pacman Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC281 - Pacman Nebula</a></li>
-        
-                <!-- NGC6888 - Crescent Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 08/14/2024
-                Gain: 101
-                Offset: 50
-                Subs: 38x480 (?)
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 5,000 ly
-                Constellation: Cygnus"
-                onclick="changeImage('/astro/NGC6888 - Crescent Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC6888 - Crescent Nebula</a></li>
-                
-                <!-- NGC6992 - Eastern Veil Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 08/18/2025
-                Gain: 101
-                Offset: 50
-                Subs: 10x240 (M3)
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 2,400 ly
-                Constellatoin: Cygnus"
-                onclick="changeImage('/astro/NGC6992 - Eastern Veil Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC6992 - Eastern Veil Nebula</a></li>
-
-                <!-- NGC6960 - Western Veil Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 08/19/2025
-                Gain: 101
-                Offset: 50
-                Subs: 10x240 (M2)
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 2,400 ly
-                Constellation: Cygnus"
-                onclick="changeImage('/astro/NGC6960 - Western Veil Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC6960 - Western Veil Nebula</a></li>
-
-                <!-- NGC7380 - Wizard Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 08/19/2025
-                Gain: 101
-                Offset: 50
-                Subs: 47x240
-                Scope: 150mm Newtonian
-                Filter: L-Ultimate
-                Distance: 7,000 ly
-                Constellation: Cepheus"
-                onclick="changeImage('/astro/NGC7380 - Wizard Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>NGC7380 - Wizard Nebula</a></li>
-
-                <!-- IC1805 - Heart Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 11/11/2025
-                Gain: 101
-                Offset: 50
-                Subs: 217x60
-                Scope: ASKAR FRA300 Pro
-                Filter: L-Ultimate
-                Distance: 7,500 ly
-                Constellation: Cassiopeia"
-                onclick="changeImage('/astro/IC1805 - Heart Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>IC1085 - Heart Nebula</a></li>
-
-                <!-- B33 - Horsehead Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 02/12/2026
-                Gain: 101
-                Offset: 50
-                Subs: 53x60
-                Scope: ASKAR FRA300 Pro
-                Filter: None
-                Distance: 1,500 ly
-                Constellation: Orion"
-                onclick="changeImage('/astro/B33 - Horsehead Nebula.jpg')"><span class="astro-icon" data-type="Emission Nebula"></span>B33 - Horsehead Nebula</a></li>
-
-                <!-- ---
-                Reflection Nebula
-                ---- -->
-
-                <!-- NGC7023 - Iris Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 08/20/2025
-                Gain: 101
-                Offset: 50
-                Subs: 126x60
-                Scope: 150mm Newtonian
-                Filter: SVBony UV/IR cut
-                Distance: 1,300 ly
-                Constellation: Cepheus"
-                onclick="changeImage('/astro/NGC7023 - Iris Nebula.jpg')"><span class="astro-icon" data-type="Reflection Nebula"></span>NGC7023 - Iris Nebula</a></li>
-
-                <!-- M42 - Orion Nebula -->
-                <li><a href="#"
-                data-content=
-                "Date: 11/08/2025
-                Gain: 101
-                Offset: 50
-                Subs: 166x60
-                Scope: ASKAR FRA300 Pro
-                Filter: None
-                Distance: 1,300 ly
-                Constellation: Cepheus"
-                onclick="changeImage('/astro/M42 - Orion Nebula.jpg')"><span class="astro-icon" data-type="Reflection Nebula"></span>M42 - Orion Nebula</a></li>
-
-                <!-- M45 - Pleiades -->
-                <li><a href="#"
-                data-content=
-                "Date: 11/08/2025
-                Gain: 101
-                Offset: 50
-                Subs: 88x60
-                Scope: ASKAR FRA300 Pro
-                Filter: None
-                Distance: 444 ly
-                Constellation: Taurus"
-                onclick="changeImage('/astro/M45 - Pleiades.jpg')"><span class="astro-icon" data-type="Reflection Nebula"></span>M45 - Pleiades</a></li>
-
-                <!-- ---
-                Wide-field
-                ---- -->
-
-                <!-- Milky Way - Sequoia -->
-                <li><a href="#"
-                data-content=
-                "Date: 08/25/2025
-                ISO: 500
-                Subs: 74x30
-                F-ratio: F/2.4
-                Lens: 14mm Rokinon"
-                onclick="changeImage('/astro/WF - Milky Way (08:25:25 - Sequoia).jpg')"><span class="astro-icon" data-type="Wide-field"></span>Milky Way (WF)</a></li>
-
-                <!-- M31 - Andromeda Galaxy - Sequoia -->
-                <li><a href="#"
-                data-content=
-                "Date: 08/25/2025
-                ISO: 500
-                Subs: 22x30
-                F-ratio: F/2.4
-                Lens: 14mm Rokinon"
-                onclick="changeImage('/astro/WF - M31 - Andromeda Galaxy (08:25:25 - Sequoia).jpg')"><span class="astro-icon" data-type="Wide-field"></span>M31 - Andromeda Galaxy (WF)</a></li>
-            </ul>
-         </div>
-        
-        <img id="image" src="/astro/M13 - Hercules Globular Cluster.jpg" alt="Image" width="60%">
-
-        <textarea class="text-box" id="text-box" readonly style="float: right; margin: 20px; margin-top: 10px;" placeholder=
-                "Date: 05/29/2026
-                Gain: 101
-                Offset: 50
-                Subs: 141x60
-                Scope: Celestron C8
-                Filter: None
-                Distance 22,200 ly
-                Constellation: Hercules
-                Moon illumination: 99%"></textarea>
-
-        <script>
-            // Function to change the image source
-            function changeImage(imageSource) {
-                document.getElementById('image').src = imageSource;
-            }
-        </script>
-          
-
-        <script>
-        function filterLinks() {
-            var searchInput = document.getElementById("search").value.toLowerCase();  // Get search input
-            var links = document.querySelectorAll("#link-list li");  // Get all list items
-
-            links.forEach(function(link) {
-                // Directly query the <a> tag inside the list item
-                var linkText = link.querySelector("a").textContent || link.querySelector("a").innerText;  // Get text inside <a> tag
-                
-                // Compare the linkText with the search input
-                if (linkText.toLowerCase().includes(searchInput)) {
-                    link.style.display = "block";  // Show the link if it matches
-                } else {
-                    link.style.display = "none";   // Hide the link if it doesn't match
-                }
-            });
-        }
-        </script>
-
-        <script>
-            // Get all list items
-            const listItems = document.querySelectorAll('.scrollbox li a');
-            
-            // Get the text box
-            const textBox = document.getElementById('text-box');
-
-            // Add event listeners to each list item
-            listItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // Remove 'selected' class from all list items
-                    listItems.forEach(link => link.classList.remove('selected'));
-
-                    // Add 'selected' class to the clicked item
-                    item.classList.add('selected');
-                });
-            });
-            
-            // Add click event listeners to each list item
-            listItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // Get the content associated with this list item
-                    const content = item.getAttribute('data-content');
-                    
-                    // Update the text box with the content
-                    textBox.value = content;
-                });
-            });
-        </script>
-
-        <script>
-            document.querySelectorAll('.astro-icon').forEach(icon => {
-            icon.addEventListener('mouseenter', event => {
-            const tooltipText = icon.getAttribute('data-type');
-            const tooltip = document.createElement('div');
-            tooltip.className = 'external-tooltip';
-            tooltip.textContent = tooltipText;
-            document.body.appendChild(tooltip);
-        
-            const rect = icon.getBoundingClientRect();
-            tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2}px`;
-            tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 10}px`;
-            tooltip.style.transform = 'translateX(-50%)';
-            tooltip.style.opacity = '1';
-        
-            icon._tooltip = tooltip;
-            });
-        
-            icon.addEventListener('mouseleave', () => {
-            if (icon._tooltip) {
-                document.body.removeChild(icon._tooltip);
-                icon._tooltip = null;
-            }
-            });
-        });
-        </script>
-
-        <script>
-            // Automatically populate dropdown with unique types
-            document.addEventListener("DOMContentLoaded", () => {
-                const icons = document.querySelectorAll('.astro-icon');
-                const dropdown = document.getElementById('typeDropdown');
-            
-                const types = new Set();
-                icons.forEach(icon => {
-                    types.add(icon.getAttribute('data-type'));
-                });
-    
-            types.forEach(type => {
-                const option = document.createElement('a');
-                option.href = "#";
-                option.textContent = type;
-                option.dataset.type = type;
-                dropdown.appendChild(option);
-            });
-        
-            // Event delegation for filtering
-            dropdown.addEventListener('click', e => {
-                if (e.target.tagName === 'A') {
-                    const selectedType = e.target.dataset.type;
-                    const listItems = document.querySelectorAll('.scrollbox li');
-        
-                    listItems.forEach(li => {
-                        const type = li.querySelector('.astro-icon').getAttribute('data-type');
-                        if (selectedType === 'all' || type === selectedType) {
-                            li.style.display = '';
-                        } else {
-                            li.style.display = 'none';
-                        }
-                    });
-        
-                    e.preventDefault(); // Prevent default anchor behavior
-                }
-            });
-        });
-        </script>
-
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="container-fluid">
-    </div>
-    <footer id="footer">
-      <div class="text-center footer-contents">
+      <div class="sort-controls" aria-label="Sort images">
+        <span>Sort by:</span>
+        <button class="sort-button active" data-sort="rank" type="button">Ranking</button>
+        <button class="sort-button" data-sort="date" type="button">Date</button>
       </div>
-    </footer>
-    </body>
+    </div>
+  </section>
+
+  <main>
+    <section id="gallery" class="gallery" aria-live="polite"></section>
+    <p id="emptyState" class="empty-state">No images match your filters.</p>
+  </main>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+    <article class="lightbox-dialog">
+      <button id="closeLightbox" class="close-button" type="button" aria-label="Close image">×</button>
+      <div class="lightbox-image-wrap">
+        <img id="lightboxImage" class="lightbox-image" alt="">
+      </div>
+      <div class="lightbox-copy">
+        <h2 id="lightboxTitle"></h2>
+        <div id="lightboxCategory" class="category"></div>
+        <pre id="lightboxDetails"></pre>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const imageData = [
+  {
+    title: "Moon - First Quarter",
+    category: "Solar System",
+    src: "./astro/Moon - First Quarter.jpg",
+    details: `Date: 03/21/2025
+Gain: 101
+Offset: 50
+Subs: 60s (253 frames)
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR Cut
+Distance: 1.3 ls`,
+    date: "2025-03-21",
+    rank: 1
+  },
+
+  {
+    title: "Jupiter",
+    category: "Solar System",
+    src: "./astro/Jupiter.jpg",
+    details: `Date: 11/10/2025
+Gain: 101
+Offset: 50
+Subs: 1000 frames
+Scope: Celestron C8
+Filter: None
+FOV modifier: None
+Distance: 39 lm`,
+    date: "2025-11-10",
+    rank: 2
+  },
+
+  {
+    title: "Sun",
+    category: "Solar System",
+    src: "./astro/Sun.jpg",
+    details: `Date: 04/18/2025
+Gain: 101
+Offset: 50
+Subs: 2.5s (500 frames)
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR Cut, Solar Filter
+Distance: 8.3 lm`,
+    date: "2025-04-18",
+    rank: 3
+  },
+
+  {
+    title: "M13 - Hercules Globular Cluster",
+    category: "Globular Cluster",
+    src: "./astro/M13 - Hercules Globular Cluster.jpg",
+    details: `Date: 05/29/2026
+Gain: 101
+Offset: 50
+Subs: 141x60
+Scope: Celestron C8
+Filter: None
+Distance 22,200 ly
+Constellation: Hercules
+Moon illumination: 99%`,
+    date: "2026-05-29",
+    rank: 4
+  },
+
+  {
+    title: "M31 - Andromeda Galaxy",
+    category: "Galaxy",
+    src: "./astro/M31 - Andromeda Galaxy.jpg",
+    details: `Date: 11/11/2025
+Gain: 101
+Offset: 50
+Subs: 210x60
+Scope: ASKAR FRA300 Pro
+Filter: None
+Distance: 2.5 Mly
+Constellation: Andromeda`,
+    date: "2025-11-11",
+    rank: 5
+  },
+
+  {
+    title: "M51 - Whirlpool Galaxy",
+    category: "Galaxy",
+    src: "./astro/M51 - Whirlpool Galaxy.jpg",
+    details: `Date: 04/18/2025
+Gain: 101
+Offset: 50
+Subs: 47x180
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR Cut
+Distance: 31 Mly
+Constellation: Canes Venatici`,
+    date: "2025-04-18",
+    rank: 6
+  },
+
+  {
+    title: "NGC891 - Silver Silver Galaxy",
+    category: "Galaxy",
+    src: "./astro/NGC891 - Silver Silver Galaxy.jpg",
+    details: `Date: 12/27/2024
+Gain: 101
+Offset: 50
+Subs: 30x300
+Scope: 150mm Newtonian
+Filter: None
+Distance: 27.4 Mly
+Constellation: Andromeda`,
+    date: "2024-12-27",
+    rank: 7
+  },
+
+  {
+    title: "M81 and M82 - Bodes Galaxy and Cigar Galaxy",
+    category: "Galaxy",
+    src: "./astro/M81 and M82 - Bodes Galaxy and Cigar Galaxy.jpg",
+    details: `Date: 01/05/2024
+Gain: 101
+Offset: 50
+Subs: 23x240
+Scope: 150mm Newtonian
+Filter: None
+Distance: 11 Mly
+Constellation: Ursa Major`,
+    date: "2024-01-05",
+    rank: 8
+  },
+
+  {
+    title: "Leo Triplet",
+    category: "Galaxy",
+    src: "./astro/Leo Triplet.jpg",
+    details: `Date: 03/22/2025
+Gain: 101
+Offset: 50
+Subs: 21x180
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR cut
+Distance: 35 Mly
+Constellation: Leo`,
+    date: "2025-03-22",
+    rank: 9
+  },
+
+  {
+    title: "M63 - Sunflower Galaxy",
+    category: "Galaxy",
+    src: "./astro/M63 - Sunflower Galaxy.jpg",
+    details: `Date: 03/22/2025
+Gain: 101
+Offset: 50
+Subs: 50x180
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR Cut
+Distance: 27 Mly
+Constellation: Canes Venatici`,
+    date: "2025-03-22",
+    rank: 10
+  },
+
+  {
+    title: "M101 - Pinwheel Galaxy",
+    category: "Galaxy",
+    src: "./astro/M101 - Pinwheel Galaxy.jpg",
+    details: `Date: 03/21/2025
+Gain: 101
+Offset: 50
+Subs: 38x180
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR Cut
+Distance: 25 Mly
+Constellation: Ursa Major`,
+    date: "2025-03-21",
+    rank: 11
+  },
+
+  {
+    title: "NGC2903",
+    category: "Galaxy",
+    src: "./astro/NGC2903.jpg",
+    details: `Date: 03/23/2025
+Gain: 101
+Offset: 50
+Subs: 30x180
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR Cut
+Distance: 30.7 Mly
+Constellation: Leo`,
+    date: "2025-03-23",
+    rank: 12
+  },
+
+  {
+    title: "NGC4038 - Antennae Galaxies",
+    category: "Galaxy",
+    src: "./astro/NGC4038 - Antennae Galaxies.jpg",
+    details: `Date: 03/23/2025
+Gain: 101
+Offset: 50
+Subs: 60x180
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR Cut
+Distance: 45 Mly
+Constellation: Corvus`,
+    date: "2025-03-23",
+    rank: 13
+  },
+
+  {
+    title: "Markarian's Chain",
+    category: "Galaxy Cluster",
+    src: "./astro/Markarian's Chain.jpg",
+    details: `Date: 03/21/2025
+Gain: 101
+Offset: 50
+Subs: 10x180
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR cut
+Distance: 51.9 Mly (M86)
+Constellation: Virgo`,
+    date: "2025-03-21",
+    rank: 14
+  },
+
+  {
+    title: "Perseus Galaxy Cluster",
+    category: "Galaxy Cluster",
+    src: "./astro/Perseus Galaxy Cluster.jpg",
+    details: `Date: 01/05/2024
+Gain: 101
+Offset: 50
+Subs: 32x200 + 45x120
+Scope: 150mm Newtonian
+Filter: None
+Distance: 237 Mly (Perseus A)
+Constellation: Perseus`,
+    date: "2024-01-05",
+    rank: 15
+  },
+
+  {
+    title: "IC405 - Flaming Star Nebula",
+    category: "Emission Nebula",
+    src: "./astro/IC405 - Flaming Star Nebula.jpg",
+    details: `Date: 01/04/2024
+Gain: 101
+Offset: 50
+Subs: 79x240
+Scope: 150mm Newtonian
+Filter: L-Ultimate
+Distance: 1,500 ly
+Constellation: Auriga`,
+    date: "2024-01-04",
+    rank: 16
+  },
+
+  {
+    title: "IC1795 - Fish Head Nebula",
+    category: "Emission Nebula",
+    src: "./astro/IC1795 - Fish Head Nebula.jpg",
+    details: `Date: 01/07/2024
+Gain: 101
+Offset: 50
+Subs: 39x240
+Scope: 150mm Newtonian
+Filter: L-Ultimate
+Distance: 6,000 ly
+Constellation: Cassiopeia`,
+    date: "2024-01-07",
+    rank: 17
+  },
+
+  {
+    title: "NGC281 - Pacman Nebula",
+    category: "Emission Nebula",
+    src: "./astro/NGC281 - Pacman Nebula.jpg",
+    details: `Date: 12/27/2024
+Gain: 101
+Offset: 50
+Subs: 43x240
+Scope: 150mm Newtonian
+Filter: L-Ultimate
+Distance: 9,459 ly
+Constellation: Cassiopeia`,
+    date: "2024-12-27",
+    rank: 18
+  },
+
+  {
+    title: "NGC6888 - Crescent Nebula",
+    category: "Emission Nebula",
+    src: "./astro/NGC6888 - Crescent Nebula.jpg",
+    details: `Date: 08/14/2024
+Gain: 101
+Offset: 50
+Subs: 38x480 (?)
+Scope: 150mm Newtonian
+Filter: L-Ultimate
+Distance: 5,000 ly
+Constellation: Cygnus`,
+    date: "2024-08-14",
+    rank: 19
+  },
+
+  {
+    title: "NGC6992 - Eastern Veil Nebula",
+    category: "Emission Nebula",
+    src: "./astro/NGC6992 - Eastern Veil Nebula.jpg",
+    details: `Date: 08/18/2025
+Gain: 101
+Offset: 50
+Subs: 10x240 (M3)
+Scope: 150mm Newtonian
+Filter: L-Ultimate
+Distance: 2,400 ly
+Constellatoin: Cygnus`,
+    date: "2025-08-18",
+    rank: 20
+  },
+
+  {
+    title: "NGC6960 - Western Veil Nebula",
+    category: "Emission Nebula",
+    src: "./astro/NGC6960 - Western Veil Nebula.jpg",
+    details: `Date: 08/19/2025
+Gain: 101
+Offset: 50
+Subs: 10x240 (M2)
+Scope: 150mm Newtonian
+Filter: L-Ultimate
+Distance: 2,400 ly
+Constellation: Cygnus`,
+    date: "2025-08-19",
+    rank: 21
+  },
+
+  {
+    title: "NGC7380 - Wizard Nebula",
+    category: "Emission Nebula",
+    src: "./astro/NGC7380 - Wizard Nebula.jpg",
+    details: `Date: 08/19/2025
+Gain: 101
+Offset: 50
+Subs: 47x240
+Scope: 150mm Newtonian
+Filter: L-Ultimate
+Distance: 7,000 ly
+Constellation: Cepheus`,
+    date: "2025-08-19",
+    rank: 22
+  },
+
+  {
+    title: "IC1085 - Heart Nebula",
+    category: "Emission Nebula",
+    src: "./astro/IC1805 - Heart Nebula.jpg",
+    details: `Date: 11/11/2025
+Gain: 101
+Offset: 50
+Subs: 217x60
+Scope: ASKAR FRA300 Pro
+Filter: L-Ultimate
+Distance: 7,500 ly
+Constellation: Cassiopeia`,
+    date: "2025-11-11",
+    rank: 23
+  },
+
+  {
+    title: "B33 - Horsehead Nebula",
+    category: "Emission Nebula",
+    src: "./astro/B33 - Horsehead Nebula.jpg",
+    details: `Date: 02/12/2026
+Gain: 101
+Offset: 50
+Subs: 53x60
+Scope: ASKAR FRA300 Pro
+Filter: None
+Distance: 1,500 ly
+Constellation: Orion`,
+    date: "2026-02-12",
+    rank: 24
+  },
+
+  {
+    title: "NGC7023 - Iris Nebula",
+    category: "Reflection Nebula",
+    src: "./astro/NGC7023 - Iris Nebula.jpg",
+    details: `Date: 08/20/2025
+Gain: 101
+Offset: 50
+Subs: 126x60
+Scope: 150mm Newtonian
+Filter: SVBony UV/IR cut
+Distance: 1,300 ly
+Constellation: Cepheus`,
+    date: "2025-08-20",
+    rank: 25
+  },
+
+  {
+    title: "M42 - Orion Nebula",
+    category: "Reflection Nebula",
+    src: "./astro/M42 - Orion Nebula.jpg",
+    details: `Date: 11/08/2025
+Gain: 101
+Offset: 50
+Subs: 166x60
+Scope: ASKAR FRA300 Pro
+Filter: None
+Distance: 1,300 ly
+Constellation: Cepheus`,
+    date: "2025-11-08",
+    rank: 26
+  },
+
+  {
+    title: "M45 - Pleiades",
+    category: "Reflection Nebula",
+    src: "./astro/M45 - Pleiades.jpg",
+    details: `Date: 11/08/2025
+Gain: 101
+Offset: 50
+Subs: 88x60
+Scope: ASKAR FRA300 Pro
+Filter: None
+Distance: 444 ly
+Constellation: Taurus`,
+    date: "2025-11-08",
+    rank: 27
+  },
+
+  {
+    title: "Milky Way (WF)",
+    category: "Wide-field",
+    src: "./astro/WF - Milky Way (08:25:25 - Sequoia).jpg",
+    details: `Date: 08/25/2025
+ISO: 500
+Subs: 74x30
+F-ratio: F/2.4
+Lens: 14mm Rokinon`,
+    date: "2025-08-25",
+    rank: 28
+  },
+
+  {
+    title: "M31 - Andromeda Galaxy (WF)",
+    category: "Wide-field",
+    src: "./astro/WF - M31 - Andromeda Galaxy (08:25:25 - Sequoia).jpg",
+    details: `Date: 08/25/2025
+ISO: 500
+Subs: 22x30
+F-ratio: F/2.4
+Lens: 14mm Rokinon`,
+    date: "2025-08-25",
+    rank: 29
+  }
+];
+
+    const gallery = document.getElementById("gallery");
+    const filters = document.getElementById("filters");
+    const search = document.getElementById("search");
+    const emptyState = document.getElementById("emptyState");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxTitle = document.getElementById("lightboxTitle");
+    const lightboxCategory = document.getElementById("lightboxCategory");
+    const lightboxDetails = document.getElementById("lightboxDetails");
+    const closeLightboxButton = document.getElementById("closeLightbox");
+
+    let activeCategory = "View All";
+    let activeSort = "rank";
+    let lastFocusedCard = null;
+
+    const categoryOrder = [
+      "Emission Nebula",
+      "Reflection Nebula",
+      "Galaxy",
+      "Galaxy Cluster",
+      "Globular Cluster",
+      "Solar System",
+      "Wide-field"
+    ];
+
+    const categories = [
+      "View All",
+      ...categoryOrder.filter(category =>
+        imageData.some(item => item.category === category)
+      )
+    ];
+
+    function makeButton(label) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "filter-button";
+      button.textContent = label;
+      button.dataset.category = label;
+      button.classList.toggle("active", label === activeCategory);
+      button.addEventListener("click", () => {
+        activeCategory = label;
+        document.querySelectorAll(".filter-button").forEach(btn => {
+          btn.classList.toggle("active", btn.dataset.category === label);
+        });
+        renderGallery();
+      });
+      return button;
+    }
+
+    categories.forEach(category => filters.appendChild(makeButton(category)));
+
+    function visibleItems() {
+      const query = search.value.trim().toLowerCase();
+
+      return imageData
+        .filter(item => activeCategory === "View All" || item.category === activeCategory)
+        .filter(item => {
+          const haystack = `${item.title} ${item.category} ${item.details}`.toLowerCase();
+          return haystack.includes(query);
+        })
+        .sort((a, b) => {
+          if (activeSort === "date") {
+            return b.date.localeCompare(a.date) || a.rank - b.rank;
+          }
+          const categoryDifference =
+            categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
+
+          return categoryDifference || a.rank - b.rank;
+        });
+    }
+
+    function resizeGridItem(card) {
+      const rowHeight = parseFloat(getComputedStyle(gallery).getPropertyValue("grid-auto-rows"));
+      const rowGap = parseFloat(getComputedStyle(gallery).getPropertyValue("row-gap"));
+      const image = card.querySelector("img");
+
+      if (!image.complete || image.naturalWidth === 0) return;
+
+      const renderedHeight = image.getBoundingClientRect().height;
+      const rowSpan = Math.ceil((renderedHeight + rowGap) / (rowHeight + rowGap));
+      card.style.gridRowEnd = `span ${rowSpan}`;
+    }
+
+    function resizeAllGridItems() {
+      gallery.querySelectorAll(".gallery-card").forEach(resizeGridItem);
+    }
+
+    function renderGallery() {
+      const items = visibleItems();
+      gallery.replaceChildren();
+
+      items.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "gallery-card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Open ${item.title}`);
+
+        const image = document.createElement("img");
+        image.src = item.src;
+        image.alt = item.title;
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.addEventListener("load", () => resizeGridItem(card));
+
+        const overlay = document.createElement("div");
+        overlay.className = "card-overlay";
+        overlay.innerHTML = `
+          <h2 class="card-title">${escapeHtml(item.title)}</h2>
+          <div class="card-category">${escapeHtml(item.category)}</div>
+        `;
+
+        card.append(image, overlay);
+        card.addEventListener("click", () => openLightbox(item, card));
+        card.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openLightbox(item, card);
+          }
+        });
+
+        gallery.appendChild(card);
+        requestAnimationFrame(() => resizeGridItem(card));
+      });
+
+      emptyState.style.display = items.length ? "none" : "block";
+      requestAnimationFrame(resizeAllGridItems);
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    function openLightbox(item, card) {
+      lastFocusedCard = card;
+      lightboxImage.src = item.src;
+      lightboxImage.alt = item.title;
+      lightboxTitle.textContent = item.title;
+      lightboxCategory.textContent = item.category;
+      lightboxDetails.textContent = item.details;
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+      closeLightboxButton.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightboxImage.src = "";
+      document.body.style.overflow = "";
+      lastFocusedCard?.focus();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resizeAllGridItems, 100);
+    });
+
+    search.addEventListener("input", renderGallery);
+
+    document.querySelectorAll(".sort-button").forEach(button => {
+      button.addEventListener("click", () => {
+        activeSort = button.dataset.sort;
+        document.querySelectorAll(".sort-button").forEach(btn => {
+          btn.classList.toggle("active", btn === button);
+        });
+        renderGallery();
+      });
+    });
+
+    closeLightboxButton.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && lightbox.classList.contains("open")) {
+        closeLightbox();
+      }
+    });
+
+    renderGallery();
+  </script>
+</body>
 </html>
