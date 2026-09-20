@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Astrophotography image gallery">
-  <title>Gallery | Amir Shapour Mohammadi</title>
+  <meta name="description" content="Astrophotography by Amir Shapour Mohammadi. Explore galaxies, nebulae and the Solar System, with full-resolution images and capture details.">
+  <title>Astrophotography | Amir Shapour Mohammadi</title>
 
   <style>
     :root {
@@ -326,6 +326,78 @@
         transition: none !important;
       }
     }
+
+    :focus-visible { outline: 2px solid #8dcbea; outline-offset: 4px; }
+    button, .viewer-toolbar a { min-height: 44px; }
+    .category-picker summary { display: none; cursor: pointer; }
+    .gallery-count { margin: 0; color: var(--muted); font-size: .8rem; }
+    .gallery-card { border: 0; padding: 0; text-align: left; color: inherit; }
+    .gallery-card img { min-height: 0; }
+    .card-title { overflow-wrap: anywhere; }
+    .lightbox {
+      width: 100%; max-width: none; height: 100dvh; max-height: none;
+      margin: 0; border: 0; color: var(--text); overflow: auto;
+      background: rgba(0, 0, 0, .96);
+    }
+    .lightbox[open] { display: grid; }
+    .lightbox::backdrop { background: rgba(0, 0, 0, .94); }
+    .lightbox-dialog { grid-template-columns: minmax(0, 1fr) minmax(280px, 370px); }
+    .image-panel { min-width: 0; background: #050505; }
+    .viewer-toolbar {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+      padding: 12px; border-bottom: 1px solid #292929;
+    }
+    .viewer-toolbar button, .viewer-toolbar a {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #171717; border: 1px solid #555; color: var(--text);
+      padding: 8px 12px; text-decoration: none; cursor: pointer; font-size: .85rem;
+    }
+    .viewer-toolbar button:disabled { opacity: .4; cursor: default; }
+    .viewer-toolbar .image-position { margin-right: auto; color: var(--muted); font-size: .8rem; }
+    .lightbox-image-wrap {
+      display: block; place-items: normal; position: relative; height: min(72vh, 850px); min-height: 0;
+      overflow: hidden; touch-action: pan-y pinch-zoom;
+    }
+    .lightbox-image { height: 100%; max-height: none; cursor: zoom-in; }
+    .lightbox-image-wrap.zoomed { overflow: auto; touch-action: auto; }
+    .zoomed .lightbox-image { max-width: none; height: auto; cursor: grab; }
+    .zoomed.dragging .lightbox-image { cursor: grabbing; }
+    .lightbox-copy { padding-top: 58px; }
+    .lightbox-copy h2 { margin-right: 0; font-size: 1.3rem; }
+    .lightbox-copy .category { margin-bottom: 14px; }
+    .description { color: #ddd; line-height: 1.6; }
+    .exposure-summary { font-size: 1.1rem; line-height: 1.55; color: #a8d6ef; }
+    .exposure-summary small { display: block; font-size: .85rem; color: var(--muted); }
+    .image-facts { font-size: .9rem; line-height: 1.6; }
+    .image-facts p { margin: 8px 0; }
+    .capture-details { border-top: 1px solid #333; padding-top: 14px; margin-top: 18px; }
+    .capture-details summary { cursor: pointer; padding: 8px 0; }
+    .capture-details pre { padding-top: 12px; font-size: .85rem; }
+    .viewer-help { color: var(--muted); font-size: .78rem; line-height: 1.5; }
+    .share-link { width: 100%; padding: 8px; background: #222; color: white; border: 1px solid #666; }
+    .share-status { min-height: 1.5em; color: var(--muted); font-size: .8rem; }
+    @media (max-width: 800px) {
+      .controls { padding: 8px 12px; }
+      .category-picker summary { display: block; padding: 10px 0; font-size: .85rem; }
+      .category-picker .filter-row { display: none; padding-bottom: 8px; }
+      .category-picker[open] .filter-row { display: flex; }
+      .utility-row { flex-direction: row; align-items: center; gap: 8px; margin-top: 4px; }
+      .search { width: 100%; min-width: 0; }
+      .sort-controls > span { display: none; }
+      .gallery-count { display: none; }
+      .lightbox { padding: 8px; align-items: start; }
+      .lightbox-dialog { max-height: none; margin: auto; }
+      .lightbox-image-wrap { height: 55dvh; }
+      .lightbox-image { height: 100%; max-height: none; }
+      .lightbox-copy { padding: 20px; }
+      .viewer-toolbar { padding-right: 56px; gap: 6px; }
+      .viewer-toolbar button, .viewer-toolbar a { padding: 8px 10px; }
+      .card-overlay { opacity: 1; transform: none; min-height: 0; padding: 30px 12px 12px; background: linear-gradient(transparent, rgba(0,0,0,.86)); }
+      .card-title { font-size: .9rem; }
+    }
+    @media (hover: none) {
+      .card-overlay { opacity: 1; transform: none; background: linear-gradient(transparent, rgba(0,0,0,.86)); }
+    }
   </style>
 </head>
 
@@ -336,7 +408,10 @@
   </header>
 
   <section class="controls" aria-label="Gallery controls">
-    <div id="filters" class="filter-row"></div>
+    <details id="categoryPicker" class="category-picker" open>
+      <summary id="categorySummary">Categories · View All</summary>
+      <div id="filters" class="filter-row"></div>
+    </details>
 
     <div class="utility-row">
       <input
@@ -350,9 +425,10 @@
 
       <div class="sort-controls" aria-label="Sort images">
         <span>Sort by:</span>
-        <button class="sort-button active" data-sort="rank" type="button">Ranking</button>
-        <button class="sort-button" data-sort="date" type="button">Date</button>
+        <button class="sort-button active" data-sort="rank" type="button" aria-pressed="true">Featured</button>
+        <button class="sort-button" data-sort="date" type="button" aria-pressed="false">Newest</button>
       </div>
+      <p id="galleryCount" class="gallery-count" role="status"></p>
     </div>
   </section>
 
@@ -361,23 +437,46 @@
     <p id="emptyState" class="empty-state">No images match your filters.</p>
   </main>
 
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+  <dialog id="lightbox" class="lightbox" aria-labelledby="lightboxTitle">
     <article class="lightbox-dialog">
       <button id="closeLightbox" class="close-button" type="button" aria-label="Close image">×</button>
-      <div class="lightbox-image-wrap">
-        <img id="lightboxImage" class="lightbox-image" alt="">
+      <div class="image-panel">
+        <nav class="viewer-toolbar" aria-label="Image viewer controls">
+          <button id="previousImage" type="button" aria-label="Previous image">←</button>
+          <span id="imagePosition" class="image-position"></span>
+          <button id="nextImage" type="button" aria-label="Next image">→</button>
+          <button id="zoomImage" type="button" aria-pressed="false">Zoom in</button>
+          <a id="originalImage" target="_blank" rel="noopener">Original ↗</a>
+        </nav>
+        <div id="imageViewport" class="lightbox-image-wrap">
+          <img id="lightboxImage" class="lightbox-image" alt="" draggable="false">
+        </div>
       </div>
       <div class="lightbox-copy">
         <h2 id="lightboxTitle"></h2>
         <div id="lightboxCategory" class="category"></div>
-        <pre id="lightboxDetails"></pre>
+        <p id="imageDescription" class="description"></p>
+        <p id="exposureSummary" class="exposure-summary"></p>
+        <div id="imageFacts" class="image-facts"></div>
+        <details id="captureDetails" class="capture-details">
+          <summary>Capture details</summary>
+          <pre id="lightboxDetails"></pre>
+        </details>
+        <div class="viewer-toolbar">
+          <button id="shareImage" type="button">Copy image link</button>
+        </div>
+        <input id="shareLink" class="share-link" aria-label="Image link" readonly hidden>
+        <p id="shareStatus" class="share-status" role="status"></p>
+        <p class="viewer-help">Use ← → or swipe to browse. Zoom in to explore; drag or scroll to move around. Press Escape to close.</p>
       </div>
     </article>
-  </div>
+  </dialog>
 
   <script>
     const imageData = [
   {
+    id: "moon",
+    description: "Sunlight along the lunar terminator brings craters and mountain ridges into relief.",
     title: "Moon: First Quarter",
     category: "Solar System",
     src: "./astro/Moon - First Quarter.jpg",
@@ -393,6 +492,8 @@ Distance: 1.3 ls`,
   },
 
   {
+    id: "jupiter",
+    description: "Cloud bands trace the atmosphere of the largest planet in our Solar System.",
     title: "Jupiter",
     category: "Solar System",
     src: "./astro/Jupiter.jpg",
@@ -409,6 +510,8 @@ Distance: 39 lm`,
   },
 
   {
+    id: "sun",
+    description: "Our nearest star, photographed through a solar filter.",
     title: "Sun",
     category: "Solar System",
     src: "./astro/Sun.jpg",
@@ -424,6 +527,8 @@ Distance: 8.3 lm`,
   },
 
   {
+    id: "hercules",
+    description: "A dense gathering of stars fades outward from the bright core of this globular cluster.",
     title: "Hercules Globular Cluster: M13",
     category: "Globular Cluster",
     src: "./astro/M13 - Hercules Globular Cluster.jpg",
@@ -441,7 +546,10 @@ Moon illumination: 99%`,
   },
 
   {
-    title: "Andromeda Galaxy: M31",
+    id: "andromeda",
+    description: "Dark dust lanes sweep around Andromeda's bright core, with its smaller companion galaxies M32 and M110 in the same field.",
+    objects: "Andromeda (M31), M32, M110",
+    title: "Andromeda and Companions: M31, M32 and M110",
     category: "Galaxy",
     src: "./astro/M31 - Andromeda Galaxy.jpg",
     details: `Date: 11/11/2025
@@ -457,7 +565,10 @@ Constellation: Andromeda`,
   },
 
   {
-    title: "Whirlpool Galaxy: M51",
+    id: "whirlpool",
+    description: "The Whirlpool's winding spiral arms reach toward its smaller companion, NGC5195.",
+    objects: "Whirlpool (M51 / NGC5194), NGC5195",
+    title: "Whirlpool and Companion: M51 and NGC5195",
     category: "Galaxy",
     src: "./astro/M51 - Whirlpool Galaxy.jpg",
     details: `Date: 05/31/2026 - 06/01/2026
@@ -473,6 +584,8 @@ Constellation: Canes Venatici`,
   },
 
   {
+    id: "splinter",
+    description: "Seen almost edge-on, this spiral galaxy becomes a narrow streak of light crossed by a dark dust lane.",
     title: "Splinter Galaxy: NGC5906/NGC5907",
     category: "Galaxy",
     src: "./astro/NGC5906 - Splinter Galaxy.jpg",
@@ -489,22 +602,9 @@ Constellation: Draco`,
   },
 
   {
-    title: "Silver Sliver Galaxy: NGC891",
-    category: "Galaxy",
-    src: "./astro/NGC891 - Silver Silver Galaxy.jpg",
-    details: `Date: 12/27/2024
-Gain: 101
-Offset: 50
-Subs: 30x300
-Scope: 150mm Newtonian
-Filter: None
-Distance: 27.4 Mly
-Constellation: Andromeda`,
-    date: "2024-12-27",
-    rank: 7
-  },
-
-  {
+    id: "bodes-and-cigar",
+    description: "Two neighboring galaxies share the frame: Bode's broad spiral disk and the slender Cigar Galaxy.",
+    objects: "Bode's Galaxy (M81), Cigar Galaxy (M82)",
     title: "Bode's Galaxy and Cigar Galaxy: M81 and M82",
     category: "Galaxy",
     src: "./astro/M81 and M82 - Bodes Galaxy and Cigar Galaxy.jpg",
@@ -521,7 +621,10 @@ Constellation: Ursa Major`,
   },
 
   {
-    title: "Leo Triplet",
+    id: "leo-triplet",
+    description: "Three spiral galaxies show different faces to us, from the tilted disks of M65 and M66 to the edge-on NGC3628.",
+    objects: "M65, M66, Hamburger Galaxy (NGC3628)",
+    title: "Leo Triplet: M65, M66 and NGC3628",
     category: "Galaxy",
     src: "./astro/Leo Triplet.jpg",
     details: `Date: 03/22/2025
@@ -537,22 +640,22 @@ Constellation: Leo`,
   },
 
   {
+    id: "sunflower",
+    description: "Fine, patchy spiral structure surrounds the warm core of the Sunflower Galaxy.",
     title: "Sunflower Galaxy: M63",
     category: "Galaxy",
     src: "./astro/M63 - Sunflower Galaxy.jpg",
-    details: `Date: 06/11/2026
-Gain: 101
-Offset: 50
-Subs: 60s
-Scope: Celestron C8
-Filter: None
+    details: `Date: Unverified
+Capture details: Awaiting source records
 Distance: 27 Mly
 Constellation: Canes Venatici`,
-    date: "2026-06-11",
+    date: null,
     rank: 10
   },
 
   {
+    id: "pinwheel",
+    description: "A face-on view reveals the Pinwheel Galaxy's loose spiral arms and scattered bright knots.",
     title: "Pinwheel Galaxy: M101",
     category: "Galaxy",
     src: "./astro/M101 - Pinwheel Galaxy.jpg",
@@ -569,6 +672,8 @@ Constellation: Ursa Major`,
   },
 
   {
+    id: "ngc2903",
+    description: "A bright central region gives way to the curved spiral arms of this galaxy in Leo.",
     title: "NGC2903",
     category: "Galaxy",
     src: "./astro/NGC2903.jpg",
@@ -585,6 +690,9 @@ Constellation: Leo`,
   },
 
   {
+    id: "antennae",
+    description: "Two interacting galaxies overlap in this distant pair in Corvus.",
+    objects: "NGC4038, NGC4039",
     title: "Antennae Galaxies: NGC4038/NGC4039",
     category: "Galaxy",
     src: "./astro/NGC4038 - Antennae Galaxies.jpg",
@@ -601,7 +709,10 @@ Constellation: Corvus`,
   },
 
   {
-    title: "Markarian's Chain",
+    id: "markarians-chain",
+    description: "An arc of galaxies stretches across the Virgo Cluster, including M84, M86 and the interacting pair known as the Eyes.",
+    objects: "M84, M86, the Eyes (NGC4435 and NGC4438)",
+    title: "Markarian's Chain: M84, M86 and the Eyes",
     category: "Galaxy Cluster",
     src: "./astro/Markarian's Chain.jpg",
     details: `Date: 03/21/2025
@@ -617,6 +728,9 @@ Constellation: Virgo`,
   },
 
   {
+    id: "perseus-cluster",
+    description: "A field of distant galaxies surrounds Perseus A in the Perseus Galaxy Cluster.",
+    objects: "Perseus Cluster (Abell 426), Perseus A (NGC1275)",
     title: "Perseus Galaxy Cluster",
     category: "Galaxy Cluster",
     src: "./astro/Perseus Galaxy Cluster.jpg",
@@ -633,6 +747,8 @@ Constellation: Perseus`,
   },
 
   {
+    id: "flaming-star",
+    description: "Wisps of glowing gas and dust give the Flaming Star Nebula its curling shape.",
     title: "Flaming Star Nebula: IC405",
     category: "Emission Nebula",
     src: "./astro/IC405 - Flaming Star Nebula.jpg",
@@ -649,6 +765,8 @@ Constellation: Auriga`,
   },
 
   {
+    id: "tulip",
+    description: "A flower-shaped cloud of glowing gas sits against the rich star field of Cygnus.",
     title: "Tulip Nebula: LBN168",
     category: "Emission Nebula",
     src: "./astro/LBN168 - Tulip Nebula.jpg",
@@ -665,6 +783,9 @@ Constellation: Cygnus`,
   },
 
   {
+    id: "ngc6823",
+    description: "The star cluster NGC6823 shares this field with the glowing gas and dark pillars of Sh2-86.",
+    objects: "Open cluster NGC6823, emission nebula Sh2-86",
     title: "NGC6823 and Sh2-86",
     category: "Emission Nebula",
     src: "./astro/NGC6823 and Sh2-86.jpg",
@@ -681,22 +802,8 @@ Constellation: Vulpecula`,
   },
 
   {
-    title: "Fish Head Nebula: IC1795",
-    category: "Emission Nebula",
-    src: "./astro/IC1795 - Fish Head Nebula.jpg",
-    details: `Date: 01/07/2024
-Gain: 101
-Offset: 50
-Subs: 39x240
-Scope: 150mm Newtonian
-Filter: L-Ultimate
-Distance: 6,000 ly
-Constellation: Cassiopeia`,
-    date: "2024-01-07",
-    rank: 17
-  },
-
-  {
+    id: "pacman",
+    description: "A dark notch cuts into this glowing cloud, giving the Pacman Nebula its familiar silhouette.",
     title: "Pacman Nebula: NGC281",
     category: "Emission Nebula",
     src: "./astro/NGC281 - Pacman Nebula.jpg",
@@ -713,6 +820,8 @@ Constellation: Cassiopeia`,
   },
 
   {
+    id: "crescent",
+    description: "A delicate, curved shell of gas stands out against the stars of Cygnus.",
     title: "Crescent Nebula: NGC6888",
     category: "Emission Nebula",
     src: "./astro/NGC6888 - Crescent Nebula.jpg",
@@ -729,7 +838,10 @@ Constellation: Cygnus`,
   },
 
   {
-    title: "Eastern Veil Nebula: NGC6992",
+    id: "eastern-veil",
+    description: "Fine filaments trace the eastern arc of the Veil, the expanding remains of an exploded star.",
+    objects: "Eastern Veil (NGC6992 and NGC6995)",
+    title: "Eastern Veil Nebula: NGC6992 and NGC6995",
     category: "Emission Nebula",
     src: "./astro/NGC6992 - Eastern Veil Nebula.jpg",
     details: `Date: 08/18/2025
@@ -745,6 +857,8 @@ Constellation: Cygnus`,
   },
 
   {
+    id: "western-veil",
+    description: "A sweeping ribbon of gas marks the western side of the Veil supernova remnant.",
     title: "Western Veil Nebula: NGC6960",
     category: "Emission Nebula",
     src: "./astro/NGC6960 - Western Veil Nebula.jpg",
@@ -761,6 +875,8 @@ Constellation: Cygnus`,
   },
 
   {
+    id: "wizard",
+    description: "Sculpted clouds of gas surround a young star cluster in Cepheus.",
     title: "Wizard Nebula: NGC7380",
     category: "Emission Nebula",
     src: "./astro/NGC7380 - Wizard Nebula.jpg",
@@ -777,7 +893,10 @@ Constellation: Cepheus`,
   },
 
   {
-    title: "Heart Nebula: IC1805",
+    id: "heart",
+    description: "The Heart Nebula's broad outline shares the frame with the brighter Fish Head region near its edge.",
+    objects: "Heart Nebula (IC1805), Fish Head Nebula (IC1795)",
+    title: "Heart and Fish Head Nebulae: IC1805 and IC1795",
     category: "Emission Nebula",
     src: "./astro/IC1805 - Heart Nebula.jpg",
     details: `Date: 11/11/2025
@@ -793,7 +912,10 @@ Constellation: Cassiopeia`,
   },
 
   {
-    title: "Horsehead Nebula: B33",
+    id: "horsehead-flame",
+    description: "The dark Horsehead is silhouetted against IC434, alongside the Flame Nebula and the blue reflection nebula NGC2023.",
+    objects: "Horsehead (B33), Flame (NGC2024), IC434, NGC2023",
+    title: "Horsehead and Flame Nebulae: B33 and NGC2024",
     category: "Emission Nebula",
     src: "./astro/B33 - Horsehead Nebula.jpg",
     details: `Date: 02/12/2026
@@ -809,23 +931,10 @@ Constellation: Orion`,
   },
 
   {
-    title: "Iris Nebula: NGC7023",
-    category: "Reflection Nebula",
-    src: "./astro/NGC7023 - Iris Nebula.jpg",
-    details: `Date: 08/20/2025
-Gain: 101
-Offset: 50
-Subs: 126x60
-Scope: 150mm Newtonian
-Filter: SVBony UV/IR Cut
-Distance: 1,300 ly
-Constellation: Cepheus`,
-    date: "2025-08-20",
-    rank: 25
-  },
-
-  {
-    title: "Orion Nebula: M42",
+    id: "orion-running-man",
+    description: "The bright Orion Nebula and its smaller neighbor M43 share the view with the blue clouds of the Running Man Nebula.",
+    objects: "Orion Nebula (M42), M43, Running Man (NGC1977 region)",
+    title: "Orion and Running Man Nebulae: M42, M43 and NGC1977",
     category: "Emission Nebula",
     src: "./astro/M42 - Orion Nebula.jpg",
     details: `Date: 11/08/2025
@@ -841,6 +950,8 @@ Constellation: Orion`,
   },
 
   {
+    id: "pleiades",
+    description: "Blue reflection nebulosity surrounds the bright stars of the Pleiades cluster.",
     title: "Pleiades: M45",
     category: "Reflection Nebula",
     src: "./astro/M45 - Pleiades.jpg",
@@ -857,6 +968,8 @@ Constellation: Taurus`,
   },
 
   {
+    id: "ring",
+    description: "A small, bright ring marks a shell of gas shed by an aging star.",
     title: "Ring Nebula: M57",
     category: "Planetary Nebula",
     src: "./astro/M57 - Ring Nebula.jpg",
@@ -873,6 +986,8 @@ Constellation: Lyra`,
   },
 
   {
+    id: "dumbbell",
+    description: "The luminous lobes of the Dumbbell Nebula reveal gas released late in a star's life.",
     title: "Dumbbell Nebula: M27",
     category: "Planetary Nebula",
     src: "./astro/M27 - Dumbbell Nebula.jpg",
@@ -889,6 +1004,8 @@ Constellation: Vulpecula`,
   },
 
   {
+    id: "milky-way",
+    description: "A wide view of the Milky Way photographed from Sequoia, with dark dust clouds threading through the star fields.",
     title: "Milky Way (WF)",
     category: "Wide-field",
     src: "./astro/WF - Milky Way (08:25:25 - Sequoia).jpg",
@@ -902,7 +1019,10 @@ Lens: 14mm Rokinon`,
   },
 
   {
-    title: "Andromeda Galaxy: M31 (WF)",
+    id: "andromeda-wide",
+    description: "Andromeda appears beside the broad band of the Milky Way in this wide view from Sequoia.",
+    objects: "Andromeda Galaxy (M31), Milky Way",
+    title: "Andromeda and the Milky Way (WF)",
     category: "Wide-field",
     src: "./astro/WF - M31 - Andromeda Galaxy (08:25:25 - Sequoia).jpg",
     details: `Date: 08/25/2025
@@ -915,212 +1035,353 @@ Lens: 14mm Rokinon`,
   }
 ];
 
+// Stable links are independent of titles and filenames.
+    // Curated opening six; the remaining images retain their relative ranks.
+    const featuredIds = ["whirlpool", "horsehead-flame", "dumbbell", "andromeda", "pinwheel", "orion-running-man"];
     const gallery = document.getElementById("gallery");
     const filters = document.getElementById("filters");
     const search = document.getElementById("search");
-    const emptyState = document.getElementById("emptyState");
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightboxImage");
-    const lightboxTitle = document.getElementById("lightboxTitle");
-    const lightboxCategory = document.getElementById("lightboxCategory");
-    const lightboxDetails = document.getElementById("lightboxDetails");
-    const closeLightboxButton = document.getElementById("closeLightbox");
-
+    const viewport = document.getElementById("imageViewport");
+    const closeButton = document.getElementById("closeLightbox");
+    const zoomButton = document.getElementById("zoomImage");
+    const picker = document.getElementById("categoryPicker");
+    const mobile = matchMedia("(max-width: 800px)");
     let activeCategory = "View All";
     let activeSort = "rank";
+    let currentItem = null;
+    let viewerItems = [];
     let lastFocusedCard = null;
+    let zoomed = false;
+    let gesture = null;
+    let suppressImageClick = false;
 
-    const categoryOrder = [
-      "Emission Nebula",
-      "Reflection Nebula",
-      "Planetary Nebula",
-      "Galaxy",
-      "Galaxy Cluster",
-      "Globular Cluster",
-      "Solar System",
-      "Wide-field"
-    ];
+    const categoryOrder = ["Emission Nebula", "Reflection Nebula", "Planetary Nebula", "Galaxy", "Galaxy Cluster", "Globular Cluster", "Solar System", "Wide-field"];
+    const categories = ["View All", ...categoryOrder.filter(category => imageData.some(item => item.category === category))];
+    const byId = new Map(imageData.map(item => [item.id, item]));
+    const aliases = { horsehead: "horsehead-flame", orion: "orion-running-man", m51: "whirlpool", m101: "pinwheel", m63: "sunflower" };
 
-    const categories = [
-      "View All",
-      ...categoryOrder.filter(category =>
-        imageData.some(item => item.category === category)
-      )
-    ];
+    function featuredRank(item) {
+      const index = featuredIds.indexOf(item.id);
+      return index < 0 ? featuredIds.length + item.rank : index;
+    }
 
-    function makeButton(label) {
+    function visibleItems() {
+      const query = search.value.trim().toLowerCase().replace(/\s+/g, "");
+      return imageData
+        .filter(item => activeCategory === "View All" || item.category === activeCategory)
+        .filter(item => [item.title, item.objects, item.description, item.category, item.details].join(" ").toLowerCase().replace(/\s+/g, "").includes(query))
+        .sort((a, b) => activeSort === "date"
+          ? (b.date || "").localeCompare(a.date || "") || featuredRank(a) - featuredRank(b)
+          : featuredRank(a) - featuredRank(b));
+    }
+
+    function setCategory(category) {
+      activeCategory = category;
+      filters.querySelectorAll("button").forEach(button => {
+        const selected = button.dataset.category === category;
+        button.classList.toggle("active", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+      document.getElementById("categorySummary").textContent = "Categories · " + category;
+      if (mobile.matches) picker.open = false;
+      renderGallery();
+    }
+
+    categories.forEach(category => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "filter-button";
-      button.textContent = label;
-      button.dataset.category = label;
-      button.classList.toggle("active", label === activeCategory);
-      button.addEventListener("click", () => {
-        activeCategory = label;
-        document.querySelectorAll(".filter-button").forEach(btn => {
-          btn.classList.toggle("active", btn.dataset.category === label);
-        });
-        renderGallery();
-      });
-      return button;
-    }
+      button.textContent = category;
+      button.dataset.category = category;
+      button.addEventListener("click", () => setCategory(category));
+      filters.append(button);
+    });
+    function syncPicker() { picker.open = !mobile.matches; }
+    mobile.addEventListener("change", syncPicker);
+    syncPicker();
 
-    categories.forEach(category => filters.appendChild(makeButton(category)));
+    function thumbnailPath(src) { return src.replace("./astro/", "./astro_thumbnails/"); }
 
-    function visibleItems() {
-      const query = search.value.trim().toLowerCase();
-
-      return imageData
-        .filter(item => activeCategory === "View All" || item.category === activeCategory)
-        .filter(item => {
-          const haystack = `${item.title} ${item.category} ${item.details}`.toLowerCase();
-          return haystack.includes(query);
-        })
-        .sort((a, b) => {
-          if (activeSort === "date") {
-            return b.date.localeCompare(a.date) || a.rank - b.rank;
-          }
-          const categoryDifference =
-            categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
-
-          return categoryDifference || a.rank - b.rank;
-        });
-    }
-
-    function resizeGridItem(card) {
-      const rowHeight = parseFloat(getComputedStyle(gallery).getPropertyValue("grid-auto-rows"));
-      const rowGap = parseFloat(getComputedStyle(gallery).getPropertyValue("row-gap"));
+    function resizeCard(card) {
       const image = card.querySelector("img");
-
-      if (!image.complete || image.naturalWidth === 0) return;
-
-      const renderedHeight = image.getBoundingClientRect().height;
-      const rowSpan = Math.ceil((renderedHeight + rowGap) / (rowHeight + rowGap));
-      card.style.gridRowEnd = `span ${rowSpan}`;
-    }
-
-    function resizeAllGridItems() {
-      gallery.querySelectorAll(".gallery-card").forEach(resizeGridItem);
-    }
-
-    function getThumbnailPath(fullResolutionPath) {
-      return fullResolutionPath
-        .replace(/^\.\/astro\//, "./astro_thumbnails/")
-        .replace(/^\/astro\//, "/astro_thumbnails/")
-        .replace(/^astro\//, "astro_thumbnails/");
+      if (!image.complete || !image.naturalWidth) return;
+      const style = getComputedStyle(gallery);
+      const row = parseFloat(style.gridAutoRows);
+      const gap = parseFloat(style.rowGap);
+      card.style.gridRowEnd = "span " + Math.ceil((image.getBoundingClientRect().height + gap) / (row + gap));
     }
 
     function renderGallery() {
       const items = visibleItems();
       gallery.replaceChildren();
-
-      items.forEach((item, index) => {
-        const card = document.createElement("article");
+      for (const [index, item] of items.entries()) {
+        const card = document.createElement("button");
+        card.type = "button";
         card.className = "gallery-card";
-        card.tabIndex = 0;
-        card.setAttribute("role", "button");
-        card.setAttribute("aria-label", `Open ${item.title}`);
-
+        card.dataset.imageId = item.id;
+        card.setAttribute("aria-label", "Open " + item.title);
         const image = document.createElement("img");
-        image.src = item.thumb ?? getThumbnailPath(item.src);
+        image.src = thumbnailPath(item.src);
         image.alt = item.title;
         image.loading = index < 8 ? "eager" : "lazy";
         image.fetchPriority = index < 4 ? "high" : "auto";
         image.decoding = "async";
-
-        // Fall back to the full-resolution image if a thumbnail is missing.
-        image.addEventListener("error", () => {
-          if (image.src !== new URL(item.src, document.baseURI).href) {
-            image.src = item.src;
-          }
-        }, { once: true });
-
-        image.addEventListener("load", () => resizeGridItem(card));
-
-        const overlay = document.createElement("div");
+        image.addEventListener("error", () => { image.src = item.src; }, {once: true});
+        image.addEventListener("load", () => resizeCard(card));
+        const overlay = document.createElement("span");
         overlay.className = "card-overlay";
-        overlay.innerHTML = `
-          <h2 class="card-title">${escapeHtml(item.title)}</h2>
-          <div class="card-category">${escapeHtml(item.category)}</div>
-        `;
-
+        const title = document.createElement("span");
+        title.className = "card-title";
+        title.style.display = "block";
+        title.textContent = item.title;
+        const category = document.createElement("span");
+        category.className = "card-category";
+        category.style.display = "block";
+        category.textContent = item.category;
+        overlay.append(title, category);
         card.append(image, overlay);
-        card.addEventListener("click", () => openLightbox(item, card));
-        card.addEventListener("keydown", event => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            openLightbox(item, card);
-          }
+        card.addEventListener("click", () => {
+          lastFocusedCard = card;
+          viewerItems = visibleItems();
+          history.pushState({astroViewer: true}, "", "#" + item.id);
+          showImage(item);
         });
-
-        gallery.appendChild(card);
-        requestAnimationFrame(() => resizeGridItem(card));
-      });
-
-      emptyState.style.display = items.length ? "none" : "block";
-      requestAnimationFrame(resizeAllGridItems);
+        gallery.append(card);
+        requestAnimationFrame(() => resizeCard(card));
+      }
+      document.getElementById("emptyState").style.display = items.length ? "none" : "block";
+      document.getElementById("galleryCount").textContent = items.length + " of " + imageData.length + " images";
     }
 
-    function escapeHtml(value) {
-      return value.replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      })[char]);
+    function exposureInfo(details) {
+      const raw = details.match(/^Subs: (.+)$/m)?.[1];
+      if (!raw) return null;
+      // Only calculate totals from complete, unambiguous count × seconds records.
+      const parts = raw.split(" + ");
+      if (!parts.every(part => /^\d+x\d+(?:\.\d+)?$/.test(part))) {
+        return {total: "", frames: raw.replace(/(\d+)x(\d+)/g, "$1 × $2 s").replace(" (?)", " (unverified)")};
+      }
+      const seconds = parts.reduce((sum, part) => {
+        const [count, length] = part.split("x").map(Number);
+        return sum + count * length;
+      }, 0);
+      const h = Math.floor(seconds / 3600), m = Math.floor(seconds % 3600 / 60), s = seconds % 60;
+      const total = [h && h + (h === 1 ? " hour" : " hours"), m && m + (m === 1 ? " minute" : " minutes"), s && s + " seconds"].filter(Boolean).join(" ");
+      return {total, frames: parts.map(part => part.replace("x", " × ") + " s").join(" + ")};
     }
 
-    function openLightbox(item, card) {
-      lastFocusedCard = card;
+    function resetZoom() {
+      zoomed = false;
+      viewport.classList.remove("zoomed", "dragging");
+      lightboxImage.style.width = "";
+      viewport.scrollTo(0, 0);
+      zoomButton.textContent = "Zoom in";
+      zoomButton.setAttribute("aria-pressed", "false");
+    }
+
+    function toggleZoom() {
+      if (!lightboxImage.complete || !lightboxImage.naturalWidth) return;
+      if (zoomed) { resetZoom(); return; }
+      zoomed = true;
+      viewport.classList.add("zoomed");
+      lightboxImage.style.width = Math.max(lightboxImage.naturalWidth, viewport.clientWidth * 2) + "px";
+      viewport.scrollTo((lightboxImage.clientWidth - viewport.clientWidth) / 2, (lightboxImage.clientHeight - viewport.clientHeight) / 2);
+      zoomButton.textContent = "Fit image";
+      zoomButton.setAttribute("aria-pressed", "true");
+    }
+
+    function showImage(item) {
+      const opening = !lightbox.open;
+      currentItem = item;
+      if (!viewerItems.some(image => image.id === item.id)) viewerItems = [...imageData].sort((a,b) => featuredRank(a) - featuredRank(b));
+      resetZoom();
+      zoomButton.disabled = true;
       lightboxImage.src = item.src;
       lightboxImage.alt = item.title;
-      lightboxTitle.textContent = item.title;
-      lightboxCategory.textContent = item.category;
-      lightboxDetails.textContent = item.details;
-      lightbox.classList.add("open");
-      document.body.style.overflow = "hidden";
-      closeLightboxButton.focus();
+      document.getElementById("originalImage").href = item.src;
+      document.getElementById("lightboxTitle").textContent = item.title;
+      document.getElementById("lightboxCategory").textContent = item.category;
+      document.getElementById("imageDescription").textContent = item.description;
+      document.getElementById("lightboxDetails").textContent = item.details;
+      document.getElementById("captureDetails").open = false;
+      const summary = document.getElementById("exposureSummary");
+      const exposure = exposureInfo(item.details);
+      summary.replaceChildren();
+      if (exposure) {
+        summary.textContent = exposure.total ? exposure.total + " of exposure" : "Exposure: " + exposure.frames;
+        if (exposure.total) {
+          const frames = document.createElement("small");
+          frames.textContent = exposure.frames;
+          summary.append(frames);
+        }
+      }
+      summary.hidden = !exposure;
+      const facts = document.getElementById("imageFacts");
+      facts.replaceChildren();
+      const rows = item.details.split("\n").filter(row => /^(Date|Scope|Lens|Filter|Distance|Constellation|Capture details):/.test(row));
+      if (item.objects) rows.unshift("In this image: " + item.objects);
+      for (const row of rows) {
+        const p = document.createElement("p");
+        const split = row.indexOf(":");
+        const label = document.createElement("strong");
+        label.textContent = row.slice(0, split + 1) + " ";
+        p.append(label, row.slice(split + 1).trim());
+        facts.append(p);
+      }
+      document.getElementById("imagePosition").textContent = (viewerItems.indexOf(item) + 1) + " / " + viewerItems.length;
+      document.getElementById("previousImage").disabled = viewerItems.length < 2;
+      document.getElementById("nextImage").disabled = viewerItems.length < 2;
+      document.getElementById("shareLink").hidden = true;
+      document.getElementById("shareStatus").textContent = "";
+      document.title = item.title + " | Amir Shapour Mohammadi";
+      if (opening) {
+        document.body.style.overflow = "hidden";
+        lightbox.showModal(); // Native modal makes the background inert.
+        closeButton.focus();
+      }
+      lightbox.scrollTop = 0;
+      document.querySelector(".lightbox-copy").scrollTop = 0;
     }
 
-    function closeLightbox() {
-      lightbox.classList.remove("open");
-      lightboxImage.src = "";
+    function dismissViewer() {
+      if (!lightbox.open) return;
+      lightbox.close();
+      resetZoom();
+      lightboxImage.removeAttribute("src");
+      currentItem = null;
       document.body.style.overflow = "";
-      lastFocusedCard?.focus();
+      document.title = "Astrophotography | Amir Shapour Mohammadi";
+      (lastFocusedCard?.isConnected ? lastFocusedCard : search).focus({preventScroll: true});
     }
 
-    let resizeTimer;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resizeAllGridItems, 100);
+    function closeViewer() {
+      if (history.state?.astroViewer) {
+        history.back();
+      } else {
+        history.replaceState(history.state, "", location.pathname + location.search);
+        dismissViewer();
+      }
+    }
+
+    function followHash() {
+      let id;
+      try { id = decodeURIComponent(location.hash.slice(1)); } catch { dismissViewer(); return; }
+      const item = byId.get(aliases[id] || id);
+      if (item) showImage(item);
+      else dismissViewer();
+    }
+
+    function navigateImage(direction) {
+      if (!currentItem || viewerItems.length < 2) return;
+      const index = (viewerItems.indexOf(currentItem) + direction + viewerItems.length) % viewerItems.length;
+      const item = viewerItems[index];
+      history.replaceState(history.state, "", "#" + item.id);
+      showImage(item);
+    }
+
+    lightboxImage.addEventListener("load", () => { zoomButton.disabled = false; });
+    lightboxImage.addEventListener("error", () => {
+      zoomButton.disabled = true;
+      document.getElementById("shareStatus").textContent = "This image could not load. Try reopening it.";
+    });
+    closeButton.addEventListener("click", closeViewer);
+    lightbox.addEventListener("cancel", event => { event.preventDefault(); closeViewer(); });
+    lightbox.addEventListener("click", event => { if (event.target === lightbox) closeViewer(); });
+    document.getElementById("previousImage").addEventListener("click", () => navigateImage(-1));
+    document.getElementById("nextImage").addEventListener("click", () => navigateImage(1));
+    zoomButton.addEventListener("click", toggleZoom);
+    lightboxImage.addEventListener("click", () => { if (!suppressImageClick) toggleZoom(); suppressImageClick = false; });
+    lightbox.addEventListener("keydown", event => {
+      if (event.key === "Tab") {
+        const controls = [...lightbox.querySelectorAll("button:not(:disabled), a[href], summary, input:not(:disabled)")]
+          .filter(element => element.getClientRects().length > 0);
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+        return;
+      }
+      if (event.target.matches("input, textarea") || event.altKey || event.ctrlKey || event.metaKey || zoomed) return;
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        navigateImage(event.key === "ArrowLeft" ? -1 : 1);
+      }
+    });
+
+    viewport.addEventListener("pointerdown", event => {
+      if (!event.isPrimary) { gesture = null; return; }
+      suppressImageClick = false;
+      gesture = {id: event.pointerId, x: event.clientX, y: event.clientY, left: viewport.scrollLeft, top: viewport.scrollTop, time: performance.now(), mouse: event.pointerType === "mouse"};
+      if (zoomed && gesture.mouse) {
+        event.preventDefault();
+        viewport.setPointerCapture(event.pointerId);
+        viewport.classList.add("dragging");
+      }
+    });
+    viewport.addEventListener("pointermove", event => {
+      if (!gesture || event.pointerId !== gesture.id) return;
+      if (zoomed && gesture.mouse) {
+        const dx = event.clientX - gesture.x, dy = event.clientY - gesture.y;
+        if (Math.abs(dx) + Math.abs(dy) > 8) suppressImageClick = true;
+        viewport.scrollTo(gesture.left - dx, gesture.top - dy);
+      }
+    });
+    viewport.addEventListener("pointerup", event => {
+      if (!gesture || event.pointerId !== gesture.id) return;
+      const dx = event.clientX - gesture.x, dy = event.clientY - gesture.y;
+      if (!zoomed && !gesture.mouse && Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5 && performance.now() - gesture.time < 1200) {
+        suppressImageClick = true;
+        navigateImage(dx < 0 ? 1 : -1);
+      }
+      viewport.classList.remove("dragging");
+      gesture = null;
+    });
+    viewport.addEventListener("pointercancel", () => { gesture = null; suppressImageClick = true; viewport.classList.remove("dragging"); });
+
+    document.getElementById("shareImage").addEventListener("click", async () => {
+      const sharedItem = currentItem;
+      const url = new URL(location.href);
+      url.hash = sharedItem.id;
+      url.search = "";
+      try {
+        await navigator.clipboard.writeText(url.href);
+        if (currentItem === sharedItem) document.getElementById("shareStatus").textContent = "Image link copied.";
+      } catch {
+        if (currentItem !== sharedItem) return;
+        const field = document.getElementById("shareLink");
+        field.value = url.href;
+        field.hidden = false;
+        field.focus();
+        field.select();
+        document.getElementById("shareStatus").textContent = "Copy the selected link.";
+      }
     });
 
     search.addEventListener("input", renderGallery);
-
     document.querySelectorAll(".sort-button").forEach(button => {
       button.addEventListener("click", () => {
         activeSort = button.dataset.sort;
-        document.querySelectorAll(".sort-button").forEach(btn => {
-          btn.classList.toggle("active", btn === button);
+        document.querySelectorAll(".sort-button").forEach(other => {
+          other.classList.toggle("active", other === button);
+          other.setAttribute("aria-pressed", String(other === button));
         });
         renderGallery();
       });
     });
-
-    closeLightboxButton.addEventListener("click", closeLightbox);
-
-    lightbox.addEventListener("click", event => {
-      if (event.target === lightbox) closeLightbox();
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => gallery.querySelectorAll(".gallery-card").forEach(resizeCard), 100);
     });
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && lightbox.classList.contains("open")) {
-        closeLightbox();
-      }
-    });
-
-    renderGallery();
+    window.addEventListener("hashchange", followHash);
+    setCategory("View All");
+    followHash();
   </script>
 </body>
 </html>
