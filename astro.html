@@ -376,6 +376,25 @@
     .viewer-help { color: var(--muted); font-size: .78rem; line-height: 1.5; }
     .share-link { width: 100%; padding: 8px; background: #222; color: white; border: 1px solid #666; }
     .share-status { min-height: 1.5em; color: var(--muted); font-size: .8rem; }
+    @media (min-width: 801px) {
+      /* Keep long captions from sizing the image row; scroll details separately. */
+      .lightbox-dialog {
+        height: min(92dvh, 920px);
+        max-height: calc(100dvh - 44px);
+        grid-template-rows: minmax(0, 1fr);
+      }
+      .image-panel {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        min-height: 0;
+      }
+      .lightbox-image-wrap { height: 100%; }
+      .lightbox-copy {
+        min-height: 0;
+        overscroll-behavior-y: contain;
+        scrollbar-gutter: stable;
+      }
+    }
     @media (max-width: 800px) {
       .controls { padding: 8px 12px; }
       .category-picker summary { display: block; padding: 10px 0; font-size: .85rem; }
