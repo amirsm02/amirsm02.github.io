@@ -2,7 +2,7 @@
 .bio p:last-child { margin-bottom: 0; }
 .profile-photo {
   float: right;
-  width: 20%;
+  width: clamp(190px, 27%, 250px);
   height: auto;
   margin: 0 0 8px 24px;
 }
@@ -63,6 +63,13 @@
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
 
 @media (max-width: 575px) {
+  .profile-photo {
+    float: none;
+    display: block;
+    width: 160px;
+    max-width: 100%;
+    margin: 0 auto 24px;
+  }
   .publication { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
   .publication-links { gap: 8px; }
   .publication-links a { min-width: 52px; padding: 4px 12px; }

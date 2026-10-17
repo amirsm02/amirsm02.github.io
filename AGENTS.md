@@ -8,4 +8,4 @@ Keep publication titles, authors, journal lines, and bracketed numbers at body-t
 
 Publication numbers such as [1] and [2] are plain text labels, not links. Keep the bio-to-publications spacing compact.
 
-Preserve the portrait's original responsive width (20% of the bio content) and natural aspect ratio. Reduce spacing through layout, not by shrinking, cropping, or stretching the photo.
+Keep the portrait prominent: 190–250px wide on larger screens and 160px wide in its own centered row on phones. Preserve its natural aspect ratio. Reduce spacing through layout, not by shrinking, cropping, or stretching the photo.
