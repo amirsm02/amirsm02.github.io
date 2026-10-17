@@ -2,6 +2,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <script src="assets/js/theme.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YJ4KCW74E"></script>
     <script>
@@ -16,7 +18,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="assets/css/home.css">
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Amir Shapour Mohammadi</title>
     <meta name="description" content="Amir Shapour Mohammadi, a theoretical physics PhD student at UC Berkeley interested in quantum dots, fractional quantum Hall physics, and tensor network methods.">
@@ -27,16 +28,20 @@
     <div class="float-center container-fluid" style="max-width: 1000px;">
 
     <!-- navigation dashboard -->
-    <div class="container-fluid pt-3 d-sm-flex justify-content-between dashboard">
+    <div class="container-fluid pt-3 dashboard">
         <h3>Amir Shapour Mohammadi</h3>
-        <p>
-        <a target="blank" style="color: black;" href="https://www.linkedin.com/in/asmohammadi/"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+        <p class="social-links">
+        <a target="blank" aria-label="LinkedIn" href="https://www.linkedin.com/in/asmohammadi/"><i class="fa-brands fa-linkedin fa-2x" aria-hidden="true"></i></a>
         &nbsp;
-        <a target="blank" style="color: black;" href="https://github.com/amirsm02"><i class="fa-brands fa-github fa-2x"></i></a>
+        <a target="blank" aria-label="GitHub" href="https://github.com/amirsm02"><i class="fa-brands fa-github fa-2x" aria-hidden="true"></i></a>
         &nbsp;
-        <a target="blank" style="color: black;" href="https://scholar.google.com/citations?user=gLXummMAAAAJ&amp;hl=en&amp;authuser=2"><i class="ai ai-google-scholar-square ai-2x"></i></a>
+        <a target="blank" aria-label="Google Scholar" href="https://scholar.google.com/citations?user=gLXummMAAAAJ&amp;hl=en&amp;authuser=2"><i class="ai ai-google-scholar-square ai-2x" aria-hidden="true"></i></a>
         &nbsp;
         </p>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" hidden>
+          <svg class="theme-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13a8.5 8.5 0 0 1-9.5-9.5A8.5 8.5 0 1 0 20.5 13Z"/></svg>
+          <svg class="theme-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+        </button>
     </div>
 
     <hr>
@@ -64,7 +69,7 @@
               <a class="publication-number" href="#quantum-hall-edges" aria-label="Publication 1">[1]</a>
               <div class="publication-content">
                 <h5><a href="https://www.nature.com/articles/s41586-025-09858-3">Visualizing interaction-driven restructuring of quantum Hall edge states</a></h5>
-                <p class="publication-authors">Jiachen Yu, Haotan Han, Kristina G. Wolinski, Ruihua Fan, Amir S. Mohammadi, Tianle Wang, Taige Wang, Liam Cohen, Kenji Watanabe, Takashi Taniguchi, Andrea F. Young, Michael P. Zaletel, and Ali Yazdani</p>
+                <p class="publication-authors">Jiachen Yu, Haotan Han, Kristina G. Wolinski, Ruihua Fan, <strong class="publication-self">Amir S. Mohammadi</strong>, Tianle Wang, Taige Wang, Liam Cohen, Kenji Watanabe, Takashi Taniguchi, Andrea F. Young, Michael P. Zaletel, and Ali Yazdani</p>
                 <p class="publication-venue"><em>Nature</em> <strong>648</strong>, 585–590 (2025)</p>
                 <div class="publication-links" aria-label="Resources for Visualizing interaction-driven restructuring of quantum Hall edge states">
                   <a href="https://arxiv.org/abs/2511.00156" aria-label="Abstract for quantum Hall edge states">ABS</a>
@@ -78,7 +83,7 @@
               <a class="publication-number" href="#fractional-quantum-hall-spectroscopy" aria-label="Publication 2">[2]</a>
               <div class="publication-content">
                 <h5><a href="https://www.nature.com/articles/s41567-025-02830-y">High-resolution tunnelling spectroscopy of fractional quantum Hall states</a></h5>
-                <p class="publication-authors">Yuwen Hu, Yen-Chen Tsui, Minhao He, Umut Kamber, Taige Wang, Amir S. Mohammadi, Kenji Watanabe, Takashi Taniguchi, Zlatko Papić, Michael P. Zaletel, and Ali Yazdani</p>
+                <p class="publication-authors">Yuwen Hu, Yen-Chen Tsui, Minhao He, Umut Kamber, Taige Wang, <strong class="publication-self">Amir S. Mohammadi</strong>, Kenji Watanabe, Takashi Taniguchi, Zlatko Papić, Michael P. Zaletel, and Ali Yazdani</p>
                 <p class="publication-venue"><em>Nature Physics</em> <strong>21</strong>, 716–723 (2025)</p>
                 <div class="publication-links" aria-label="Resources for High-resolution tunnelling spectroscopy of fractional quantum Hall states">
                   <a href="https://arxiv.org/abs/2308.05789" aria-label="Abstract for fractional quantum Hall spectroscopy">ABS</a>
