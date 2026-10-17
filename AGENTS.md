@@ -5,3 +5,5 @@ For every current or future publication on the home page, bold Amir's name in th
 When changing the home page, check both light and dark themes and phone-sized layouts. Keep the theme toggle accessible by keyboard and preserve the saved preference behavior.
 
 Keep publication titles, authors, journal lines, and bracketed numbers at body-text size (1rem), following the compact proportions of borshigida.github.io. Do not enlarge publication titles into display headings.
+
+Publication numbers such as [1] and [2] are plain text labels, not links. Keep the bio-to-publications spacing compact.
