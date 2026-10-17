@@ -3,9 +3,10 @@
 .bio p:last-child { margin-bottom: 0; }
 .profile-photo {
   float: right;
-  width: 20%;
+  width: 24%;
+  max-width: 220px;
   height: auto;
-  margin: 20px;
+  margin: 0 0 20px 24px;
 }
 
 .publications {
