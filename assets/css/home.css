@@ -1,9 +1,8 @@
-.bio { display: flow-root; }
+/* Let the next section flow beside the portrait instead of clearing its height. */
 .bio p:last-child { margin-bottom: 0; }
 .profile-photo {
   float: right;
   width: 20%;
-  max-width: 120px;
   height: auto;
   margin: 0 0 8px 24px;
 }

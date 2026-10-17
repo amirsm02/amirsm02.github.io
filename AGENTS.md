@@ -7,3 +7,5 @@ When changing the home page, check both light and dark themes and phone-sized la
 Keep publication titles, authors, journal lines, and bracketed numbers at body-text size (1rem), following the compact proportions of borshigida.github.io. Do not enlarge publication titles into display headings.
 
 Publication numbers such as [1] and [2] are plain text labels, not links. Keep the bio-to-publications spacing compact.
+
+Preserve the portrait's original responsive width (20% of the bio content) and natural aspect ratio. Reduce spacing through layout, not by shrinking, cropping, or stretching the photo.
