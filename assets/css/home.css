@@ -20,34 +20,34 @@
 
 .publication-number {
   color: var(--accent-color);
-  font: 700 1.35rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+  font: 700 1rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
 .publication h5 {
-  margin: 0 0 8px;
-  font-size: 1.3rem;
-  line-height: 1.4;
+  margin: 0 0 4px;
+  font-size: 1rem;
+  line-height: 1.5;
   font-weight: 700;
 }
 
 .publication h5 a { color: var(--heading-text); }
 .publication-self { font-weight: 700; }
-.publication-authors { margin: 0 0 6px; line-height: 1.6; }
-.publication-venue { margin: 0 0 14px; font-size: 1.05rem; }
+.publication-authors { margin: 0 0 4px; line-height: 1.5; }
+.publication-venue { margin: 0 0 10px; font-size: 1rem; }
 .publication-links { display: flex; flex-wrap: wrap; gap: 12px; }
 
 .publication-links a {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  min-height: 44px;
-  min-width: 76px;
-  padding: 7px 18px;
+  min-height: 26px;
+  min-width: 52px;
+  padding: 4px 16px;
   border: 1px solid var(--control-border);
   border-radius: 2px;
   color: var(--heading-text);
   background: var(--page-bg);
-  font-size: .9rem;
+  font-size: .64rem;
   text-decoration: none;
 }
 
@@ -56,10 +56,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-color); 
 
 @media (max-width: 575px) {
   .publication { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
-  .publication h5 { font-size: 1.15rem; }
-  .publication-number { font-size: 1.15rem; }
   .publication-links { gap: 8px; }
-  .publication-links a { min-width: 64px; padding: 7px 12px; }
+  .publication-links a { min-width: 52px; padding: 4px 12px; }
+}
+
+@media (pointer: coarse) {
+  .publication-links a { min-height: 44px; }
 }
 :root {
   color-scheme: light;
