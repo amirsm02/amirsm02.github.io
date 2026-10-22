@@ -24,8 +24,7 @@
       mode: 'quasi',
       beta: numberValue('zero-beta', 0.9),
       height: numberValue('zero-height', 12),
-      power: numberValue('growth-power', 6),
-      lastQuestion: ''
+      power: numberValue('growth-power', 6)
     };
     var drag = false;
     var redrawFrame = 0;
@@ -102,6 +101,10 @@
       setText('prime-limit-value', limit.toLocaleString('en-US'));
       setText('prime-count', counts[limit].toLocaleString('en-US'));
       setText('prime-estimate', estimate.toFixed(1));
+      setText('prime-observation', 'Up to ' + limit.toLocaleString('en-US') + ', there are ' + counts[limit] + ' primes. The smooth curve estimates ' + estimate.toFixed(1) + '. It follows the broad trend while missing the individual steps.');
+      document.querySelectorAll('[data-prime-preset]').forEach(function (button) {
+        button.setAttribute('aria-pressed', String(Number(button.dataset.primePreset) === limit));
+      });
       var chart = createChart('prime-chart', 285, 'Counting primes up to ' + limit,
         'The solid staircase is the exact prime count, pi of x. The dashed curve is x divided by the natural logarithm of x, an introductory approximation. At ' + limit + ', there are ' + counts[limit] + ' primes; the approximation is ' + estimate.toFixed(1) + '. This is not a graph of a Riemann-hypothesis error bound.');
       var svg = chart.svg;
@@ -231,7 +234,7 @@
       if (value >= 10) return value.toFixed(1) + '%';
       if (value >= 1) return value.toFixed(2) + '%';
       if (value >= 0.01) return value.toFixed(3) + '%';
-      return value.toExponential(2) + '%';
+      return value.toFixed(6).replace(/0+$/, '').replace(/\.$/, '') + '%';
     }
 
     function drawGrowth() {
@@ -239,6 +242,10 @@
       setText('envelope-near', percent(0.99));
       setText('envelope-quasi', percent(0.875));
       setText('envelope-rh', percent(0.5));
+      setText('growth-observation', 'At x = 10' + superscript(state.power) + ', the green factor is ' + percent(0.875) + '; the purple one is ' + percent(0.5) + '. The smaller horizontal coordinate makes this toy factor much smaller. These are model values, not measured errors.');
+      document.querySelectorAll('[data-growth-preset]').forEach(function (button) {
+        button.setAttribute('aria-pressed', String(Number(button.dataset.growthPreset) === state.power));
+      });
       var chart = createChart('growth-chart', 295, 'A toy envelope: x to the power beta minus one',
         'Both axes are logarithmic. The three curves compare x^(beta−1) for beta 0.99, 7/8, and 1/2, from x=1 to x=10^12. At x=10^' + state.power + ', their values as percentages are ' + percent(0.99) + ', ' + percent(0.875) + ', and ' + percent(0.5) + '. This toy envelope is not a proved bound on prime-counting error.');
       var svg = chart.svg, left = 57, right = chart.width - 17, top = 24, bottom = 211;
@@ -288,62 +295,6 @@
       };
     }
 
-    function makePrompt(question) {
-      var current = context();
-      return 'I am reading an interactive introductory lesson about the quasi-Riemann hypothesis. Help me understand the mathematics, starting at the problem statement and defining unfamiliar terms.\n\n' +
-        'Lesson context: nontrivial zeros of the Riemann zeta function lie in 0 < Re(s) < 1. The quasi-Riemann statement shown is that there are no such zeros with Re(s) > 7/8. The full Riemann hypothesis says all such zeros have Re(s) = 1/2. A proof of the first statement would not prove the second. The page discusses an AI-produced result; the visualization itself does not verify that result or its current review status. Distinguish a claimed result, its exact formal statement, and independent review. If discussing current status, check primary sources.\n\n' +
-        'Primary sources: the released formalization scope is https://github.com/openai/math/blob/main/lean/docs/003.md ; the connection between zeta zeros and weighted prime counts is https://dlmf.nist.gov/25.16 . Consult these sources before expanding their claims.\n\n' +
-        'My controls: I counted ' + current.primeCount + ' primes up to ' + current.primeLimit + ', compared with x/log(x) ≈ ' + current.primeEstimate.toFixed(1) + '. The complex-plane view is ' + current.zeroMode + '. My hypothetical candidate is beta = ' + current.candidateBeta.toFixed(3) + ', t = ' + current.candidateHeight.toFixed(1) + '; it is NOT an actual or newly discovered zero. The plotted dots are the first ten computed zeta zeros, which are examples and cannot establish an infinite claim.\n\n' +
-        'The toy envelope is x^(beta−1), not a rigorous prime-counting error formula. At x = 10^' + current.growthPower + ', beta 0.99 gives ' + current.envelopes.near + ', beta 7/8 gives ' + current.envelopes.quasi + ', and beta 1/2 gives ' + current.envelopes.rh + '.\n\n' +
-        'My question: ' + question.trim() + '\n\nPlease give one small concrete example, distinguish intuition from proof, and explain only the prerequisites needed for this question.';
-    }
-
-    var questions = {
-      primes: 'Why does counting primes lead mathematicians to study the zeros of a complex function?',
-      zeros: 'What is a zero of the zeta function, and what do the horizontal and vertical coordinates in this diagram mean?',
-      meaning: 'Why do these curves plot x^(beta−1), what does this toy scale model illustrate, and why is it not a bound on the percentage of prime-counting error?',
-      'why-zeta': 'Why do the zeros of the zeta function tell us anything about primes? Please connect the Euler product to the idea of a prime-counting formula.',
-      'why-not-proof': 'Why is this interactive picture not a proof, even when the computed zeros lie on the critical line? What would establish an infinite mathematical claim?',
-      proof: 'What would I need to check before trusting an AI-produced proof of this statement?',
-      growth: 'Why does a zero farther left suggest a smaller relative oscillation, and what does the toy envelope leave out?'
-    };
-
-    function currentQuestion() {
-      var field = byId('ask-question');
-      return field && field.value.trim() ? field.value.trim() : (state.lastQuestion || questions.meaning);
-    }
-
-    function handoff(question) {
-      state.lastQuestion = question;
-      var prompt = makePrompt(question);
-      var url = 'https://chatgpt.com/?q=' + encodeURIComponent(prompt);
-      // Open a real destination; this page does not impersonate a chat session.
-      var link = document.createElement('a');
-      link.href = url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setText('ask-status', 'Opening ChatGPT with your question and the current diagram settings. If a new tab did not open, use Copy question and paste it into ChatGPT.');
-    }
-
-    function fallbackCopy(text) {
-      var area = document.createElement('textarea');
-      area.value = text;
-      area.setAttribute('readonly', '');
-      area.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;opacity:0';
-      document.body.appendChild(area);
-      var previous = document.activeElement;
-      area.focus();
-      area.select();
-      var success = false;
-      try { success = document.execCommand('copy'); } catch (error) { success = false; }
-      area.remove();
-      if (previous && previous.focus) previous.focus();
-      return success;
-    }
-
     function bindInput(id, callback) {
       if (byId(id)) byId(id).addEventListener('input', callback);
     }
@@ -356,6 +307,20 @@
         if (['strip', 'quasi', 'rh'].indexOf(button.dataset.zeroMode) < 0) return;
         state.mode = button.dataset.zeroMode;
         drawZeros();
+      });
+    });
+    document.querySelectorAll('[data-prime-preset]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        state.primeLimit = Number(button.dataset.primePreset);
+        byId('prime-limit').value = state.primeLimit;
+        drawPrimes();
+      });
+    });
+    document.querySelectorAll('[data-growth-preset]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        state.power = Number(button.dataset.growthPreset);
+        byId('growth-power').value = state.power;
+        drawGrowth();
       });
     });
     var zeroContainer = byId('zero-chart');
@@ -381,67 +346,6 @@
       zeroContainer.addEventListener(name, function () { drag = false; });
     });
 
-    var quizMessages = {
-      finite: 'Checking finitely many zeros gives evidence about those zeros only. There are infinitely many nontrivial zeros, so even a huge finite check cannot prove the stated bound for all of them.',
-      quasi: 'Exactly. The quasi-Riemann statement excludes every nontrivial zero with real part greater than 7/8, however high its imaginary part. It still permits locations away from 1/2, so it does not prove the full Riemann hypothesis.',
-      rh: 'That is the stronger Riemann hypothesis: every nontrivial zero lies exactly on real part 1/2. A bound excluding only real part greater than 7/8 does not establish it.'
-    };
-    document.querySelectorAll('[data-answer]').forEach(function (button) {
-      button.setAttribute('aria-pressed', 'false');
-      button.addEventListener('click', function () {
-        var answer = button.dataset.answer;
-        if (!quizMessages[answer]) return;
-        document.querySelectorAll('[data-answer]').forEach(function (other) {
-          var selected = other === button;
-          other.setAttribute('aria-pressed', String(selected));
-          other.classList.toggle('is-selected', selected);
-        });
-        setText('quiz-feedback', quizMessages[answer]);
-        if (byId('quiz-feedback')) byId('quiz-feedback').dataset.state = answer === 'quasi' ? 'correct' : 'retry';
-      });
-    });
-    document.querySelectorAll('[data-ask]').forEach(function (button) {
-      button.addEventListener('click', function (event) {
-        event.preventDefault();
-        var question = questions[button.dataset.ask] || button.dataset.question || questions.meaning;
-        if (byId('ask-question')) byId('ask-question').value = question;
-        handoff(question);
-      });
-    });
-    if (byId('ask-form')) byId('ask-form').addEventListener('submit', function (event) {
-      event.preventDefault();
-      handoff(currentQuestion());
-    });
-    if (byId('copy-question')) byId('copy-question').addEventListener('click', async function (event) {
-      event.preventDefault();
-      var text = makePrompt(currentQuestion());
-      var copied = false;
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(text);
-          copied = true;
-        }
-      } catch (error) { copied = false; }
-      if (!copied) copied = fallbackCopy(text);
-      if (copied) setText('ask-status', 'Question and current diagram settings copied. Paste them into ChatGPT or another assistant.');
-      else {
-        // Make the full prompt selectable if clipboard access is unavailable.
-        var status = byId('ask-status');
-        if (status) {
-          status.replaceChildren(document.createTextNode('Clipboard access is unavailable. Select and copy the prepared prompt below:'));
-          var manual = document.createElement('textarea');
-          manual.value = text;
-          manual.readOnly = true;
-          manual.rows = 8;
-          manual.setAttribute('aria-label', 'Prepared question and diagram context to copy');
-          manual.style.cssText = 'display:block;width:100%;margin-top:12px';
-          status.appendChild(manual);
-          manual.focus();
-          manual.select();
-        }
-      }
-    });
-
     function drawAll() { drawPrimes(); drawZeros(); drawGrowth(); }
     drawAll();
     if ('ResizeObserver' in window) {
@@ -462,7 +366,7 @@
     } else window.addEventListener('resize', drawAll);
 
     // Read-only snapshots are useful for an explainer handoff and browser QA.
-    window.quasiLesson = Object.freeze({ getState: context, makePrompt: makePrompt });
+    window.quasiLesson = Object.freeze({ getState: context });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
