@@ -6,10 +6,14 @@
     if (document.getElementById('math-guide-dialog')) return;
     var main = document.querySelector('main');
     var scanRoot = main || document.body;
-    var sourceURLs = [
+    var quasiSourceURLs = [
       'https://github.com/openai/math/blob/main/lean/docs/003.md',
       'https://dlmf.nist.gov/25.16'
     ];
+    var pepsSourceURLs = [
+      'https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/build/sections/00-introduction.tex'
+    ];
+    var contextSelector = '[data-guide-context], #primes, #zeros, #meaning, #takeaway, #check, #sources, #results, #peps-state, #peps-energy, #peps-network, #peps-guarantee, #peps-proof, #peps-sources';
     var notes = {
       primes: {
         title: 'From counting primes to zeta',
@@ -51,16 +55,70 @@
         why: 'An explanation should preserve credit, assumptions, and uncertainty. This page has not independently rerun or audited the released proof. Its plots and reading notes teach the statement; source documents and independent checking establish its evidence status.',
         question: 'What does the released formalization cover, and what would independent review still need to establish?'
       },
+      'peps-state': {
+        title: 'Why a quantum state needs so many numbers',
+        intro: 'A two-state site can be measured as 0 or 1. A quantum state assigns a complex amplitude to every joint configuration. For N such sites there are 2^N configurations, so writing an arbitrary state as a complete list quickly becomes impractical.',
+        simpler: 'An amplitude is a number used to predict measurement outcomes. Its squared magnitude gives the probability of the corresponding configuration. The state is the whole list of amplitudes; it is not a list of hidden, already chosen outcomes.',
+        example: 'Give each site amplitudes (1/√2, 1/√2). Multiplying them gives amplitudes 1/2 for 00, 01, 10, and 11. Each outcome therefore has probability 1/4. The Bell state (|00⟩ + |11⟩)/√2 instead has amplitudes 1/√2, 0, 0, 1/√2. It gives 00 or 11, each with probability 1/2, and cannot be written as two independent single-site states.',
+        why: 'The full list is expensive, but some states have a shorter description. The PEPS question asks whether a particular physically motivated class always has a compact approximate representation. It does not promise to compress every possible quantum state.',
+        question: 'Explain amplitudes, joint configurations, and why an entangled state cannot be described by independent single-site states.'
+      },
+      'peps-energy': {
+        title: 'Which quantum states does the theorem cover?',
+        intro: 'A Hamiltonian describes energy. Its ground state has the lowest energy, and the spectral gap is the difference between that energy and the next energy level. Here the interactions involve individual sites and neighboring pairs on an open square grid.',
+        simpler: 'Picture an energy ladder. A unique ground state gives one lowest rung, up to an irrelevant overall phase. A uniform gap means the distance to the next rung stays above the same positive number as the grid grows. It does not mean that every smaller piece of the grid also has a gap.',
+        example: 'A schematic ladder with energies 0, 1, and 3 has gap 1; a ladder with 0, 0.01, and 3 has gap 0.01. A sequence of gaps 1/L gets arbitrarily small as L grows, so it does not meet a fixed positive lower bound. The lesson’s ladder illustrates these definitions; it is not a computed spectrum of a chosen Hamiltonian.',
+        why: 'These assumptions select a special class from the enormous space of quantum states. A guarantee for that class is much more precise than “all quantum systems can be compressed.” The theorem concerns the full Hamiltonian’s unique, uniformly gapped ground state.',
+        question: 'What are a ground state, a spectral gap, and the uniform-gap assumption in this PEPS result?'
+      },
+      'peps-network': {
+        title: 'A network instead of an enormous list',
+        intro: 'A tensor is an array with one or more indices. A PEPS puts one tensor at each site and connects indices along grid edges. Summing over each shared index combines these local arrays into the amplitudes of one many-site state.',
+        simpler: 'Each connection has an index that can take D values. This size D is called the bond dimension. Increasing it gives the representation more capacity, but does not by itself say how entangled the represented state is or how accurate an approximation will be.',
+        example: 'On an open 3 × 3 grid of two-state sites, four corner tensors have 2D² entries each, four edge tensors have 2D³ each, and the central tensor has 2D⁴. The total is 2(4D² + 4D³ + D⁴). At D = 2 that is 128 entries, versus 2⁹ = 512 amplitudes in the full list. This is a count of raw entries, not a proof that 128 numbers accurately describe any particular target state.',
+        why: 'A network representation can exploit structure that the full amplitude list hides. Small D limits the representational capacity across cuts; a large allowed D does not force a state to use that capacity. Contracting the network or finding useful tensor entries can still be difficult.',
+        question: 'How does a PEPS produce amplitudes, and what does bond dimension measure?'
+      },
+      'peps-guarantee': {
+        title: 'What the reported guarantee actually says',
+        intro: 'For the stated ground-state class, the paper reports a PEPS on the same L × L grid with bond dimension at most C L^c and normalized whole-state error at most 1/L, after allowing an overall phase. The constants C and c depend on the fixed local dimension, interaction bound, and gap.',
+        simpler: 'As the grid grows, the allowed connection size grows no faster than a fixed power of its side length. Meanwhile the guaranteed state-vector error shrinks. This is an existence statement: it says a suitable representation is available in principle, without giving an efficient way to discover it.',
+        example: 'At L = 10 the stated error bound is 0.1; at L = 100 it is 0.01. Those are vector-distance bounds, not percentages of measurement outcomes that are wrong. The bound D ≤ C L^c leaves C and c symbolic. We cannot read a numerical sufficient bond dimension from the error target alone.',
+        why: 'For fixed local dimension and polynomial D, the number of tensor entries grows polynomially with L, whereas the full state list has q^(L²) entries. Polynomial growth can nevertheless be enormous in practice. Neither the entry count nor a chosen D slider certifies the displayed approximation error.',
+        question: 'Unpack the polynomial bond-dimension and 1/L whole-state-error guarantees, including what they do not promise.'
+      },
+      'peps-proof': {
+        title: 'Why the proof needs more than small pieces',
+        intro: 'Describing each part efficiently is not enough: the descriptions must agree where parts interact and must combine into an accurate whole. The proof must also produce a network using the original grid’s edges.',
+        simpler: 'Think of assembling a map from many local maps. Each local map may be small, yet incompatible boundaries would prevent a coherent whole. In the proof, the challenge is to coordinate local descriptions while keeping the total approximation error controlled. This analogy describes the obstacle, not the proof itself.',
+        example: 'If a chain of m approximation steps introduces vector error at most ε/m per step, the triangle inequality bounds the total error by ε. This simple error-budget example explains why controlling every local step matters. It is not a derivation of the PEPS theorem’s more involved estimates.',
+        why: 'The paper organizes transfers of parts of the state among auxiliary parties, compresses a density-level construction, extracts a state vector, and routes the network back to the square grid. Each step carries a separate estimate. A small diagram cannot independently validate those estimates.',
+        question: 'Explain the compatibility and accumulated-error obstacles, then outline the paper’s proof strategy without treating an analogy as a proof.'
+      },
+      'peps-sources': {
+        title: 'Read the statement before the headline',
+        intro: 'The source states a representation theorem for a specific family of Hamiltonians. Keep that theorem separate from claims about practical simulation, efficient algorithms, independent review, or broader versions of the PEPS conjecture.',
+        simpler: 'Four questions are separate: what was claimed, what argument was provided, what exactly was checked, and what can be computed efficiently. A positive answer to one does not automatically answer the others.',
+        example: 'A proof that a short representation exists does not necessarily tell us how to find its entries. Knowing those entries also does not automatically make every calculation with the network fast. These are distinct tasks even when they concern the same state.',
+        why: 'This lesson uses the primary statement and proof overview to teach the result. The diagrams are educational constructions and have not independently audited the argument. Verification or formalization claims should be matched to an explicit scope record, rather than inferred from AI involvement or a repository name.',
+        question: 'Which exact claim does the PEPS paper make, and which algorithmic or verification claims need separate evidence?'
+      },
       results: {
         title: 'Finding a way into a result',
-        intro: 'Start with the question a result answers. Then identify the mathematical objects, the assumptions, and the exact conclusion. A short example can make the question approachable before you attempt the proof.',
-        simpler: 'A theorem says that objects meeting certain conditions must have a particular property. Each entry here names the objects, describes what was established, and links the evidence. A construction shows that an example exists; a bound limits how large or small something can be.',
-        example: 'For quasi-Riemann, the objects are nontrivial zeros of zeta, a complex-valued function. The displayed conclusion is that none has a horizontal coordinate greater than 7/8. Understanding that sentence comes before following the proof.',
-        why: 'A collection becomes useful when you can compare what each result claims and what has been checked. AI involvement, a published manuscript, a formalization, and independent review describe different parts of that record.',
+        intro: 'Start with the question a result answers. Then identify what is being studied, the assumptions or experimental conditions, and the exact conclusion. The necessary background can be learned one step at a time.',
+        simpler: 'Different discoveries offer different kinds of evidence. A theorem establishes a conclusion from assumptions. A computation checks specified cases. An experiment measures a system under stated conditions. Each entry should make that distinction clear before explaining why the result matters.',
+        example: 'The PEPS lesson begins with a concrete obstacle: an arbitrary state of N two-state quantum sites needs 2^N amplitudes. Only then does it introduce a network representation and the special class of states covered by the theorem. Starting with that obstacle makes the formal guarantee easier to understand.',
+        why: 'A useful collection lets you compare both the claims and their evidence. AI involvement, a manuscript, a proof-assistant check, an experiment, and independent review describe different parts of a research record. None is a universal substitute for the others.',
         question: 'Help me understand the problem statement and why this result matters.'
       }
     };
     var recordNotes = {
+      peps: {
+        intro: 'An arbitrary many-particle quantum state takes an enormous list of numbers to write down. The reported PEPS result shows that a specified class of lowest-energy states on a square grid has a much smaller approximate tensor-network representation.',
+        simpler: 'The theorem concerns a unique ground state of a local, uniformly gapped Hamiltonian on an open square grid. It guarantees an approximation with polynomial bond dimension. “Polynomial” describes how the representation size grows; it does not by itself promise an efficient simulation.',
+        example: 'For N two-state sites, a full list has 2^N amplitudes. A PEPS instead uses arrays attached to individual sites, joined by indices along grid edges. This change of representation is the central idea; the theorem supplies an existence guarantee for its specified state class.',
+        why: 'A compact representation would be a major structural fact about these states. Finding it and using it efficiently remain separate questions. The interactive lesson builds up amplitudes, energy gaps, and tensor networks before returning to the exact guarantee.'
+      },
       'quasi-riemann': {
         intro: 'The zeta function turns questions about primes into questions about a landscape of complex inputs. The released result places a permanent boundary in that landscape: no nontrivial zero can be to the right of 7/8. Full Riemann would narrow the possibilities to the 1/2 line.',
         simpler: 'The nontrivial zeros of zeta are special inputs of a complex function. Their horizontal coordinate is called β. The released quasi-Riemann statement says no such zero has β greater than 7/8. Full Riemann would put every one exactly at β = 1/2, a stronger claim.',
@@ -98,8 +156,9 @@
         why: 'A concrete configuration improves a lower bound: it raises the number we know can fit. High-dimensional arrangements can be checked through coordinates and distances without being pictured directly. The 593-neighbor construction is a dated May 2025 improvement over 592, not a claim about today’s record.'
       }
     };
+    recordNotes['peps-approximation'] = recordNotes.peps;
     var aliases = { check: 'takeaway', 'why-zeta': 'primes', 'why-not-proof': 'takeaway', growth: 'meaning', proof: 'sources' };
-    var visibleContext = main && main.querySelector('#primes') ? 'primes' : 'results';
+    var visibleContext = main && main.querySelector('#peps-state') ? 'peps-state' : (main && main.querySelector('#primes') ? 'primes' : 'results');
     var current = null;
     var selected = null;
     var returnFocus = null;
@@ -125,7 +184,7 @@
     }
     function keyFor(node) {
       if (!node || !node.closest) return visibleContext;
-      var enclosing = node.closest('[data-guide-context], #primes, #zeros, #meaning, #takeaway, #check, #sources, #results');
+      var enclosing = node.closest(contextSelector);
       return enclosing ? (enclosing.dataset.guideContext || aliases[enclosing.id] || enclosing.id) : visibleContext;
     }
     function recordFor(key) {
@@ -133,25 +192,40 @@
         return node.dataset.guideContext === key;
       });
     }
+    function sourceLinks(root) {
+      var seen = new Set();
+      return Array.from(root.querySelectorAll('a[href]')).map(function (link) { return link.href; }).filter(function (href) {
+        if (!/^https?:\/\//.test(href) || href.length > 500 || href.startsWith(location.origin + '/') || href.includes('chatgpt.com') || seen.has(href)) return false;
+        seen.add(href);
+        return true;
+      }).slice(0, 5);
+    }
+    function pageSources() {
+      var links = sourceLinks(scanRoot);
+      return links.length ? links : [location.href.split('#')[0]];
+    }
     function contextFor(requested) {
       var key = typeof requested === 'string' ? requested : visibleContext;
       key = aliases[key] || key;
-      if (notes[key]) return Object.assign({ key: key, sources: key === 'results' ? ['https://github.com/openai/math'] : sourceURLs.slice(), isLesson: key !== 'results' }, notes[key]);
+      var lessonKind = key.indexOf('peps-') === 0 ? 'peps' : (key === 'results' ? null : 'quasi');
+      if (notes[key]) return Object.assign({
+        key: key,
+        sources: lessonKind === 'peps' ? pepsSourceURLs.slice() : (lessonKind === 'quasi' ? quasiSourceURLs.slice() : pageSources()),
+        lessonKind: lessonKind
+      }, notes[key]);
       var record = recordFor(key);
-      if (!record) return Object.assign({ key: 'results', sources: ['https://github.com/openai/math'], isLesson: false }, notes.results);
+      if (!record) return Object.assign({ key: 'results', sources: pageSources(), lessonKind: null }, notes.results);
       var title = limit(record.dataset.guideTitle || record.querySelector('h2, h3, h4')?.textContent || key, 180);
       var summary = limit(record.dataset.guideSummary || '', 900);
-      var links = Array.from(record.querySelectorAll('a[href]')).map(function (link) { return link.href; }).filter(function (href) {
-        return /^https?:\/\//.test(href) && href.length <= 500 && !href.startsWith(location.origin) && !href.includes('chatgpt.com');
-      }).slice(0, 3);
+      var links = sourceLinks(record).slice(0, 3);
       return Object.assign({
-        key: key, title: title, summary: summary, isLesson: false,
+        key: key, title: title, summary: summary, lessonKind: null,
         intro: summary || 'This entry needs a precise reading: identify the objects, assumptions, and conclusion before treating the title as a full statement.',
-        simpler: 'Start with the entry’s stated question. Separate the objects it talks about from the property it claims they have. The summary above is the supplied description; this general reading note does not independently verify or reinterpret the result.',
-        example: 'To unpack a theorem, ask for one object that meets its assumptions and one that does not. Then ask what its conclusion predicts for the first example. A source-grounded tutor can help construct an example for this particular result.',
-        why: 'To judge significance, compare this precise conclusion with the previous result, then check what remains open. The label “AI-produced” explains part of the discovery process; it does not, by itself, establish correctness or importance.',
+        simpler: 'Separate the research question from its answer. Then identify the conditions under which that answer holds and the evidence supporting it. The summary above is the supplied description; this general reading note does not independently verify or reinterpret the result.',
+        example: 'Compare one situation covered by the result with another outside its stated conditions. For a theorem, the difference may be a missing assumption. For an experiment, it may be a different material, environment, or measurement range. That comparison identifies the reach of the claim.',
+        why: 'To judge significance, compare this precise conclusion with what was known before, then check what remains open. The label “AI-assisted” describes part of the research process; it does not, by itself, establish correctness or importance.',
         question: 'Explain the problem statement for “' + title + '” with a small example and only the necessary prerequisites.',
-        sources: links.length ? links : ['https://github.com/openai/math']
+        sources: links.length ? links : [location.href.split('#')[0]]
       }, recordNotes[key] || {});
     }
 
@@ -251,7 +325,7 @@
       scrollFrame = 0;
       if (dialog.open) return;
       var readingLine = Math.min(200, window.innerHeight * 0.28);
-      var candidates = Array.from(scanRoot.querySelectorAll('[data-guide-context], #primes, #zeros, #meaning, #takeaway, #check, #sources, #results'));
+      var candidates = Array.from(scanRoot.querySelectorAll(contextSelector));
       var best = null, distance = Infinity;
       candidates.forEach(function (node) {
         var rect = node.getBoundingClientRect();
@@ -321,11 +395,14 @@
       openGuide(trigger.dataset.guide || keyFor(trigger), trigger);
     });
 
-    function settingsText() {
-      if (!window.quasiLesson || typeof window.quasiLesson.getState !== 'function') return '';
+    function settingsText(context) {
+      var lesson = context.lessonKind === 'peps' ? window.pepsLesson : (context.lessonKind === 'quasi' ? window.quasiLesson : null);
+      if (!lesson || typeof lesson.getState !== 'function') return '';
       try {
-        var state = window.quasiLesson.getState();
-        return 'Current diagram settings: ' + limit(JSON.stringify(state), 650) + '. Candidate beta/height are a hypothetical input, NOT a discovered zero. The ten plotted zeros are finite computed examples. The envelope percentages are values of x^(beta−1), NOT measured prime-counting error or the share of RH proved.';
+        var state = lesson.getState();
+        var prefix = 'Current diagram settings: ' + limit(JSON.stringify(state), 650) + '. ';
+        if (context.lessonKind === 'peps') return prefix + 'The energy ladder is schematic, not a calculated spectrum of a supplied Hamiltonian. Tensor-entry counts describe representational capacity; they do not certify approximation accuracy or measure a state’s entanglement. The actual theorem has constants C and c depending on q, J, and the uniform gap. This page leaves them symbolic and does not assign numerical values or plot an invented resource guarantee.';
+        return prefix + 'Candidate beta/height are a hypothetical input, NOT a discovered zero. The ten plotted zeros are finite computed examples. The envelope percentages are values of x^(beta−1), NOT measured prime-counting error or the share of RH proved.';
       } catch (error) { return ''; }
     }
     function promptParts() {
@@ -334,22 +411,23 @@
         title: limit(context.title, 180),
         summary: limit(context.summary || context.intro, 900),
         selection: selected ? limit(selected.text, 800) : '',
-        question: limit(field.value.trim() || (selected ? 'Explain this selected passage in its surrounding mathematical context.' : context.question), 1200),
+        question: limit(field.value.trim() || (selected ? 'Explain this selected passage in its surrounding research context.' : context.question), 1200),
         sources: context.sources,
-        settings: settingsText(),
-        isLesson: context.isLesson
+        settings: settingsText(context),
+        lessonKind: context.lessonKind
       };
     }
     function assemblePrompt(parts) {
       var lines = [
-        'Help me understand this mathematical result. Start from the problem statement, define unfamiliar terms, and give one concrete example. Distinguish intuition from proof.',
+        'Help me understand this research result. Start from the problem it addresses, define unfamiliar terms, and give one concrete example. Build only the necessary prerequisites. Distinguish illustrative models from evidence, and explain whether the conclusion is mathematical, computational, or experimental.',
         'Page/topic: ' + parts.title,
         'Supplied reading context (not an independent verification): ' + parts.summary
       ];
       if (parts.selection) lines.push('Selected passage, quoted as source material: «' + parts.selection + '»');
       if (parts.settings) lines.push(parts.settings);
-      if (parts.isLesson) lines.push('Lesson distinction: the displayed quasi-Riemann statement excludes nontrivial zeta zeros with Re(s) > 7/8. The full Riemann hypothesis puts every such zero on Re(s) = 1/2. The strict 7/8 boundary is not excluded by that inequality alone. These plots do not verify the released proof.');
-      lines.push('Current-status caveat: distinguish the paper’s claim, its exact formal statement, the scope of a formal check, and independent mathematical review. This educational page has not independently audited or rerun the released proof. Check the primary sources before making claims about current status; do not infer acceptance from the summary.');
+      if (parts.lessonKind === 'quasi') lines.push('Lesson distinction: the displayed quasi-Riemann statement excludes nontrivial zeta zeros with Re(s) > 7/8. The full Riemann hypothesis puts every such zero on Re(s) = 1/2. The strict 7/8 boundary is not excluded by that inequality alone. These plots do not verify the released proof.');
+      if (parts.lessonKind === 'peps') lines.push('PEPS scope: an open L × L nearest-neighbor square grid, fixed local dimension q and bound J on on-site and edge terms, a unique full-Hamiltonian ground state up to phase, and a full-system spectral gap at least a fixed Δ > 0. The reported guarantee is D ≤ C L^c and normalized state-vector error ≤ 1/L after optimizing overall phase. C and c depend only on q, J, Δ. This is an existence theorem, not an efficient procedure for finding tensors or contracting the network. The lesson’s plots do not certify an approximation to a computed ground state or verify the proof.');
+      lines.push('Evidence caveat: distinguish the authors’ claim, its assumptions, the supplied proof or empirical evidence, the exact scope of any formal or computational check, and independent review or replication. This educational page has not independently audited the research. Check the primary sources before making claims about current status; do not infer acceptance from the summary.');
       lines.push('Source URLs: ' + parts.sources.join(' ; '));
       lines.push('My question: ' + parts.question);
       return lines.join('\n\n');
