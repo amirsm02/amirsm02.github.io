@@ -7,6 +7,13 @@
 .home-intro { padding-block:30px 24px; }
 .home-intro h1 { font-size:clamp(29px,3vw,39px);line-height:1.12;margin:0 0 10px;letter-spacing:-.025em; }
 .home-intro>p { max-width:870px;font-size:14px;line-height:1.6;color:var(--muted);margin:0; }
+.starting-point { display:flex;align-items:baseline;gap:8px 16px;flex-wrap:wrap;margin-top:18px;padding:12px 0 0;border-top:1px solid var(--line);font-size:12px;line-height:1.6; }
+.starting-label { font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted); }
+.starting-point a { font-weight:500;text-decoration:none; }
+.starting-point a:hover { text-decoration:underline; }
+.starting-point a span { display:inline-block;margin-left:4px; }
+.starting-point p { margin:0;color:var(--muted); }
+.starting-time { margin-left:auto;color:var(--muted);font-size:10px;white-space:nowrap; }
 .collection-heading { display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:17px;margin-bottom:12px; }
 .collection-heading h2 { font:500 14px "DM Sans",sans-serif;letter-spacing:0;margin:0; }
 .collection-heading>span { font-size:10px;color:var(--muted); }
@@ -22,8 +29,15 @@
 .list-caption { display:flex;justify-content:space-between;gap:16px;color:var(--muted);font-size:10px;line-height:1.4;padding-block:11px; }
 .list-caption p { margin:0; }
 .result-row { display:grid;grid-template-columns:125px minmax(0,1fr) 162px;gap:24px;border-top:1px solid var(--line);padding:16px 0;scroll-margin-top:20px; }
+.result-row[data-field="mathematics"] { --field-color:#385b47; }
+.result-row[data-field="physics"] { --field-color:#315f69; }
+.result-row[data-field="biology"] { --field-color:#557127; }
+:root[data-theme="dark"] .result-row[data-field="mathematics"] { --field-color:#bbd4ad; }
+:root[data-theme="dark"] .result-row[data-field="physics"] { --field-color:#afd4dc; }
+:root[data-theme="dark"] .result-row[data-field="biology"] { --field-color:#c0d59c; }
 .row-field { display:flex;flex-direction:column;font-size:11px;line-height:1.45;padding-top:2px; }
-.row-field>span:first-child { color:var(--accent);font-weight:500; }
+.row-field>span:first-child { display:inline-flex;align-items:center;gap:6px;color:var(--field-color,var(--accent));font-weight:500; }
+.field-glyph { width:17px;height:17px;flex:none; }
 .row-field small { font-size:10px;color:var(--muted);margin-top:1px; }
 .row-field time { margin-top:9px;font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums; }
 .row-field .date-kind { font-size:9px;color:var(--muted); }
@@ -31,6 +45,7 @@
 .row-content h3 { font:400 24px/1.15 "Newsreader",Georgia,serif;letter-spacing:-.012em;margin:0 0 5px; }
 .row-content h3 a { color:var(--ink);text-decoration:none; }
 .row-content h3 a:hover { text-decoration:underline; }
+.entry-payoff { margin:0 0 7px;font-size:12px;line-height:1.55;color:var(--ink); }
 .entry-arrow { color:var(--accent);font-size:15px; }
 .paper-title { color:var(--muted);font-size:12px;line-height:1.55;margin:0 0 6px; }
 .paper-title>span { font-size:9px;text-transform:uppercase;letter-spacing:.08em;margin-right:6px; }
@@ -66,12 +81,14 @@
   .math-wordmark { font-size:26px; }
   .header-right { gap:8px; }.header-right .about-link { display:none; }
   .home-intro { padding-block:25px 20px; }.home-intro h1 { font-size:33px;max-width:430px; }.home-intro>p { font-size:13px; }
+  .starting-point { gap:3px 12px;margin-top:15px;padding-top:11px; }.starting-point p { flex-basis:100%;font-size:11px; }.starting-time { display:none; }
   .collection-heading { gap:10px;align-items:flex-start; }.collection-heading>span { max-width:125px;text-align:right;line-height:1.6; }
   .collection-tools { flex-direction:column;align-items:stretch;gap:10px; }.search-control { width:100%;min-width:0; }.search-control input { min-height:42px; }
   .field-filters { gap:2px; }.field-filters button { padding-inline:10px;min-height:42px; }
   .list-caption { font-size:9px;gap:10px; }.list-caption>span { text-align:right; }
   .result-row { grid-template-columns:minmax(0,1fr);gap:6px;padding-block:17px; }
   .row-field { flex-direction:row;align-items:center;flex-wrap:wrap;gap:4px 8px;font-size:10px;padding:0; }.row-field small { margin:0; }.row-field time { margin:0 0 0 auto; }.row-field .date-kind { display:none; }
+  .field-glyph { width:15px;height:15px; }
   .row-content h3 { font-size:25px;line-height:1.2; }.paper-title { font-size:12px; }.row-content details { margin-top:7px; }.row-content summary { padding-block:5px; }.entry-byline { font-size:9px; }
   .row-status { flex-direction:row;gap:3px 8px;align-items:center;flex-wrap:wrap;padding:0; }.entry-duration { margin-top:0; }.evidence-label { margin:0 0 0 auto;font-size:9px; }.row-status small { width:100%;margin:0;text-align:right;font-size:9px; }
   .row-links a,.row-links .text-button { min-height:44px;display:inline-flex;align-items:center; }.row-links { gap:0 18px; }

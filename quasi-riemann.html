@@ -10,10 +10,12 @@
   <script src="assets/js/theme.js"></script>
   <link rel="stylesheet" href="assets/css/quasi-riemann.css">
   <link rel="stylesheet" href="assets/css/math-guide.css">
+  <link rel="stylesheet" href="assets/css/learning-path.css">
   <script src="assets/js/quasi-riemann.js" defer></script>
   <script src="assets/js/math-guide.js" defer></script>
+  <script src="assets/js/learning-path.js" defer></script>
 </head>
-<body>
+<body class="learning-page">
   <a class="skip-link" href="#lesson">Skip to the lesson</a>
   <header class="site-header wrap">
     <a class="site-name" href="/discoveries/">← Discovery in view</a>
@@ -37,6 +39,17 @@
       </aside>
     </section>
 
+    <section class="result-digest wrap" aria-labelledby="quasi-digest-heading">
+      <h2 id="quasi-digest-heading">The result in a minute</h2>
+      <div class="digest-grid">
+        <article><span class="small-label">The problem</span><h3>How regular are the primes?</h3><p>The positions of certain zeros of the zeta function constrain how much prime counts can stray from a smooth trend.</p></article>
+        <article><span class="small-label">What changed</span><h3>A permanent region is ruled out.</h3><p>The released result excludes zeros to the right of 7/8, at every height. It reaches beyond any finite chart or calculation. <a class="source-ref" href="#source-result">[4]</a></p></article>
+        <article><span class="small-label">What it leaves open</span><h3>The central line is still a conjecture.</h3><p>The full Riemann hypothesis would put every nontrivial zero on 1/2. The new boundary leaves room on either side of that line.</p></article>
+      </div>
+      <p class="digest-scope">This lesson illustrates the zeta case and the statement’s significance. It does not independently verify the released proof.</p>
+      <div class="digest-route"><a href="#primes">Build the idea <span aria-hidden="true">↓</span></a><a href="#zeros">See the statement <span aria-hidden="true">→</span></a></div>
+    </section>
+
     <nav class="chapter-nav" aria-label="Lesson sections"><div class="wrap chapter-links"><a href="#primes"><span>01</span> Count primes</a><a href="#zeros"><span>02</span> Explore zeros</a><a href="#meaning"><span>03</span> See why it matters</a><a href="#takeaway"><span>04</span> The idea to keep</a></div></nav>
     <noscript><p class="wrap notice">JavaScript is needed for the interactive charts. The explanations and source links below are still available.</p></noscript>
 
@@ -54,7 +67,7 @@
     </section>
 
     <section class="chapter wrap" id="zeros" aria-labelledby="zeros-heading">
-      <div class="chapter-intro"><p class="eyebrow"><span class="chapter-number">02</span> A different way to look at primes</p><h2 id="zeros-heading">Meet the landscape of zeros.</h2><p>The <strong>zeta function</strong>, written ζ, packages information about the primes into a function. Its inputs are <strong>complex numbers</strong>: points with a horizontal coordinate and a vertical coordinate. A <strong>zero</strong> is an input where the function’s output is exactly zero.</p><p>Write an input as <var>s</var> = β + <var>it</var>. For this picture, just read β as “across” and <var>t</var> as “up.” You can understand the question without knowing how to calculate ζ.</p><p>The zeros of interest lie in a vertical strip between β = 0 and β = 1. They are called <strong>nontrivial zeros</strong>; other, easy-to-locate zeros lie outside this view.</p></div>
+      <div class="chapter-intro"><p class="eyebrow"><span class="chapter-number">02</span> A different way to look at primes</p><h2 id="zeros-heading">Meet the landscape of zeros.</h2><p>The <span class="term-wrap"><button class="inline-term" type="button" disabled aria-expanded="false" aria-controls="quasi-term-zeta">zeta function</button><span class="term-definition" id="quasi-term-zeta" hidden>A function that connects a sum over whole numbers with a product over primes.</span></span>, written ζ, packages information about the primes into a function. Its inputs are <span class="term-wrap"><button class="inline-term" type="button" disabled aria-expanded="false" aria-controls="quasi-term-complex">complex numbers</button><span class="term-definition" id="quasi-term-complex" hidden>Numbers with a real part and an imaginary part; the two parts give coordinates on a plane.</span></span>: points with a horizontal coordinate and a vertical coordinate. A <span class="term-wrap"><button class="inline-term" type="button" disabled aria-expanded="false" aria-controls="quasi-term-zero">zero</button><span class="term-definition" id="quasi-term-zero" hidden>For example, 2 is a zero of f(x) = x − 2 because f(2) = 0. Zeta has its own zeros.</span></span> is an input where the function’s output is exactly zero.</p><p>Write an input as <var>s</var> = β + <var>it</var>. For this picture, just read β as “across” and <var>t</var> as “up.” You can understand the question without knowing how to calculate ζ.</p><p>The zeros of interest lie in a vertical strip between β = 0 and β = 1. They are called <strong>nontrivial zeros</strong>; other, easy-to-locate zeros lie outside this view.</p></div>
       <details class="bridge"><summary>How does zeta know about primes?</summary><p>In the region to the right of 1, the same function can be written in two ways:</p><div class="formula" aria-label="Zeta of s equals the sum of n to the minus s, and also the product over primes of one divided by one minus p to the minus s.">ζ(<var>s</var>) = ∑<sub>n ≥ 1</sub> 1/<var>n</var><sup>s</sup> = ∏<sub>p prime</sub> 1/(1 − <var>p</var><sup>−s</sup>)</div><p>The right-hand expression runs over the primes. This connection comes from the fact that every integer greater than 1 has a unique prime factorization.</p><p>These formulas represent zeta when the horizontal coordinate is greater than 1. Inside the critical strip, mathematicians use a unique extension called <strong>analytic continuation</strong>. The point <var>s</var> = 1 is a pole, where the function is singular. <a class="source-ref" href="#source-zeta">[2]</a></p></details>
       <div class="experiment zero-experiment">
         <div class="experiment-top"><div><span class="experiment-label">Three statements, side by side</span><h3>A strip, a smaller region, then a line.</h3></div><button class="text-button" type="button" data-guide="zeros">Help me read this</button></div>
