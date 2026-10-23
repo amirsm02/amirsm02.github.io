@@ -1,0 +1,30 @@
+.peps-page { --accent:#315f69;--accent-soft:#e5eff0;--purple:#a57747;--plot-accent:#376c79;--plot-secondary:#ae8053;--plot-excluded:#dbeaed;--plot-candidate:#8c6093; }
+:root[data-theme="dark"] .peps-page { --accent:#afd4dc;--accent-soft:#263d43;--purple:#dbb17e;--plot-accent:#a8d0da;--plot-secondary:#d6ac7b;--plot-excluded:#2b464b;--plot-candidate:#d9afe0; }
+.peps-hero { grid-template-columns:1.6fr 1fr;gap:45px;padding-block:65px 50px; }
+.peps-hero h1 { font-size:clamp(44px,5vw,65px); }
+.peps-cover { padding:30px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-align:center; }
+.cover-list { font:15px/1.8 ui-monospace,SFMono-Regular,monospace;color:var(--muted);display:grid; }
+.cover-list span:nth-child(4) { opacity:.6; }.cover-list span:nth-child(5) { opacity:.4; }
+.cover-transition { color:var(--accent);font-size:25px; }.peps-cover svg { width:100%;max-width:300px;display:block;margin:auto; }
+.peps-cover p { font:20px/1.3 "Newsreader",Georgia,serif;color:var(--accent);margin:0; }
+.lesson-route { padding:0 0 35px; }.lesson-route>p:not(.small-note) { font-size:13px;margin:10px 0; }.lesson-route>p>span { color:var(--muted);margin-inline:8px; }.lesson-route .small-note { margin-bottom:0; }
+.peps-page .chapter-links { justify-content:space-between;gap:14px; }.peps-page .chapter-links a { font-size:11px; }
+.peps-page .chapter-intro { max-width:780px; }
+.peps-split { display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:45px;align-items:center;margin-top:25px; }
+.peps-chart { min-width:0;width:100%; }.peps-chart svg { display:block;width:100%;height:auto;max-width:100%; }
+.size-reading .stat-label { margin-top:22px; }.amplitude-total { display:block;font:400 clamp(24px,3vw,40px)/1.25 "Newsreader",Georgia,serif;margin-top:8px;overflow-wrap:anywhere; }
+.bridge-sentence { font-family:"Newsreader",Georgia,serif;font-size:24px;line-height:1.4;max-width:750px;margin:35px 0 0;color:var(--accent); }
+.peps-two { grid-template-columns:1fr 1fr; }
+.assumption-strip { margin:30px 0 0;border-block:1px solid var(--line);padding:22px 0;max-width:900px; }.assumption-strip p { font-size:14px;margin:10px 0 0; }
+.tensor-counts { display:grid;grid-template-columns:1fr 1fr;gap:20px; }.tensor-counts .stat-label { font-size:11px; }.tensor-counts .stat-value { font-size:34px; }
+.network-key { display:flex;flex-wrap:wrap;gap:20px; }.network-key>span { display:flex;align-items:center;gap:7px;font-size:11px; }
+.pair-example { display:grid;grid-template-columns:1fr 1fr;gap:50px;padding-top:40px;align-items:center; }.pair-example .eyebrow { font-size:10px; }.pair-example h3 { font-family:"Newsreader",Georgia,serif;font-size:30px;margin-bottom:15px; }.pair-example p:not(.eyebrow) { font-size:14px; }.pair-example .example-presets { margin:25px 0 0; }
+.symbolic-bound { border-top:1px solid var(--line);padding-top:18px;margin:20px 0 0;display:flex;align-items:center;gap:25px; }.symbolic-bound span { font-size:12px;color:var(--muted); }.symbolic-bound strong { font:28px Georgia,serif; }
+.claim-columns { display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:32px; }.claim-columns h3 { font:26px/1.2 "Newsreader",Georgia,serif;margin:12px 0; }.claim-columns p { font-size:14px;color:var(--muted); }
+.proof-roadmap { display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin:35px 0 30px; }.proof-roadmap article { border-top:1px solid var(--line);padding-top:15px; }.proof-roadmap article>span { font-size:11px;color:var(--accent); }.proof-roadmap h3 { font-size:15px;margin:8px 0; }.proof-roadmap p { font-size:13px;color:var(--muted); }
+.proof-controls { display:grid;grid-template-columns:repeat(4,1fr);gap:8px; }.proof-controls button { border:1px solid var(--line);background:var(--page);border-radius:5px;padding:11px 8px;color:var(--ink);font-size:12px;min-height:44px; }.proof-controls button[aria-pressed="true"] { border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 -2px 0 var(--accent); }
+.proof-reading h3 { font:28px/1.2 "Newsreader",Georgia,serif;margin:0 0 15px; }.proof-reading p { font-size:14px;line-height:1.8;margin:0; }.proof-split { align-items:center;min-height:300px; }
+.research-status { display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:900px;border-block:1px solid var(--line);padding-block:20px; }.research-status p { font-size:13px;color:var(--muted);margin:10px 0 0; }
+@media(max-width:900px) { .peps-hero { grid-template-columns:1.5fr 1fr;gap:28px; }.peps-cover { padding:22px; }.peps-split { gap:25px; }.proof-roadmap { gap:18px; }.peps-page .chapter-links { flex-wrap:wrap;justify-content:flex-start; } }
+@media(max-width:720px) { .peps-hero { grid-template-columns:1fr;padding-block:40px 28px; }.peps-hero h1 { font-size:48px; }.peps-cover { display:none; }.lesson-route { padding-bottom:26px; }.lesson-route>p:not(.small-note) { font-size:12px;line-height:2; }.peps-page .chapter-links { gap:6px 14px; }.peps-page .chapter-links a { font-size:10px; }.peps-split,.pair-example,.claim-columns,.research-status { grid-template-columns:1fr;gap:23px; }.peps-split { margin-top:20px; }.size-reading { border-top:1px solid var(--line);padding-top:10px; }.amplitude-total { font-size:32px; }.tensor-counts .stat-value { font-size:32px; }.pair-example { padding-top:32px; }.pair-example .peps-chart { max-width:380px;margin:auto; }.claim-columns { gap:12px; }.claim-columns h3 { font-size:25px; }.proof-roadmap { grid-template-columns:1fr 1fr;gap:15px 20px; }.proof-controls { grid-template-columns:1fr 1fr; }.proof-split { min-height:0; }.proof-reading h3 { font-size:25px; }.bridge-sentence { font-size:22px; }.research-status { gap:20px; } }
+@media(max-width:380px) { .peps-hero h1 { font-size:42px; }.lesson-route>p>span { margin-inline:4px; } }

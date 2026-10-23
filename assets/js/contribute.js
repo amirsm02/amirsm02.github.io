@@ -37,6 +37,8 @@
   function updateKind() {
     const factual = form.elements.kind.value === 'factual';
     source.required = factual;
+    const sourceLabel = document.getElementById('source-label');
+    if (sourceLabel) sourceLabel.textContent = factual ? 'Primary source' : 'Suggested resource';
     document.getElementById('source-required').hidden = !factual;
     document.getElementById('source-optional').hidden = factual;
   }
@@ -46,7 +48,7 @@
   if (initialLesson) {
     const safeLesson = normalizedLesson(initialLesson.slice(0, 500));
     if (safeLesson) lesson.value = safeLesson;
-    else status.textContent = 'The supplied lesson link was not a page on this website. Enter the lesson URL below.';
+    else status.textContent = 'The supplied link was not a page on this website. Enter the page or record URL below.';
   }
   section.value = (query.get('section') || '').slice(0, 120);
   quote.value = (query.get('quote') || '').slice(0, 600);
@@ -64,21 +66,22 @@
   form.addEventListener('submit', event => {
     event.preventDefault();
     const lessonURL = normalizedLesson(lesson.value);
-    lesson.setCustomValidity(lessonURL ? '' : 'Enter a page URL from this website, such as /peps.html.');
+    lesson.setCustomValidity(lessonURL ? '' : 'Enter a page URL from this website, such as /discoveries/peps/.');
     source.setCustomValidity(validSource(source.value) ? '' : 'Enter an http or https link to the original source.');
     for (const field of [quote, correction, rationale]) field.setCustomValidity(field.value.trim() ? '' : 'Please add a short description.');
     if (!form.reportValidity()) return;
-    const kind = form.elements.kind.value === 'factual' ? 'Accuracy or missing qualification' : 'Explanation, example, or interaction';
-    const title = `Lesson suggestion: ${new URL(lessonURL).pathname}${section.value.trim() ? ' — ' + section.value.trim() : ''}`.slice(0, 220);
+    const factual = form.elements.kind.value === 'factual';
+    const kind = factual ? 'Evidence update or correction' : 'Reading route or explanation';
+    const title = `Discovery suggestion: ${new URL(lessonURL).pathname}${section.value.trim() ? ' — ' + section.value.trim() : ''}`.slice(0, 220);
     const body = [
-      `## Lesson\n${lessonURL}`,
+      `## Page or record\n${lessonURL}`,
       `## Section\n${section.value.trim() || 'Not specified'}`,
       `## Type\n${kind}`,
-      `## Passage or behavior\n${quote.value.trim()}`,
+      `## Claim, passage, or missing update\n${quote.value.trim()}`,
       `## Suggested change\n${correction.value.trim()}`,
-      `## Primary source\n${source.value.trim() || 'Not supplied (teaching suggestion)'}`,
+      `## ${factual ? 'Primary source' : 'Suggested resource'}\n${source.value.trim() || 'Not supplied (reading route or explanation suggestion)'}`,
       `## Why it helps\n${rationale.value.trim()}`,
-      `## Credit preference\n${credit.value.trim() || 'No name requested in the lesson revision note.'}`
+      `## Credit preference\n${credit.value.trim() || 'No name requested in the revision note.'}`
     ].join('\n\n');
     draft.textContent = body;
     const issueURL = new URL('https://github.com/amirsm02/amirsm02.github.io/issues/new');
