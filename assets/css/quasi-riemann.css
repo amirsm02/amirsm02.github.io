@@ -137,3 +137,10 @@ textarea::placeholder {color:var(--muted);}
 .summary-symbol { font:40px "Newsreader",Georgia,serif;color:var(--accent); }
 .next-reading { display:flex;align-items:center;gap:25px;flex-wrap:wrap;margin:35px 0 0; }
 @media(max-width:720px) { .worked-summary { grid-template-columns:1fr;gap:10px; }.example-presets button { min-height:44px; } }
+
+/* Keep the research identity visible beside the editorial title. */
+.paper-citation { display:grid;gap:7px;margin:20px 0 24px;padding:14px 0 14px 16px;border-left:2px solid var(--accent);max-width:750px; }
+.paper-citation>a { font-size:16px;line-height:1.5;text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere; }
+.paper-citation .small-label { font-size:10px; }
+.paper-meta { display:block;font-size:11px;line-height:1.6;color:var(--muted); }
+@media(max-width:720px) { .paper-citation { margin:18px 0; }.paper-citation>a {font-size:14px;} }

@@ -6,6 +6,7 @@
     if (document.getElementById('math-guide-dialog')) return;
     var main = document.querySelector('main');
     var scanRoot = main || document.body;
+    var pageGuide = window.discoveryLessonGuide || null;
     var quasiSourceURLs = [
       'https://github.com/openai/math/blob/main/lean/docs/003.md',
       'https://dlmf.nist.gov/25.16'
@@ -156,9 +157,15 @@
         why: 'A concrete configuration improves a lower bound: it raises the number we know can fit. High-dimensional arrangements can be checked through coordinates and distances without being pictured directly. The 593-neighbor construction is a dated May 2025 improvement over 592, not a claim about today’s record.'
       }
     };
+    recordNotes.esm3 = {
+      intro: 'ESM3 proposed protein designs using learned relationships among sequence, structure, and function. Researchers tested and refined candidates, producing esmGFP, a fluorescent protein with substantial sequence differences from known fluorescent proteins. The result combines AI generation with laboratory work.',
+      simpler: 'A protein sequence describes a molecule. A model can propose a sequence likely to support a desired structure and function, but the molecule still has to be made and measured. Here the functional test was fluorescence, not just a plausible predicted shape.',
+      example: 'In a toy alignment of 100 positions, 58 matches leave 42 differences. That explains the paper’s reported 58% sequence identity to its closest known fluorescent-protein comparison. It is not a brightness percentage. The actual alignment is not this toy example.',
+      why: 'The result demonstrates a working molecule that differs substantially from known examples. The paper’s “500 million years” is an estimate based on natural sequence divergence, not a literal replay of evolution or the model’s running time. It does not establish reliable design of every protein function.'
+    };
     recordNotes['peps-approximation'] = recordNotes.peps;
     var aliases = { check: 'takeaway', 'why-zeta': 'primes', 'why-not-proof': 'takeaway', growth: 'meaning', proof: 'sources' };
-    var visibleContext = main && main.querySelector('#peps-state') ? 'peps-state' : (main && main.querySelector('#primes') ? 'primes' : 'results');
+    var visibleContext = pageGuide && pageGuide.initialContext ? pageGuide.initialContext : (main && main.querySelector('#peps-state') ? 'peps-state' : (main && main.querySelector('#primes') ? 'primes' : 'results'));
     var current = null;
     var selected = null;
     var returnFocus = null;
@@ -207,6 +214,9 @@
     function contextFor(requested) {
       var key = typeof requested === 'string' ? requested : visibleContext;
       key = aliases[key] || key;
+      if (pageGuide && pageGuide.notes && pageGuide.notes[key]) return Object.assign({
+        key: key, lessonKind: pageGuide.kind, sources: (pageGuide.sources || pageSources()).slice()
+      }, pageGuide.notes[key]);
       var lessonKind = key.indexOf('peps-') === 0 ? 'peps' : (key === 'results' ? null : 'quasi');
       if (notes[key]) return Object.assign({
         key: key,
@@ -300,7 +310,9 @@
     manualCopy.setAttribute('aria-label', 'Prepared prompt to select and copy');
     form.append(fieldLabel, field, actionRow, handoffNote, status, manualCopy);
     divider.appendChild(form);
-    content.append(description, selectionBox, intro, suggestionGroup, explanation, divider);
+    var correctionLink = element('a', 'math-guide-correction', 'Suggest a correction or a clearer explanation ↗');
+    correctionLink.href = '/contribute.html';
+    content.append(description, selectionBox, intro, suggestionGroup, explanation, correctionLink, divider);
     dialog.append(head, content);
     var spacer = element('div', 'math-guide-spacer');
     spacer.setAttribute('aria-hidden', 'true');
@@ -343,6 +355,12 @@
     window.addEventListener('resize', scheduleContext, { passive: true });
     updateVisibleContext();
 
+    function updateCorrectionLink() {
+      var parameters = new URLSearchParams({ lesson: location.pathname, section: current ? current.key : visibleContext });
+      if (selected) parameters.set('quote', limit(selected.text, 600));
+      correctionLink.href = '/contribute.html?' + parameters.toString();
+    }
+
     function openGuide(requested, trigger) {
       captureSelection();
       updateVisibleContext();
@@ -353,6 +371,7 @@
       intro.textContent = current.intro;
       quote.textContent = selected ? selected.text : '';
       selectionBox.hidden = !selected;
+      updateCorrectionLink();
       launcher.textContent = selected ? 'Explain selection' : 'Help me understand';
       explanation.hidden = true;
       explanation.textContent = '';
@@ -385,6 +404,7 @@
       quote.textContent = '';
       launcher.textContent = 'Help me understand';
       field.placeholder = current.question;
+      updateCorrectionLink();
       // The control being hidden should not leave keyboard focus behind.
       suggestionButtons[0].focus();
     });
@@ -396,6 +416,11 @@
     });
 
     function settingsText(context) {
+      if (pageGuide && context.lessonKind === pageGuide.kind) {
+        var snapshot = '';
+        try { if (typeof pageGuide.getState === 'function') snapshot = 'Current diagram settings: ' + limit(JSON.stringify(pageGuide.getState()), 650) + '. '; } catch (error) { /* Explanations remain available without a snapshot. */ }
+        return snapshot + (pageGuide.settingsCaveat || '');
+      }
       var lesson = context.lessonKind === 'peps' ? window.pepsLesson : (context.lessonKind === 'quasi' ? window.quasiLesson : null);
       if (!lesson || typeof lesson.getState !== 'function') return '';
       try {
@@ -419,7 +444,7 @@
     }
     function assemblePrompt(parts) {
       var lines = [
-        'Help me understand this research result. Start from the problem it addresses, define unfamiliar terms, and give one concrete example. Build only the necessary prerequisites. Distinguish illustrative models from evidence, and explain whether the conclusion is mathematical, computational, or experimental.',
+        'Help me understand this research result. Assume a curious reader comfortable with algebra, graphs, and step-by-step reasoning, but unfamiliar with this particular field. Start from the problem it addresses, build the missing prerequisites, and use a concrete example to explain the mechanism and why the conclusion follows. Distinguish illustrative models from evidence, and mathematical, computational, and experimental conclusions.',
         'Page/topic: ' + parts.title,
         'Supplied reading context (not an independent verification): ' + parts.summary
       ];
@@ -427,6 +452,7 @@
       if (parts.settings) lines.push(parts.settings);
       if (parts.lessonKind === 'quasi') lines.push('Lesson distinction: the displayed quasi-Riemann statement excludes nontrivial zeta zeros with Re(s) > 7/8. The full Riemann hypothesis puts every such zero on Re(s) = 1/2. The strict 7/8 boundary is not excluded by that inequality alone. These plots do not verify the released proof.');
       if (parts.lessonKind === 'peps') lines.push('PEPS scope: an open L × L nearest-neighbor square grid, fixed local dimension q and bound J on on-site and edge terms, a unique full-Hamiltonian ground state up to phase, and a full-system spectral gap at least a fixed Δ > 0. The reported guarantee is D ≤ C L^c and normalized state-vector error ≤ 1/L after optimizing overall phase. C and c depend only on q, J, Δ. This is an existence theorem, not an efficient procedure for finding tensors or contracting the network. The lesson’s plots do not certify an approximation to a computed ground state or verify the proof.');
+      if (pageGuide && parts.lessonKind === pageGuide.kind && pageGuide.scope) lines.push('Lesson scope: ' + pageGuide.scope);
       lines.push('Evidence caveat: distinguish the authors’ claim, its assumptions, the supplied proof or empirical evidence, the exact scope of any formal or computational check, and independent review or replication. This educational page has not independently audited the research. Check the primary sources before making claims about current status; do not infer acceptance from the summary.');
       lines.push('Source URLs: ' + parts.sources.join(' ; '));
       lines.push('My question: ' + parts.question);

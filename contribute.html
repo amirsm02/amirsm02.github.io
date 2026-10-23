@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suggest a correction · Interactive discoveries</title>
+  <meta name="description" content="Help improve an AI-written research explanation. Point to a claim, suggest a change, and include the evidence behind it.">
+  <link rel="canonical" href="https://amirshapourmohammadi.com/contribute.html">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon-home.svg?v=otter">
+  <script src="/assets/js/theme.js"></script>
+  <link rel="stylesheet" href="/assets/css/quasi-riemann.css">
+  <link rel="stylesheet" href="/assets/css/contribute.css">
+  <script src="/assets/js/contribute.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#correction-form">Skip to the suggestion form</a>
+  <header class="site-header wrap"><a class="site-name" href="/discoveries/">← All discoveries</a><div class="header-right"><span class="small-label">Reader contributions</span><button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" hidden><svg class="theme-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 13a8.5 8.5 0 0 1-9.5-9.5A8.5 8.5 0 1 0 20.5 13Z"/></svg><svg class="theme-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></div></header>
+  <main class="wrap contribution-main">
+    <section class="contribution-intro" aria-labelledby="page-title">
+      <p class="eyebrow">Improve one claim, example, or explanation</p>
+      <h1 id="page-title">Help make it more accurate.<br><em>Or easier to see.</em></h1>
+      <p>These lessons are AI-written. Readers can contribute the subject knowledge, counterexamples, and teaching ideas that make them better. You don’t need to rewrite an article: a precise observation and a source can be enough.</p>
+    </section>
+    <div class="contribution-layout">
+      <section class="suggestion-panel" aria-labelledby="form-heading">
+        <h2 id="form-heading">Suggest a change</h2>
+        <p class="form-intro">Prepare a draft below, then choose GitHub or email. Nothing is sent from this page.</p>
+        <noscript><p class="notice">The draft builder needs JavaScript. You can <a href="https://github.com/amirsm02/amirsm02.github.io/issues/new?template=lesson-correction.yml">open a correction on GitHub</a> or email <a href="mailto:amirsm@berkeley.edu?subject=Lesson%20correction">amirsm@berkeley.edu</a> with the lesson, passage, and suggested change.</p></noscript>
+        <form id="correction-form" hidden>
+          <div class="field"><label for="lesson-url">Lesson URL <span aria-hidden="true">*</span></label><input id="lesson-url" name="lesson" type="text" inputmode="url" required maxlength="500" placeholder="/peps.html" aria-describedby="lesson-hint"><p class="field-hint" id="lesson-hint">A page on this website. A relative path such as /peps.html also works.</p></div>
+          <div class="field"><label for="lesson-section">Section <span class="optional">(optional)</span></label><input id="lesson-section" name="section" type="text" maxlength="120" placeholder="The heading or section you’re referring to"></div>
+          <fieldset class="suggestion-kind"><legend>What would you improve?</legend><label><input type="radio" name="kind" value="factual" checked> Accuracy or missing qualification</label><label><input type="radio" name="kind" value="pedagogical"> Explanation, example, or interaction</label></fieldset>
+          <div class="field"><label for="quoted-claim">The passage or behavior <span aria-hidden="true">*</span></label><textarea id="quoted-claim" name="quote" rows="3" maxlength="600" required placeholder="Quote the claim, or describe what a diagram does."></textarea></div>
+          <div class="field"><label for="proposed-change">Your suggested change <span aria-hidden="true">*</span></label><textarea id="proposed-change" name="correction" rows="4" maxlength="1500" required placeholder="What should the reader see instead? A short description is fine."></textarea></div>
+          <div class="field"><label for="primary-source">Primary source <span id="source-required" aria-hidden="true">*</span><span id="source-optional" class="optional" hidden> (optional)</span></label><input id="primary-source" name="source" type="url" required maxlength="500" placeholder="https://…" aria-describedby="source-hint"><p class="field-hint" id="source-hint">For a factual correction, link the paper, theorem, dataset, or other original evidence. Put the relevant page, figure, or passage in your explanation below. For a teaching suggestion, a source is optional.</p></div>
+          <div class="field"><label for="change-reason">Why it helps <span aria-hidden="true">*</span></label><textarea id="change-reason" name="rationale" rows="3" maxlength="800" required placeholder="Explain the mismatch with the source, or where the current explanation loses the reader."></textarea></div>
+          <div class="field"><label for="credit-name">Credit name <span class="optional">(optional)</span></label><input id="credit-name" name="credit" type="text" maxlength="100" placeholder="How you would like to be credited"><p class="field-hint">Leave blank if you don’t want a name added to the lesson’s revision note. A public GitHub issue still shows your GitHub username.</p></div>
+          <button class="button primary" type="submit">Review suggestion draft <span aria-hidden="true">→</span></button>
+          <p class="field-hint required-note">* Required. Drafts stay in this tab and are not saved after you leave.</p>
+        </form>
+        <section class="draft-review" id="draft-review" aria-labelledby="draft-heading" hidden>
+          <h2 id="draft-heading" tabindex="-1">Review your draft</h2>
+          <pre id="suggestion-draft" tabindex="0" aria-label="Suggestion draft"></pre>
+          <p class="field-hint">GitHub will show this draft before you submit it. Issues are public and require a GitHub account. You can edit the draft there.</p>
+          <p class="field-hint" id="draft-limit-note" hidden></p>
+          <div class="draft-actions"><a class="button primary" id="github-draft" target="_blank" rel="noopener noreferrer">Continue on GitHub ↗</a><a class="button" id="github-manual" href="https://github.com/amirsm02/amirsm02.github.io/issues/new?template=lesson-correction.yml" target="_blank" rel="noopener noreferrer" hidden>Open a GitHub issue to paste into ↗</a><button class="button" id="copy-draft" type="button">Copy draft</button><a class="button" id="email-draft">Open email draft</a><a class="button" id="email-manual" href="mailto:amirsm@berkeley.edu" hidden>Open a blank email</a></div>
+          <p class="field-hint">Email goes to <a href="mailto:amirsm@berkeley.edu">amirsm@berkeley.edu</a> rather than a public issue. Some email apps truncate long links; copy the draft into your message if needed.</p>
+        </section>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </section>
+      <aside class="review-policy" aria-labelledby="review-heading">
+        <p class="eyebrow">AI-written, with reader scrutiny</p>
+        <h2 id="review-heading">A small correction can matter.</h2>
+        <p>A useful contribution might be “this bound requires an extra assumption,” “this picture suggests the wrong mechanism,” or “this concrete example would make the definition click.”</p>
+        <h3>How review works today</h3>
+        <p>Suggestions arrive as issues or email and need manual review. This site does not yet run an automatic AI review or publishing service.</p>
+        <h3>The revision process we’re building toward</h3>
+        <ol class="review-steps"><li><strong>You identify the issue.</strong><span>Point to a passage, suggest a change, and supply evidence where possible.</span></li><li><strong>AI checks and drafts.</strong><span>Compare the suggestion with the cited source, draft a focused revision, and check the affected example or interaction.</span></li><li><strong>An editor approves the change.</strong><span>Review the specific claim and supporting evidence. If the evidence is unresolved, keep that uncertainty visible.</span></li><li><strong>The revision stays traceable.</strong><span>Publish the change with a dated note, a link to the diff, and optional contributor credit.</span></li></ol>
+        <p>The aim is to make expert feedback useful in small pieces, without asking every expert to author a lesson. AI authorship does not replace checking the claims.</p>
+        <a class="text-button" href="https://github.com/amirsm02/amirsm02.github.io/issues" target="_blank" rel="noopener noreferrer">Browse public suggestions ↗</a>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer wrap"><a href="/discoveries/">← All discoveries</a><span>Understanding improves with revision.</span><a href="#page-title">Back to top ↑</a></footer>
+</body>
+</html>
