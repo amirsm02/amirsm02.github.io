@@ -551,17 +551,17 @@ Distance: 8.3 lm`,
     description: "A dense gathering of stars fades outward from the bright core of this globular cluster.",
     title: "Hercules Globular Cluster: M13",
     category: "Globular Cluster",
-    src: "./astro/M13 - Hercules Globular Cluster.jpg",
-    details: `Date: 05/29/2026
+    src: "./astro/M13 - Hercules Globular Cluster.jpg?v=20261031",
+    details: `Date: 05/30/2026 (recorded stack date)
+Capture date note: Exact acquisition interval could not be verified from the stack metadata.
 Gain: 101
 Offset: 50
 Subs: 141x60
 Scope: Celestron C8
 Filter: None
 Distance: 22,200 ly
-Constellation: Hercules
-Moon illumination: 99%`,
-    date: "2026-05-29",
+Constellation: Hercules`,
+    date: "2026-05-30",
     rank: 4
   },
 
@@ -590,10 +590,10 @@ Constellation: Andromeda`,
     objects: "Whirlpool (M51 / NGC5194), NGC5195",
     title: "Whirlpool and Companion: M51 and NGC5195",
     category: "Galaxy",
-    src: "./astro/M51 - Whirlpool Galaxy.jpg",
-    details: `Date: 05/31/2026 - 06/01/2026
-Gain: 101
-Offset: 50
+    src: "./astro/M51 - Whirlpool Galaxy.jpg?v=20261031",
+    details: `Date: 05/31/2026 - 06/02/2026 (PDT)
+Gain: Unknown (not retained in source master)
+Offset: Unknown (not retained in source master)
 Subs: 336x60
 Scope: Celestron C8
 Filter: None
@@ -601,6 +601,26 @@ Distance: 31 Mly
 Constellation: Canes Venatici`,
     date: "2026-05-31",
     rank: 6
+  },
+
+  {
+    id: "black-eye",
+    description: "A dark arc of dust cuts across the bright central region of the Black Eye Galaxy.",
+    objects: "Black Eye Galaxy (M64 / NGC4826)",
+    title: "Black Eye Galaxy: M64",
+    category: "Galaxy",
+    src: "./astro/M64 - Black Eye Galaxy.jpg",
+    details: `Date: 06/23/2026 - 06/24/2026 (PDT)
+Capture date note: Dates supported by the 56 adjacent raw LIGHT frames; the stack does not retain an explicit input-file list.
+Gain: 101
+Offset: 50
+Subs: 56x180
+Scope: Celestron C8
+Filter: None
+Distance: 17 Mly
+Constellation: Coma Berenices`,
+    date: "2026-06-23",
+    rank: 35
   },
 
   {
@@ -1080,7 +1100,7 @@ Lens: 14mm Rokinon`,
     const categoryOrder = ["Emission Nebula", "Reflection Nebula", "Planetary Nebula", "Galaxy", "Galaxy Cluster", "Globular Cluster", "Solar System", "Wide-field"];
     const categories = ["View All", ...categoryOrder.filter(category => imageData.some(item => item.category === category))];
     const byId = new Map(imageData.map(item => [item.id, item]));
-    const aliases = { horsehead: "horsehead-flame", orion: "orion-running-man", m51: "whirlpool", m101: "pinwheel", m63: "sunflower" };
+    const aliases = { horsehead: "horsehead-flame", orion: "orion-running-man", m13: "hercules", m51: "whirlpool", m64: "black-eye", m101: "pinwheel", m63: "sunflower" };
 
     function featuredRank(item) {
       const index = featuredIds.indexOf(item.id);
