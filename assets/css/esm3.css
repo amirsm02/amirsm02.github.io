@@ -1,0 +1,27 @@
+.esm3-page { --accent:#557127;--accent-soft:#edf1e2;--purple:#926477;--plot-accent:#5c7b2f;--plot-secondary:#9b6e84;--light-in:#5076b7;--light-out:#5a8a26; }
+:root[data-theme="dark"] .esm3-page { --accent:#c0d59c;--accent-soft:#34402b;--purple:#d5a7bd;--plot-accent:#c0d59c;--plot-secondary:#d5a7bd;--light-in:#a7c2f4;--light-out:#c1e69a; }
+.esm3-hero { grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:45px;padding-block:55px 45px; }
+.esm3-hero h1 { font-size:clamp(44px,5vw,64px); }
+.esm3-cover { background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:15px 22px 25px;text-align:center; }
+.esm3-cover svg { display:block;width:100%;height:auto;max-width:320px;margin:auto; }
+.esm3-cover p { font:22px/1.35 "Newsreader",Georgia,serif;color:var(--accent);margin:0 0 10px; }
+.esm3-cover .small-note { font-size:10px; }
+.esm3-route { padding-bottom:30px; }.esm3-route>p:not(.small-note) { font-size:13px;margin:10px 0; }.esm3-route>p>span { color:var(--muted);margin-inline:7px; }.esm3-route .small-note { margin:0; }
+.esm3-page .chapter-links { justify-content:space-between;gap:16px; }.esm3-page .chapter-intro { max-width:790px; }
+.esm3-tabs,.esm3-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:8px; }
+.esm3-steps { grid-template-columns:repeat(4,1fr); }
+.esm3-tabs button,.esm3-steps button { border:1px solid var(--line);background:var(--page);color:var(--ink);border-radius:5px;font-size:13px;padding:11px 10px;min-height:44px; }
+.esm3-tabs button[aria-pressed="true"],.esm3-steps button[aria-pressed="true"] { border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 -2px 0 var(--accent); }
+.esm3-split { display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;margin-top:25px; }
+.esm3-split h3 { font:26px/1.25 "Newsreader",Georgia,serif;margin:8px 0 14px; }
+.esm3-chart { min-width:0;width:100%; }.esm3-chart svg { display:block;width:100%;height:auto;max-width:100%;overflow:hidden; }
+.figure-reading { font-size:15px;line-height:1.7;margin-bottom:12px; }
+.esm3-bridge { font:24px/1.4 "Newsreader",Georgia,serif;color:var(--accent);max-width:780px;margin:32px 0 0; }
+.space-total { display:block;font:36px/1.3 "Newsreader",Georgia,serif;margin-top:8px;overflow-wrap:anywhere; }
+.esm3-reasoning { max-width:790px;margin-top:30px; }.esm3-reasoning h3 { font-size:18px;margin-bottom:12px; }.esm3-reasoning p { font-size:15px;color:var(--muted); }
+.identity-key { display:flex;gap:25px;font-size:11px;justify-content:center; }.identity-key span { display:flex;align-items:center;gap:7px; }.identity-key i { display:grid;place-items:center;font-style:normal;background:var(--accent-soft);color:var(--accent);width:19px;height:19px;border-radius:3px; }.identity-key span+span i { color:var(--purple);background:var(--page);border:1px solid var(--purple); }
+.esm3-claim-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:35px; }.esm3-claim-grid article { border-top:1px solid var(--line);padding-top:20px; }.esm3-claim-grid h3 { font:25px/1.3 "Newsreader",Georgia,serif;margin:10px 0; }.esm3-claim-grid p { font-size:14px;color:var(--muted);margin:0; }
+.esm3-record { display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:900px;border-block:1px solid var(--line);padding:20px 0; }.esm3-record p { font-size:13px;color:var(--muted);margin:10px 0 0; }
+@media(max-width:900px) { .esm3-hero { gap:25px; }.esm3-split { gap:25px; }.esm3-page .chapter-links { flex-wrap:wrap;justify-content:flex-start; } }
+@media(max-width:720px) { .esm3-hero { grid-template-columns:1fr;padding-block:36px 28px; }.esm3-hero h1 { font-size:47px; }.esm3-cover { display:none; }.esm3-route { padding-bottom:25px; }.esm3-route>p:not(.small-note) { font-size:12px;line-height:2; }.esm3-split { grid-template-columns:1fr;gap:19px;margin-top:20px; }.esm3-split h3 { font-size:25px; }.esm3-steps { grid-template-columns:repeat(2,1fr); }.esm3-chart { max-width:480px;margin:auto; }.esm3-page .chapter-links { gap:7px 15px; }.esm3-page .chapter-links a { font-size:10px; }.esm3-claim-grid,.esm3-record { grid-template-columns:1fr;gap:22px; }.space-reading { border-top:1px solid var(--line);padding-top:10px; }.space-total { font-size:34px; }.esm3-bridge { font-size:22px; }.esm3-tabs button { font-size:12px; }.esm3-page .example-presets button { font-size:11px;text-align:left; }.esm3-claim-grid p { max-width:550px; } }
+@media(max-width:380px) { .esm3-hero h1 { font-size:41px; }.esm3-route>p>span { margin-inline:3px; }.esm3-tabs button { padding-inline:7px; } }

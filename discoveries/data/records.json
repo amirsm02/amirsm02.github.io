@@ -1,0 +1,787 @@
+[
+  {
+    "id": "quasi-riemann",
+    "title": "A fixed boundary for zeta's zeros",
+    "fields": [
+      "mathematics"
+    ],
+    "topic": "Number theory",
+    "researchDate": "2026-10-06",
+    "dateLabel": "Released",
+    "paper": {
+      "title": "The Quasi-Riemann Hypothesis: A Zero-Free Half-Plane Re(s) > 7/8",
+      "url": "https://github.com/openai/math/blob/main/preprints/The-Quasi-Riemann-Hypothesis-September-30-2026/paper.pdf",
+      "authors": "OpenAI"
+    },
+    "claim": "The released proof excludes zeros of the Riemann zeta function to the right of 7/8, at every height. The full Riemann hypothesis remains open.",
+    "ai": {
+      "system": "Unreleased OpenAI model",
+      "contribution": "Produced mathematical arguments and proof artifacts in OpenAI's research collection.",
+      "human": "OpenAI curated the release. Human assistance is acknowledged for the later, weaker 11/12 companion.",
+      "disclosure": "Zero-free-region work was an exception to the standard evaluation procedure; the full division of work is not disclosed."
+    },
+    "status": "Scoped Lean formalization",
+    "statusKey": "formalization",
+    "evidence": [
+      {
+        "label": "Formal proof scope",
+        "text": "The release lists a Lean formalization covering zeta, all Dirichlet L-functions, and a specified Hecke family. Later applications are excluded; this tracker has not rerun it.",
+        "url": "https://github.com/openai/math/blob/main/lean/docs/003.md"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Starting point",
+      "before": "Excluding zeros on the line Re(s) = 1 does not exclude a fixed band to its left.",
+      "after": "A single boundary, 7/8, applies at every height.",
+      "conditions": "The zero-free region is strictly Re(s) > 7/8; poles at 1 are excluded.",
+      "limit": "This does not place all nontrivial zeros on 1/2, as the Riemann hypothesis requires.",
+      "url": "https://github.com/openai/math/blob/main/preprints/The-Quasi-Riemann-Hypothesis-September-30-2026/build/paper.tex#L72"
+    },
+    "timeline": [
+      {
+        "date": "2026-09-30",
+        "title": "Manuscript dated",
+        "text": "The 7/8 manuscript carries this date.",
+        "url": "https://github.com/openai/math/blob/main/preprints/The-Quasi-Riemann-Hypothesis-September-30-2026/README.md"
+      },
+      {
+        "date": "2026-10-06",
+        "title": "Public research release",
+        "text": "OpenAI announces the collection and supporting formalizations.",
+        "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"
+      }
+    ],
+    "route": [
+      {
+        "title": "Visualizing the Riemann zeta function",
+        "provider": "3Blue1Brown",
+        "url": "https://www.3blue1brown.com/lessons/zeta/",
+        "read": "The complex-input and analytic-continuation sections.",
+        "purpose": "See what the function is before interpreting a region in the complex plane."
+      },
+      {
+        "title": "Zeta zeros and the critical strip",
+        "provider": "NIST DLMF",
+        "url": "https://dlmf.nist.gov/25.10",
+        "read": "The opening description of zeros and the Riemann hypothesis.",
+        "purpose": "Separate known zero locations, a zero-free region, and the stronger conjecture."
+      },
+      {
+        "title": "Read the exact new claim",
+        "provider": "Research paper",
+        "url": "https://github.com/openai/math/blob/main/preprints/The-Quasi-Riemann-Hypothesis-September-30-2026/build/paper.tex#L98",
+        "read": "Introduction, Theorem 1.1 and the paragraph immediately after it.",
+        "purpose": "Identify the included functions, strict boundary, and remaining conjecture."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Research-process disclosure",
+        "url": "https://github.com/openai/math#how-the-results-were-produced",
+        "note": "Model attribution and exceptions to the standard procedure."
+      },
+      {
+        "label": "Lean scope note",
+        "url": "https://github.com/openai/math/blob/main/lean/docs/003.md",
+        "note": "Formalized statements and excluded applications."
+      },
+      {
+        "label": "Human-assisted companion",
+        "url": "https://github.com/openai/math/blob/main/preprints/The-Quasi-Riemann-Hypothesis-October-5-2026/README.md",
+        "note": "Separate October 5 manuscript; not a stronger boundary."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  },
+  {
+    "id": "peps",
+    "title": "When a quantum state has a compact description",
+    "fields": [
+      "physics",
+      "mathematics"
+    ],
+    "topic": "Quantum many-body theory",
+    "researchDate": "2026-10-06",
+    "dateLabel": "Released",
+    "paper": {
+      "title": "Polynomial PEPS approximation of gapped square-grid ground states",
+      "url": "https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/paper.pdf",
+      "authors": "OpenAI"
+    },
+    "claim": "The preprint claims that a specified class of lowest-energy quantum states on a square grid admits a polynomial-size tensor-network approximation of the entire state.",
+    "ai": {
+      "system": "Unreleased OpenAI model",
+      "contribution": "Produced the manuscript within OpenAI's collection of model-generated research.",
+      "human": "OpenAI organized and published the evaluation; per-paper editing and checking roles are not itemized.",
+      "disclosure": "The repository's general process description is not a complete record of this paper's research process."
+    },
+    "status": "Research preprint",
+    "statusKey": "preprint",
+    "evidence": [
+      {
+        "label": "Released argument",
+        "text": "Paper and source are available. The proof uses a companion area-law result; this tracker has not independently audited either argument.",
+        "url": "https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/build/sections/00-history.tex"
+      },
+      {
+        "label": "Formalization availability",
+        "text": "No PEPS entry was found in the release's formalization catalogue checked October 22, 2026.",
+        "url": "https://github.com/openai/math/blob/main/lean/formalization.yaml"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Starting point",
+      "before": "An entanglement bound across each cut does not by itself supply one compatible approximation of the whole grid.",
+      "after": "The claimed network has bond dimension at most C L^c and whole-vector error at most 1/L.",
+      "conditions": "An open L × L grid; fixed local dimension, bounded nearest-neighbor interactions, a unique ground state, and a gap bounded below independently of L.",
+      "limit": "It does not guarantee an efficient way to find the tensors or compute with them.",
+      "url": "https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/build/sections/00-introduction.tex"
+    },
+    "timeline": [
+      {
+        "date": "2026-09-24",
+        "title": "Manuscript dated",
+        "text": "The released paper carries this date.",
+        "url": "https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/README.md"
+      },
+      {
+        "date": "2026-10-06",
+        "title": "Public research release",
+        "text": "Included in OpenAI's mathematical research collection.",
+        "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"
+      }
+    ],
+    "route": [
+      {
+        "title": "Multiple quantum systems",
+        "provider": "IBM Quantum Learning",
+        "url": "https://quantum.cloud.ibm.com/learning/en/courses/basics-of-quantum-information/multiple-systems/quantum-information",
+        "read": "Quantum states, tensor products, and entangled states.",
+        "purpose": "Understand why joint states need more than a separate description of each particle."
+      },
+      {
+        "title": "A practical introduction to tensor networks",
+        "provider": "Román Orús",
+        "url": "https://arxiv.org/pdf/1306.2164",
+        "read": "Sections 4.1 and 5.2: diagrams and PEPS.",
+        "purpose": "Learn how connected arrays represent amplitudes and what bond dimension measures."
+      },
+      {
+        "title": "Read the guarantee and its limits",
+        "provider": "Research paper",
+        "url": "https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/build/sections/00-introduction.tex",
+        "read": "Statement of the result: Theorem 1.1 and the following paragraph.",
+        "purpose": "Distinguish existence, global accuracy, and efficient computation."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Theorem and assumptions",
+        "url": "https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/build/sections/00-introduction.tex",
+        "note": "Precise model, error, and resource bound."
+      },
+      {
+        "label": "Prior work and dependencies",
+        "url": "https://github.com/openai/math/blob/main/preprints/Polynomial-PEPS-approximation-of-gapped-square-grid-ground-states-September-24-2026/build/sections/00-history.tex",
+        "note": "Distinguishes local approximation, global approximation, and stronger conjectures."
+      },
+      {
+        "label": "Research-process disclosure",
+        "url": "https://github.com/openai/math#how-the-results-were-produced",
+        "note": "Collection-level attribution; no complete per-paper role breakdown."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  },
+  {
+    "id": "esm3",
+    "title": "A generated protein that fluoresces in the lab",
+    "fields": [
+      "biology"
+    ],
+    "topic": "Protein design",
+    "researchDate": "2025-01-16",
+    "dateLabel": "Published",
+    "paper": {
+      "title": "Simulating 500 million years of evolution with a language model",
+      "url": "https://doi.org/10.1126/science.ads0018",
+      "authors": "Thomas Hayes and colleagues"
+    },
+    "claim": "ESM3 helped generate esmGFP, a fluorescent protein with 58% sequence identity to the closest known fluorescent protein in the authors' comparison.",
+    "ai": {
+      "system": "ESM3",
+      "contribution": "Generated protein candidates from partial sequence and structural prompts, then variants of a promising candidate.",
+      "human": "Researchers set the target, selected candidates, synthesized proteins, measured fluorescence, and analyzed sequence distance.",
+      "disclosure": "The paper describes a model-and-laboratory workflow. The authors released a smaller open model, not all model sizes."
+    },
+    "status": "Published · laboratory evidence",
+    "statusKey": "experiment",
+    "evidence": [
+      {
+        "label": "Experimental result",
+        "text": "The Science paper reports a synthesized fluorescent protein. The authors describe two rounds of laboratory testing; this tracker has not replicated the experiments.",
+        "url": "https://www.evolutionaryscale.ai/blog/esm3-release"
+      },
+      {
+        "label": "Released research material",
+        "text": "Addgene lists deposited plasmids for the initial B8 design and esmGFP-C10. Availability is distinct from independent replication.",
+        "url": "https://www.addgene.org/browse/article/28252406/"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Starting point",
+      "before": "Natural and engineered fluorescent proteins already existed; preserving function far from their sequences remained the design challenge.",
+      "after": "A model-generated candidate fluoresced despite substantial sequence divergence.",
+      "conditions": "A selected design tested under the authors' assay conditions; 58% depends on the reference set and alignment.",
+      "limit": "“500 million years” estimates sequence divergence. It is neither runtime nor a replay of evolution.",
+      "url": "https://www.evolutionaryscale.ai/blog/esm3-release"
+    },
+    "timeline": [
+      {
+        "date": "2024-06-25",
+        "title": "ESM3 announced",
+        "text": "The authors introduce the model and esmGFP experiment.",
+        "url": "https://www.evolutionaryscale.ai/blog/esm3-release"
+      },
+      {
+        "date": "2025-01-16",
+        "title": "Published online in Science",
+        "text": "Journal publication follows the initial announcement.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39818825/"
+      }
+    ],
+    "route": [
+      {
+        "title": "Green fluorescent protein",
+        "provider": "RCSB PDB-101",
+        "url": "https://pdb101.rcsb.org/motm/42",
+        "read": "Ready-Made and Exploring the Structure.",
+        "purpose": "Connect the protein's folded shape with the light-emitting group inside it."
+      },
+      {
+        "title": "From a prompt to a tested molecule",
+        "provider": "EvolutionaryScale · authors' account",
+        "url": "https://www.evolutionaryscale.ai/blog/esm3-release",
+        "read": "Simulating 500 million years of evolution, especially the two experimental rounds.",
+        "purpose": "Separate computational proposals from the measurements that establish function."
+      },
+      {
+        "title": "Read the paper's claim",
+        "provider": "Science · abstract via PubMed",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39818825/",
+        "read": "Abstract; follow the publisher link for the GFP experiment in the full paper.",
+        "purpose": "Identify exactly what was measured and how the evolutionary-distance claim is framed. Full-text access may be required."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Journal record and abstract",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39818825/",
+        "note": "Publication date, authors, and central result."
+      },
+      {
+        "label": "Authors' experimental account",
+        "url": "https://www.evolutionaryscale.ai/blog/esm3-release",
+        "note": "Human/model roles, candidate selection, and divergence interpretation."
+      },
+      {
+        "label": "Deposited plasmids",
+        "url": "https://www.addgene.org/browse/article/28252406/",
+        "note": "B8 and esmGFP-C10 research materials."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  },
+  {
+    "id": "prime-sums",
+    "title": "Can two fixed sets add up to the primes?",
+    "fields": [
+      "mathematics"
+    ],
+    "topic": "Number theory",
+    "researchDate": "2026-10-06",
+    "dateLabel": "Released",
+    "paper": {
+      "title": "The additive indecomposability of the primes",
+      "url": "https://github.com/openai/math/blob/main/preprints/the-additive-indecomposability-of-the-primes-September-24-2026/paper.pdf",
+      "authors": "OpenAI"
+    },
+    "claim": "The released theorem rules out two sets of nonnegative integers whose pairwise sums equal the primes apart from finitely many exceptions, when each set has at least two elements.",
+    "ai": {
+      "system": "Internal OpenAI model",
+      "contribution": "Produced the mathematical manuscript and supporting proof artifacts, according to the release.",
+      "human": "OpenAI selected, organized and released the collection.",
+      "disclosure": "The model is unreleased; a detailed account of human intervention for this individual result is not supplied."
+    },
+    "status": "Author-supplied Lean",
+    "statusKey": "formalization",
+    "evidence": [
+      {
+        "label": "Formalization scope",
+        "text": "OpenAI lists the full Ostmann theorem and its two-infinite-summands case; this tracker has not audited the Lean development.",
+        "url": "https://github.com/openai/math/blob/main/lean/docs/013.md"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Before",
+      "before": "Earlier work constrained what a hypothetical decomposition would have to look like.",
+      "after": "The manuscript reports that every such decomposition is impossible, even after finitely many changes.",
+      "conditions": "Both sets contain at least two nonnegative integers; every pairwise sum counts.",
+      "limit": "This concerns the set of primes as a sumset. It does not settle Goldbach’s question about even numbers.",
+      "url": "https://github.com/openai/math/blob/main/preprints/the-additive-indecomposability-of-the-primes-September-24-2026/build/sections/01-introduction.tex"
+    },
+    "timeline": [
+      {
+        "date": "2026-09-24",
+        "title": "Manuscript dated",
+        "text": "The paper’s metadata gives this date.",
+        "url": "https://github.com/openai/math/blob/main/preprints/the-additive-indecomposability-of-the-primes-September-24-2026/README.md"
+      },
+      {
+        "date": "2026-10-06",
+        "title": "Collection released",
+        "text": "OpenAI announced the repository of manuscripts and proof artifacts.",
+        "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"
+      }
+    ],
+    "route": [
+      {
+        "title": "What is a sumset?",
+        "provider": "Terence Tao / UCLA",
+        "url": "https://www.math.cmu.edu/users/af1p/Teaching/AdditiveCombinatorics/Tao.pdf#page=1",
+        "read": "Lecture notes 1, introduction, first page.",
+        "purpose": "Learn the notation A+B: take every possible sum, not just a chosen pairing."
+      },
+      {
+        "title": "Pin down the claim",
+        "provider": "OpenAI",
+        "url": "https://github.com/openai/math/blob/main/lean/docs/013.md",
+        "read": "The short “Scope” section.",
+        "purpose": "See precisely what finite exceptions and the two-element condition allow."
+      },
+      {
+        "title": "Enter the paper",
+        "provider": "OpenAI",
+        "url": "https://github.com/openai/math/blob/main/preprints/the-additive-indecomposability-of-the-primes-September-24-2026/paper.pdf",
+        "read": "Introduction, Theorem 1.1 and the following paragraphs.",
+        "purpose": "Separate the claim from prior partial results before attempting the proof."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Paper and metadata",
+        "url": "https://github.com/openai/math/blob/main/preprints/the-additive-indecomposability-of-the-primes-September-24-2026/README.md",
+        "note": "Title, author and manuscript date."
+      },
+      {
+        "label": "How the collection was produced",
+        "url": "https://github.com/openai/math",
+        "note": "Collection-level provenance; individual intervention is not detailed."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  },
+  {
+    "id": "zeros-on-line",
+    "title": "More than two thirds of zeta’s zeros on the line",
+    "fields": [
+      "mathematics"
+    ],
+    "topic": "Number theory",
+    "researchDate": "2026-08-10",
+    "dateLabel": "Released",
+    "paper": {
+      "title": "More than two thirds of the zeta zeros are simple and on the critical line",
+      "url": "https://arxiv.org/abs/2608.13637",
+      "authors": "Levent Alpöge & Ralph Furman; proof discovered by Claude"
+    },
+    "claim": "The authors report an asymptotic lower bound of about 67.25% for nontrivial zeta zeros that are both simple and on the critical line.",
+    "ai": {
+      "system": "Claude research model",
+      "contribution": "Developed the argument during a multi-agent investigation prompted by an Anthropic staff member.",
+      "human": "Jarred Sumner guided the investigation; Alpöge and Furman verified and communicated the argument.",
+      "disclosure": "Anthropic describes the sessions and human roles; the research model was unreleased."
+    },
+    "status": "Author-supplied Lean",
+    "statusKey": "formalization",
+    "evidence": [
+      {
+        "label": "Paper",
+        "text": "Theorem A states the asymptotic bound and distinguishes simple, distinct and on-line zeros.",
+        "url": "https://arxiv.org/html/2608.13637v2"
+      },
+      {
+        "label": "Lean artifact",
+        "text": "The authors supply formal statements, proof files and audit instructions. This tracker has not rerun them.",
+        "url": "https://github.com/anthropics/formal-math/tree/main/zeta23"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Before",
+      "before": "The paper cites 5/12, about 41.67%, as the previous unconditional bound for simple zeros on the line.",
+      "after": "About 67.25% in the asymptotic limit.",
+      "conditions": "Count nontrivial zeros with multiplicity as the height range grows.",
+      "limit": "The remaining zeros are not proved off the line; the result does not prove the Riemann hypothesis.",
+      "url": "https://arxiv.org/html/2608.13637v2"
+    },
+    "timeline": [
+      {
+        "date": "2026-08-10",
+        "title": "Research announced",
+        "text": "Anthropic released its account, paper and formalization link.",
+        "url": "https://www.anthropic.com/research/riemann-zeta"
+      },
+      {
+        "date": "2026-08-13",
+        "title": "arXiv version 1",
+        "text": "The paper appeared under Alpöge and Furman’s names, explicitly crediting Claude’s proof discovery.",
+        "url": "https://arxiv.org/abs/2608.13637v1"
+      },
+      {
+        "date": "2026-08-19",
+        "title": "arXiv version 2",
+        "text": "A revised version is recorded in arXiv’s submission history.",
+        "url": "https://arxiv.org/abs/2608.13637v2"
+      }
+    ],
+    "route": [
+      {
+        "title": "The question behind the line",
+        "provider": "Clay Mathematics Institute",
+        "url": "https://www.claymath.org/millennium/riemann-hypothesis/",
+        "read": "Overview.",
+        "purpose": "Connect zeta zeros with prime numbers and identify what Riemann’s hypothesis actually claims."
+      },
+      {
+        "title": "What Claude changed",
+        "provider": "Anthropic",
+        "url": "https://www.anthropic.com/research/riemann-zeta",
+        "read": "“Claude’s finding” and “Claude’s methodology.”",
+        "purpose": "Follow the researchers’ account of the new step and the division of work."
+      },
+      {
+        "title": "Read the bound carefully",
+        "provider": "Alpöge & Furman",
+        "url": "https://arxiv.org/html/2608.13637v2",
+        "read": "Sections 1.1 and 1.4; the latter explains what the result does not establish.",
+        "purpose": "Distinguish a limiting proportion from a claim about every finite batch of zeros."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Research announcement",
+        "url": "https://www.anthropic.com/research/riemann-zeta",
+        "note": "Initial release and discovery process."
+      },
+      {
+        "label": "Current arXiv record",
+        "url": "https://arxiv.org/abs/2608.13637",
+        "note": "Authorship, statement and revision history."
+      },
+      {
+        "label": "Formalization scope",
+        "url": "https://github.com/anthropics/formal-math/tree/main/zeta23",
+        "note": "Author-provided scope and reproduction instructions."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  },
+  {
+    "id": "network-choices",
+    "title": "A stronger bound on compatible choices",
+    "fields": [
+      "mathematics",
+      "physics"
+    ],
+    "topic": "Combinatorics",
+    "researchDate": "2026-02-02",
+    "dateLabel": "Preprint",
+    "paper": {
+      "title": "Lower bounds for multivariate independence polynomials and their generalisations",
+      "url": "https://arxiv.org/abs/2602.02450",
+      "authors": "Joonkyung Lee & Jaehyeon Seo"
+    },
+    "claim": "A lower bound on weighted counts of non-adjacent vertex selections now allows a different nonnegative weight at every vertex.",
+    "ai": {
+      "system": "Aletheia / Gemini Deep Think",
+      "contribution": "Helped derive key inequalities and proof ideas. Harmonic’s Aristotle assisted the later Lean formalization.",
+      "human": "Lee and Seo integrated the ideas, filled gaps, and independently rewrote some proofs.",
+      "disclosure": "The paper identifies contributions locally; it describes the two-color AI output as an incomplete proof sketch."
+    },
+    "status": "Partial Lean formalization",
+    "statusKey": "formalization",
+    "evidence": [
+      {
+        "label": "Research paper",
+        "text": "The main theorem extends an equal-weight bound; a second theorem covers a two-color model.",
+        "url": "https://arxiv.org/html/2602.02450v2"
+      },
+      {
+        "label": "Lean artifact",
+        "text": "The repository formalizes Theorem 1.4, the two-color result, rather than the entire paper.",
+        "url": "https://github.com/thegreatseo/multivar-indep-formalize"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Before",
+      "before": "The cited bound used a common weight for all vertices.",
+      "after": "Each vertex may have its own weight, while the lower bound still depends on the vertex degrees.",
+      "conditions": "A finite simple graph; all weights are nonnegative.",
+      "limit": "This bounds a weighted count. It is not an algorithm for finding the largest independent set.",
+      "url": "https://arxiv.org/abs/2602.02450"
+    },
+    "timeline": [
+      {
+        "date": "2026-02-02",
+        "title": "Preprint submitted",
+        "text": "Version 1 reported the weighted bounds and AI assistance.",
+        "url": "https://arxiv.org/abs/2602.02450v1"
+      },
+      {
+        "date": "2026-08-05",
+        "title": "Formalization added",
+        "text": "Version 2 clarified Section 3 and added a Lean proof of Theorem 1.4.",
+        "url": "https://arxiv.org/abs/2602.02450v2"
+      }
+    ],
+    "route": [
+      {
+        "title": "Recognize an independent set",
+        "provider": "Stanford CS103",
+        "url": "https://web.stanford.edu/class/archive/cs/cs103/cs103.1256/lectures/09/Lecture%20Slides.pdf#page=51",
+        "read": "PDF pages 51–62: condor nesting example and independent sets.",
+        "purpose": "Build the graph picture: choose vertices without choosing two connected by an edge."
+      },
+      {
+        "title": "From choices to weighted counts",
+        "provider": "Lee & Seo",
+        "url": "https://arxiv.org/html/2602.02450v2",
+        "read": "Introduction through Theorem 1.1.",
+        "purpose": "See how assigning weights turns a count into the independence polynomial."
+      },
+      {
+        "title": "Where AI entered the proof",
+        "provider": "Lee & Seo",
+        "url": "https://arxiv.org/html/2602.02450v2",
+        "read": "The remark at the end of Section 3.",
+        "purpose": "Compare the AI’s proposed ideas with the proof work the authors supplied."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Paper and version history",
+        "url": "https://arxiv.org/abs/2602.02450",
+        "note": "Statements, dates and formalization scope."
+      },
+      {
+        "label": "Contribution details",
+        "url": "https://arxiv.org/html/2602.02450v2",
+        "note": "Sections 2–3 explain the model’s specific role."
+      },
+      {
+        "label": "Theorem 1.4 proof files",
+        "url": "https://github.com/thegreatseo/multivar-indep-formalize",
+        "note": "Author-provided Lean project; not audited here."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  },
+  {
+    "id": "matrix-multiplication",
+    "title": "One fewer multiplication",
+    "fields": [
+      "mathematics"
+    ],
+    "topic": "Algebra / algorithms",
+    "researchDate": "2025-05-14",
+    "dateLabel": "Released",
+    "paper": {
+      "title": "AlphaEvolve: A coding agent for scientific and algorithmic discovery",
+      "url": "https://arxiv.org/abs/2506.13131",
+      "authors": "Alexander Novikov et al. / Google DeepMind"
+    },
+    "claim": "AlphaEvolve found an exact algorithm for multiplying two 4 × 4 complex matrices using 48 complex scalar multiplications, improving a 49-multiplication construction.",
+    "ai": {
+      "system": "AlphaEvolve / Gemini",
+      "contribution": "Evolved a search algorithm that found the matrix decomposition.",
+      "human": "Researchers supplied the task, initial code and evaluation framework, then released the result.",
+      "disclosure": "The technical report describes the pipeline; the public repository contains results and checking code, not AlphaEvolve itself."
+    },
+    "status": "Exact construction + code",
+    "statusKey": "construction",
+    "evidence": [
+      {
+        "label": "Technical report",
+        "text": "Section 3.1 reports the decomposition and the arithmetic setting.",
+        "url": "https://arxiv.org/html/2506.13131v1"
+      },
+      {
+        "label": "Verification notebook",
+        "text": "The authors provide mathematical outputs and code for checking them. This tracker has not rerun the notebook.",
+        "url": "https://github.com/google-deepmind/alphaevolve_results"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Before",
+      "before": "49 scalar multiplications from applying Strassen’s construction twice.",
+      "after": "48 complex scalar multiplications for the same 4 × 4 task.",
+      "conditions": "Exact arithmetic over complex numbers; the metric counts scalar multiplications.",
+      "limit": "This does not prove 48 is minimal or guarantee a faster implementation on real hardware.",
+      "url": "https://arxiv.org/html/2506.13131v1"
+    },
+    "timeline": [
+      {
+        "date": "2025-05-14",
+        "title": "Result announced",
+        "text": "DeepMind introduced AlphaEvolve and the 48-multiplication result.",
+        "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/"
+      },
+      {
+        "date": "2025-06-16",
+        "title": "Report on arXiv",
+        "text": "The technical report was submitted to arXiv.",
+        "url": "https://arxiv.org/abs/2506.13131"
+      }
+    ],
+    "route": [
+      {
+        "title": "See what multiplication means",
+        "provider": "3Blue1Brown",
+        "url": "https://www.3blue1brown.com/lessons/matrix-multiplication/",
+        "read": "“Composition of Transformations” through “Computing the New Matrix.”",
+        "purpose": "Understand the operation before comparing algorithms that compute it."
+      },
+      {
+        "title": "Understand the search loop",
+        "provider": "Google DeepMind",
+        "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "read": "“Designing better algorithms with large language models.”",
+        "purpose": "See why the model proposes programs and an evaluator scores their outputs."
+      },
+      {
+        "title": "Inspect the specific improvement",
+        "provider": "Novikov et al.",
+        "url": "https://arxiv.org/html/2506.13131v1",
+        "read": "Section 3.1, then the 4 × 4 entry in Appendix A.",
+        "purpose": "Check which arithmetic operations are counted and which number system the result uses."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Dated announcement",
+        "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "note": "May 2025 release."
+      },
+      {
+        "label": "Technical report",
+        "url": "https://arxiv.org/abs/2506.13131",
+        "note": "Task specification and reported improvement."
+      },
+      {
+        "label": "Results repository",
+        "url": "https://github.com/google-deepmind/alphaevolve_results",
+        "note": "Outputs and verification code; no code to run AlphaEvolve."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  },
+  {
+    "id": "kissing-spheres",
+    "title": "Fitting one more sphere around a sphere",
+    "fields": [
+      "mathematics"
+    ],
+    "topic": "Geometry",
+    "researchDate": "2025-05-14",
+    "dateLabel": "Released",
+    "paper": {
+      "title": "AlphaEvolve: A coding agent for scientific and algorithmic discovery",
+      "url": "https://arxiv.org/abs/2506.13131",
+      "authors": "Alexander Novikov et al. / Google DeepMind"
+    },
+    "claim": "AlphaEvolve supplied an 11-dimensional configuration with 593 equal spheres touching a central sphere without overlaps, improving the previous construction of 592.",
+    "ai": {
+      "system": "AlphaEvolve / Gemini",
+      "contribution": "Evolved programs to search for a better configuration.",
+      "human": "Researchers specified the problem and evaluator, and presented a certificate converting coordinates into a valid arrangement.",
+      "disclosure": "Coordinates and verification code are released; the full discovery system is not in the results repository."
+    },
+    "status": "Construction + certificate",
+    "statusKey": "construction",
+    "evidence": [
+      {
+        "label": "Mathematical certificate",
+        "text": "Appendix B.11 gives a distance condition on the integer-coordinate points and explains why it certifies a kissing configuration.",
+        "url": "https://arxiv.org/html/2506.13131v1"
+      },
+      {
+        "label": "Construction data",
+        "text": "The public notebook contains the result and checking code. This tracker has not rerun it.",
+        "url": "https://github.com/google-deepmind/alphaevolve_results"
+      }
+    ],
+    "comparison": {
+      "beforeLabel": "Before",
+      "before": "A known 11-dimensional arrangement had 592 neighbors.",
+      "after": "A construction with 593 neighbors.",
+      "conditions": "Equal spheres in eleven-dimensional Euclidean space, each touching the central sphere without overlaps.",
+      "limit": "A construction proves at least 593 fit, not that 593 is the maximum. This is the dated 2025 result, not a claim about today’s record.",
+      "url": "https://arxiv.org/html/2506.13131v1"
+    },
+    "timeline": [
+      {
+        "date": "2025-05-14",
+        "title": "Construction announced",
+        "text": "DeepMind reported the 593-sphere configuration.",
+        "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/"
+      },
+      {
+        "date": "2025-06-16",
+        "title": "Report on arXiv",
+        "text": "The report includes the certificate in Appendix B.11.",
+        "url": "https://arxiv.org/abs/2506.13131"
+      }
+    ],
+    "route": [
+      {
+        "title": "Start with circles and spheres",
+        "provider": "Boyvalenkov, Dodunekov & Musin",
+        "url": "https://arxiv.org/pdf/1507.03631#page=1",
+        "read": "Survey introduction, pages 1–2.",
+        "purpose": "Learn the kissing-number question in familiar dimensions before moving to eleven."
+      },
+      {
+        "title": "Read the research overview",
+        "provider": "Google DeepMind",
+        "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "read": "“Advancing the frontiers in mathematics and algorithm discovery.”",
+        "purpose": "Place this construction among the tasks AlphaEvolve searched."
+      },
+      {
+        "title": "See what certifies a construction",
+        "provider": "Novikov et al.",
+        "url": "https://arxiv.org/html/2506.13131v1",
+        "read": "Appendix B.11, especially Lemma 1.",
+        "purpose": "Follow how checking distances can establish feasibility without proving optimality."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Dated announcement",
+        "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "note": "May 2025 release."
+      },
+      {
+        "label": "Appendix B.11",
+        "url": "https://arxiv.org/html/2506.13131v1",
+        "note": "Previous bound, new configuration and certificate."
+      },
+      {
+        "label": "Results repository",
+        "url": "https://github.com/google-deepmind/alphaevolve_results",
+        "note": "Construction data and checking code."
+      }
+    ],
+    "checkedOn": "2026-10-22"
+  }
+]

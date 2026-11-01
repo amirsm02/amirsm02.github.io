@@ -1,0 +1,53 @@
+DISCOVERY TRACKER — EDITING AND REVIEW
+
+Source of truth: discoveries/data/records.json
+Renderer: scripts/build-discoveries.py
+Rebuild from repository root: python3 scripts/build-discoveries.py
+Commit both the data and the generated HTML. GitHub Pages serves these files
+without a build service; reading records works without JavaScript.
+
+A record should answer three questions:
+1. What was claimed, what did AI and researchers each contribute, and what
+   evidence is actually public?
+2. What changed from a clearly named starting point, under which conditions?
+3. Which three specific reading stops offer a route into the actual paper?
+
+Keep the exact paper title visible. Prefer primary sources for claims, dates,
+comparisons and attribution. Use existing educational resources for background.
+Do not turn an unclear AI/human division of work into an autonomy claim.
+A proof release, a formalization, a laboratory experiment, and a replicated
+experiment are different evidence types. Describe scope, not a trust score.
+A construction is not an optimum; existence is not an efficient algorithm.
+
+Use researchDate for the stated Released/Preprint/Published event. Each timeline
+event needs its own source and real event date. checkedOn is the source-review
+date. Older dated records may remain useful; never silently call them current
+world records. Timelines are selected source events, not automatic monitoring.
+For a substantive correction, state what changed and why in the commit message.
+Only add a research timeline event when a dated source supports that event.
+
+Reader updates: /contribute.html prepares a GitHub issue or email draft for the
+reader to submit. Factual changes require a primary source. Examine the quoted
+passage and source, prepare an AI-assisted draft, then have the editor approve
+the precise change before publication. No automatic acceptance or publishing.
+
+Record schema is illustrated by the existing eight records. IDs must be unique
+lowercase letters, numbers and hyphens. Use HTTPS external links. Exactly three
+route items are required. Date fields use YYYY-MM-DD. Field and status options
+are defined near the top of the renderer. New categories require updating the
+labels there. Saved records are local browser bookmarks, not accounts or alerts.
+
+BEFORE PUBLISHING
+Rebuild; inspect changed facts against their cited sources; check external links
+and reading instructions. Open the index and changed records on desktop/mobile
+in both themes. Check filters, links, save/unsave, and contribution prefills if
+those features changed. Keep the personal homepage free of this project link
+unless Amir requests otherwise.
+
+PRESERVED PROTOTYPE
+/archive/interactive-lessons-2026-10-22/ contains the three earlier interactive
+lessons plus their dependencies, with URLs adjusted for the archive location.
+The unchanged originals were saved separately in an output folder and ZIP with
+a SHA-256 manifest. Original source commit:
+58b653bfd34d97b021706ba62b345f187e23b8a0
+Do not rebuild or rewrite the archive when updating the tracker.

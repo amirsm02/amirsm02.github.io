@@ -1,0 +1,56 @@
+name: Lesson correction or teaching suggestion
+description: Improve a specific claim, example, or interaction in an AI-written research lesson.
+title: "Lesson suggestion: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve a lesson. A focused observation is enough; you do not need to rewrite the article.
+        This issue is public. Suggestions are reviewed manually today; submitting does not automatically change the website.
+  - type: input
+    id: lesson
+    attributes:
+      label: Lesson URL
+      placeholder: https://amirshapourmohammadi.com/peps.html
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: A heading or link to the relevant part of the lesson.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of suggestion
+      options:
+        - Accuracy or missing qualification
+        - Explanation, example, or interaction
+    validations:
+      required: true
+  - type: textarea
+    id: quote
+    attributes:
+      label: Passage or behavior
+      description: Quote the claim, or describe the diagram or interaction.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested change
+      description: What should the reader see instead? A short description is fine.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and rationale
+      description: For a factual correction, link the primary source and identify the relevant passage, page, theorem, or figure. For a teaching suggestion, explain how it helps the reader.
+    validations:
+      required: true
+  - type: input
+    id: credit
+    attributes:
+      label: Credit name (optional)
+      description: Leave blank if you do not want a name added to the lesson’s revision note. This public issue still shows your GitHub username.

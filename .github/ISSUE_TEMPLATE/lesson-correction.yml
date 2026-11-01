@@ -1,0 +1,56 @@
+name: Discovery update or reading suggestion
+description: Suggest sourced evidence, a correction, or a better reading route for a discovery record.
+title: "Discovery suggestion: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A focused observation and a source can be enough: a new publication, released code, replication, correction, or better introduction.
+        This issue is public. Suggestions are reviewed manually; AI can help draft a revision, and an editor decides what to publish. Submitting does not automatically change the website.
+  - type: input
+    id: lesson
+    attributes:
+      label: Page or record URL
+      placeholder: https://amirshapourmohammadi.com/discoveries/peps/
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: A heading or link to the relevant part of the page.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of suggestion
+      options:
+        - Evidence update or correction
+        - Reading route or explanation
+    validations:
+      required: true
+  - type: textarea
+    id: quote
+    attributes:
+      label: Claim, passage, or missing update
+      description: Quote a claim, identify an outdated status, or describe what is missing.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested change
+      description: What should the reader see instead? A short description is fine.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and rationale
+      description: For evidence updates or corrections, link the original source and identify the relevant date, page, or passage. For reading suggestions, link the resource if you have one and explain what the reader would learn.
+    validations:
+      required: true
+  - type: input
+    id: credit
+    attributes:
+      label: Credit name (optional)
+      description: Leave blank if you do not want a name added to the revision note. This public issue still shows your GitHub username.
